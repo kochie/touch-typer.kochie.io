@@ -43,4 +43,20 @@
     cursor: pointer;
     box-shadow: 0 12px 40px 20px rgba(0, 0, 0, 0.05);
   }
+
+  .logoHover {
+    --icon-color: #2780cd;
+  }
+
+  .logo {
+    --icon-color: white;
+  }
+
+  .logoPrimary {
+    color: var(--icon-color);
+  }
+
+  .fillRuleNonZero {
+    fill-rule: nonzero;
+  }
 }
