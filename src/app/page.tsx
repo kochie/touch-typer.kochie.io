@@ -7,6 +7,7 @@ import DOTMS from "@/assets/Download_on_the_Mac_App_Store_Badge_US-UK_RGB_wht_09
 import example1 from "@/assets/example_1.png";
 import Image from "next/image";
 import { Inconsolata } from "@next/font/google";
+import Script from "next/script";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] });
 
@@ -18,17 +19,29 @@ export default function Page() {
         <div className="text-white text-2xl typewriter">
           <p>Learn at your own pace</p>
         </div>
-        <div className="flex gap-6">
+        <div className="flex flex-col items-center gap-10">
           <a href="https://snapcraft.io/touch-typer">
             <img
               alt="Get it from the Snap Store"
-              className=""
+              className="hover:iconHover transform"
               src="https://snapcraft.io/static/images/badges/en/snap-store-white.svg"
             />
           </a>
           <a>
-            <Image src={DOTMS} alt="" height="56" />
+            <Image src={DOTMS} alt=""  className="hover:iconHover" />
           </a>
+          <Script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js" />
+          
+          {/* @ts-ignore */}
+          <ms-store-badge
+          className="h-[56px]"
+          size="small"
+            productid="9NG3CCFL631D"
+            window-mode="full"
+            theme="auto"
+            language="en"
+            animation="on" />
+          
         </div>
       </div>
       <Image src={divider} alt="" height="100" className="w-full" />
@@ -53,7 +66,6 @@ export default function Page() {
         <Image src={divider4} alt="" height="200" className="w-full" />
       </div>
 
-      <div className="bg-[#464953] py-32 text-white">Footer</div>
     </div>
   );
 }

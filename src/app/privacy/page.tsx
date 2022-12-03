@@ -1,8 +1,6 @@
 import { serialize } from "next-mdx-remote/serialize";
 import PrivacyPolicy from "./privacy_policy.md";
 import MDXClient from "./MdxClient";
-import { readFile } from "fs/promises";
-import { join } from "path";
 
 export default async function Page() {
   console.log("PP", PrivacyPolicy);
@@ -15,7 +13,7 @@ export default async function Page() {
   const mdxSource = await serialize(data);
 
   return (
-    <div className="">
+    <div className="w-96 mx-auto">
       <MDXClient {...mdxSource} />
     </div>
   );
