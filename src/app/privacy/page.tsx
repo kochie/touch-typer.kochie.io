@@ -3,7 +3,6 @@ import PrivacyPolicy from "./privacy_policy.md";
 import MDXClient from "./MdxClient";
 
 export default async function Page() {
-  console.log("PP", PrivacyPolicy);
   const encoded = (PrivacyPolicy as unknown as string).replace(
     "data:text/markdown;base64,",
     ""

@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Inconsolata } from "@next/font/google";
 import Script from "next/script";
 import analytics from "@/assets/analytics.png";
+import Link from "next/link";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] });
 
@@ -21,16 +22,16 @@ export default function Page() {
           <p>Learn at your own pace</p>
         </div>
         <div className="flex flex-col items-center gap-10">
-          <a href="https://snapcraft.io/touch-typer">
+          <Link href="https://snapcraft.io/touch-typer">
             <img
               alt="Get it from the Snap Store"
               className="hover:iconHover transform"
               src="https://snapcraft.io/static/images/badges/en/snap-store-white.svg"
             />
-          </a>
-          <a>
+          </Link>
+          <Link href="https://apps.apple.com/au/app/touch-typer/id1637786724">
             <Image src={DOTMS} alt="" className="hover:iconHover" />
-          </a>
+          </Link>
           <Script
             type="module"
             src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"
