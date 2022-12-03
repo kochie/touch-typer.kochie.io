@@ -1,0 +1,7 @@
+<svg id="visual" viewBox="0 0 960 140" width="960" height="140"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  <path d="M0 77L960 190L960 0L0 0Z" fill="#464953"></path>
+  <path d="M0 260L960 368L960 188L0 75Z" fill="#9e9fa5"></path>
+  <path d="M0 541L960 541L960 366L0 258Z" fill="#ffffff"></path>
+</svg>
