@@ -1,0 +1,17 @@
+{
+  "short_name": "Touch Typer",
+  "name": "Touch Typer",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "id": "/",
+  "start_url": "/",
+  "background_color": "#42444D",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#464953"
+}
