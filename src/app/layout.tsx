@@ -127,7 +127,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="min-h-screen grid grid-rows-[1fr_auto]">
-        {/* <Fathom /> */}
+        <Fathom />
         <div>{children}</div>
         <div className="bg-[#464953] py-12 text-white">
           <div className="max-w-4xl w-5/6 mx-auto flex">

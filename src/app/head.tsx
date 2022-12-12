@@ -18,7 +18,11 @@ export default function Head() {
           type: "website",
           images: [
             {
-              url: "/og.png",
+              url: `https://${
+                process.env.NEXT_PUBLIC_PROD_URL ||
+                process.env.NEXT_PUBLIC_VERCEL_URL ||
+                process.env.VERCEL_URL
+              }/og.png`,
               height: 630,
               width: 1200,
               alt: "OpenGraph image",
