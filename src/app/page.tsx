@@ -6,17 +6,17 @@
 // import DOTMS from "@/assets/Download_on_the_Mac_App_Store_Badge_US-UK_RGB_wht_092917.svg";
 // import example1 from "@/assets/example_1.png";
 // import Image from "next/image";
-import { Inconsolata } from "@next/font/google";
+// import { Inconsolata } from "@next/font/google";
 // import Script from "next/script";
 // import analytics from "@/assets/analytics.png";
 // import Link from "next/link";
 import { NextSeo } from "next-seo";
 
-const inconsolata = Inconsolata({ subsets: ["latin"] });
+// const inconsolata = Inconsolata({ subsets: ["latin"] });
 
 export default function Page() {
   return (
-    <div className={inconsolata.className}>
+    <div>
       <NextSeo
         useAppDir={true}
         canonical="https://touch-typer.kochie.io"
