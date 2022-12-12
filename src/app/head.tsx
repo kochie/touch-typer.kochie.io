@@ -9,7 +9,7 @@ export default function Head() {
       <link rel="icon" type="image/png" href="/favicon.png" />
       <meta name="author" content="Robert Koch" />
       <meta property="og:type" content="website" />
-      <meta name="image" property="og:image" content="/og.png">
+      <meta name="image" property="og:image" content="/og.png" />
 
       <NextSeo
         useAppDir={true}
