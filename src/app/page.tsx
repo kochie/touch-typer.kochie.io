@@ -10,41 +10,31 @@ import { Inconsolata } from "@next/font/google";
 import Script from "next/script";
 import analytics from "@/assets/analytics.png";
 import Link from "next/link";
-import { NextSeo } from "next-seo";
+import { DOMAttributes } from "react";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] });
+
+interface MsStoreBadge {
+  size: string;
+  productid: string;
+  theme: string;
+  language: string;
+  animation: string;
+}
+
+type CustomElement<T> = Partial<T & DOMAttributes<T> & { children: any }>;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      ["ms-store-badge"]: CustomElement<HTMLDivElement & MsStoreBadge>;
+    }
+  }
+}
 
 export default function Page() {
   return (
     <div className={inconsolata.className}>
-      <NextSeo
-        useAppDir={true}
-        canonical="https://touch-typer.kochie.io"
-        title="Touch Typer"
-        description="Touch Typer is an app that lets you practice your typing skills."
-        openGraph={{
-          type: "website",
-          images: [
-            {
-              url: "https://touch-typer.kochie.io/og.png",
-              height: 630,
-              width: 1200,
-              alt: "OpenGraph image",
-            },
-          ],
-          description:
-            "Touch Typer is an app that lets you practice your typing skills.",
-          siteName: "Touch Typer",
-          url: "https://touch-typer.kochie.io",
-          title: "Touch Typer",
-        }}
-        twitter={{
-          handle: "@kochie",
-          site: "@kochie",
-          cardType: "summary_large_image",
-        }}
-        themeColor="#42444D"
-      />
       <div className="bg-[#464953] w-full min-h-[50vh] flex flex-col pt-24 gap-28 items-center justify-center">
         <Image src={logo} alt="logo" width="300" className="min-w-min" />
         <div className="text-white text-2xl typewriter">
@@ -66,7 +56,6 @@ export default function Page() {
             src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"
           />
 
-          {/* @ts-ignore */}
           <ms-store-badge
             className="h-[56px]"
             size="small"
