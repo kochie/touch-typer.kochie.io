@@ -1,15 +1,15 @@
-import logo from "@/assets/logo.svg";
-import divider from "@/assets/layered-waves-haikei.svg";
-import divider2 from "@/assets/layered-peaks-haikei.svg";
-import divider3 from "@/assets/stacked-steps-haikei.svg";
-import divider4 from "@/assets/layered-peaks-haikei-1.svg";
-import DOTMS from "@/assets/Download_on_the_Mac_App_Store_Badge_US-UK_RGB_wht_092917.svg";
-import example1 from "@/assets/example_1.png";
-import Image from "next/image";
+// import logo from "@/assets/logo.svg";
+// import divider from "@/assets/layered-waves-haikei.svg";
+// import divider2 from "@/assets/layered-peaks-haikei.svg";
+// import divider3 from "@/assets/stacked-steps-haikei.svg";
+// import divider4 from "@/assets/layered-peaks-haikei-1.svg";
+// import DOTMS from "@/assets/Download_on_the_Mac_App_Store_Badge_US-UK_RGB_wht_092917.svg";
+// import example1 from "@/assets/example_1.png";
+// import Image from "next/image";
 import { Inconsolata } from "@next/font/google";
-import Script from "next/script";
-import analytics from "@/assets/analytics.png";
-import Link from "next/link";
+// import Script from "next/script";
+// import analytics from "@/assets/analytics.png";
+// import Link from "next/link";
 import { NextSeo } from "next-seo";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] });
@@ -45,7 +45,7 @@ export default function Page() {
         }}
         themeColor="#42444D"
       />
-      <div className="bg-[#464953] w-full min-h-[50vh] flex flex-col pt-24 gap-28 items-center justify-center">
+      {/* <div className="bg-[#464953] w-full min-h-[50vh] flex flex-col pt-24 gap-28 items-center justify-center">
         <Image src={logo} alt="logo" width="300" className="min-w-min" />
         <div className="text-white text-2xl typewriter">
           <p>Learn at your own pace</p>
@@ -66,7 +66,6 @@ export default function Page() {
             src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"
           />
 
-          {/* @ts-ignore */}
           <ms-store-badge
             className="h-[56px]"
             size="small"
@@ -119,7 +118,7 @@ export default function Page() {
           <Image src={analytics} alt="" className="w-[50vw]" />
         </div>
         <Image src={divider4} alt="" height="200" className="w-full" />
-      </div>
+      </div> */}
     </div>
   );
 }
