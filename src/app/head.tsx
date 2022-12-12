@@ -8,8 +8,6 @@ export default function Head() {
       <meta charSet="utf-8" />
       <link rel="icon" type="image/png" href="/favicon.png" />
       <meta name="author" content="Robert Koch" />
-      <meta property="og:type" content="website" />
-      <meta name="image" property="og:image" content="/og.png" />
 
       <NextSeo
         useAppDir={true}
@@ -20,7 +18,7 @@ export default function Head() {
           type: "website",
           images: [
             {
-              url: "https://touch-typer.kochie.io/og.png",
+              url: "/og.png",
               height: 630,
               width: 1200,
               alt: "OpenGraph image",
