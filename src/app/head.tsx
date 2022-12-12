@@ -23,8 +23,8 @@ export default function Head() {
                 process.env.NEXT_PUBLIC_VERCEL_URL ||
                 process.env.VERCEL_URL
               }/og.png`,
-              height: 630,
-              width: 1200,
+              // height: 630,
+              // width: 1200,
               alt: "OpenGraph image",
             },
           ],
