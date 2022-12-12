@@ -126,6 +126,7 @@ const Logo = (
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <head></head>
       <body className="min-h-screen grid grid-rows-[1fr_auto]">
         <Fathom />
         <div>{children}</div>
