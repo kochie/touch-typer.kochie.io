@@ -33,6 +33,9 @@ declare global {
   }
 }
 
+const description =
+  "Improve your typing skills or learn a new keyboard layout with Touch Typer. Available on Mac, Windows, and Linux.";
+
 export default function Page() {
   return (
     <>
@@ -40,7 +43,7 @@ export default function Page() {
         useAppDir={true}
         canonical="https://touch-typer.kochie.io"
         title="Touch Typer"
-        description="Touch Typer is an app that lets you practice your typing skills."
+        description={description}
         openGraph={{
           type: "website",
           images: [
@@ -55,8 +58,7 @@ export default function Page() {
               alt: "OpenGraph image",
             },
           ],
-          description:
-            "Touch Typer is an app that lets you practice your typing skills.",
+          description,
           siteName: "Touch Typer",
           url: "https://touch-typer.kochie.io",
           title: "Touch Typer",
