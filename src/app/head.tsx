@@ -7,6 +7,8 @@ export default function Head() {
       <link rel="manifest" href="/manifest.json" />
       <meta charSet="utf-8" />
       <link rel="icon" type="image/png" href="/favicon.png" />
+      <meta name="author" content="Robert Koch" />
+      <meta property="og:type" content="website" />
 
       <NextSeo
         useAppDir={true}
