@@ -11,8 +11,27 @@ import Script from "next/script";
 import analytics from "@/assets/analytics.png";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { DOMAttributes } from "react";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] });
+
+interface MsStoreBadge {
+  size: string;
+  productid: string;
+  theme: string;
+  language: string;
+  animation: string;
+}
+
+type CustomElement<T> = Partial<T & DOMAttributes<T> & { children: any }>;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      ["ms-store-badge"]: CustomElement<HTMLDivElement & MsStoreBadge>;
+    }
+  }
+}
 
 export default function Page() {
   return (
