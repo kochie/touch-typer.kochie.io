@@ -11,6 +11,8 @@ import { faCopyright } from "@fortawesome/pro-duotone-svg-icons";
 import { faHeart } from "@fortawesome/pro-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import Fathom from "./Fathom";
+import Providers from "./Providers";
+
 
 const Logo = (
   <svg
@@ -129,7 +131,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head></head>
       <body className="min-h-screen grid grid-rows-[1fr_auto]">
         <Fathom />
-        <div>{children}</div>
+        <div>
+          <Providers>
+            {children}
+          </Providers>
+        </div>
         <div className="bg-[#464953] py-12 text-white">
           <div className="max-w-4xl w-5/6 mx-auto flex">
             <div className="self-center">{Logo}</div>

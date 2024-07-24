@@ -2,7 +2,6 @@
 module.exports = {
   reactStrictMode: true,
   experimental: {
-    appDir: true,
   },
   webpack(config) {
     config.module.rules.push({

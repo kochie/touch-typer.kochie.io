@@ -6,12 +6,12 @@ import divider4 from "@/assets/layered-peaks-haikei-1.svg";
 import DOTMS from "@/assets/Download_on_the_Mac_App_Store_Badge_US-UK_RGB_wht_092917.svg";
 import example1 from "@/assets/example_1.png";
 import Image from "next/image";
-import { Inconsolata } from "@next/font/google";
+import { Inconsolata } from "next/font/google";
 import Script from "next/script";
 import analytics from "@/assets/analytics.png";
 import Link from "next/link";
 import { DOMAttributes } from "react";
-import { NextSeo } from "next-seo";
+import { Metadata, Viewport } from "next";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] });
 
@@ -36,40 +36,43 @@ declare global {
 const description =
   "Improve your typing skills or learn a new keyboard layout with Touch Typer. Available on Mac, Windows, and Linux.";
 
+  export const metadata: Metadata = {
+    title: 'Touch Typer',
+    description: description,
+    alternates: {
+      canonical: 'https://touch-typer.kochie.io',
+    },
+    openGraph: {
+      type: 'website',
+      images: [
+        {
+          url: `https://${
+            process.env.NEXT_PUBLIC_PROD_URL ||
+            process.env.NEXT_PUBLIC_VERCEL_URL ||
+            process.env.VERCEL_URL
+          }/og.png`,
+          alt: 'OpenGraph image',
+        },
+      ],
+      description: description,
+      siteName: 'Touch Typer',
+      url: 'https://touch-typer.kochie.io',
+      title: 'Touch Typer',
+    },
+    twitter: {
+      site: '@kochie',
+      card: 'summary_large_image',
+      creator: '@kochie',
+    },
+  };
+
+export const viewport: Viewport = {
+  themeColor: "#42444D",
+}
+
 export default function Page() {
   return (
     <>
-      <NextSeo
-        useAppDir={true}
-        canonical="https://touch-typer.kochie.io"
-        title="Touch Typer"
-        description={description}
-        openGraph={{
-          type: "website",
-          images: [
-            {
-              url: `https://${
-                process.env.NEXT_PUBLIC_PROD_URL ||
-                process.env.NEXT_PUBLIC_VERCEL_URL ||
-                process.env.VERCEL_URL
-              }/og.png`,
-              // height: 630,
-              // width: 1200,
-              alt: "OpenGraph image",
-            },
-          ],
-          description,
-          siteName: "Touch Typer",
-          url: "https://touch-typer.kochie.io",
-          title: "Touch Typer",
-        }}
-        twitter={{
-          handle: "@kochie",
-          site: "@kochie",
-          cardType: "summary_large_image",
-        }}
-        themeColor="#42444D"
-      />
       <div className={inconsolata.className}>
         <div className="bg-[#464953] w-full min-h-[50vh] flex flex-col pt-24 gap-28 items-center justify-center">
           <Image src={logo} alt="logo" width="300" className="min-w-min" />
@@ -158,14 +161,14 @@ const buttons = (
     viewBox="0 0 54 14"
     className="ml-2 mt-2"
   >
-    <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+    <g fill="none" fillRule="evenodd" transform="translate(1 1)">
       <circle
         cx="6"
         cy="6"
         r="6"
         fill="#FF5F56"
         stroke="#E0443E"
-        stroke-width=".5"
+        strokeWidth=".5"
       ></circle>
       <circle
         cx="26"
@@ -173,7 +176,7 @@ const buttons = (
         r="6"
         fill="#FFBD2E"
         stroke="#DEA123"
-        stroke-width=".5"
+        strokeWidth=".5"
       ></circle>
       <circle
         cx="46"
@@ -181,7 +184,7 @@ const buttons = (
         r="6"
         fill="#27C93F"
         stroke="#1AAB29"
-        stroke-width=".5"
+        strokeWidth=".5"
       ></circle>
     </g>
   </svg>
