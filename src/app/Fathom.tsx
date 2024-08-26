@@ -10,7 +10,7 @@ export default function Fathom() {
   useEffect(() => {
     load("LSICVRPU", {
       includedDomains: ["touch-typer.kochie.io"],
-      url: "https://kite.kochie.io/script.js",
+      // url: "https://kite.kochie.io/script.js",
       spa: "auto",
     });
 

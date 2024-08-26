@@ -1,18 +1,22 @@
-"use client"
+"use client";
+
 import { signIn } from "aws-amplify/auth";
 import { Formik, Field, Form } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Logo from "@/assets/logo-dark.png";
+import Image from "next/image";
 
 export default function SignIn() {
   const router = useRouter();
 
   return (
-    <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+    <div className="h-full flex flex-col justify-center items-center bg-slate-100">
+      <div className="w-full max-w-md">
+        <div className="">
+          <Image
+            alt="Touch Typer Logo"
+            src={Logo}
             className="mx-auto h-10 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -29,10 +33,11 @@ export default function SignIn() {
                 password: password,
               });
 
-              router.push("/account")
+              router.replace("/account");
+              router.refresh()
             }}
           >
-            <Form className="space-y-6">
+            <Form className="space-y-6 bg-white rounded-xl shadow-xl p-8">
               <div>
                 <label
                   htmlFor="email"
@@ -94,15 +99,15 @@ export default function SignIn() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
-            <a
-              href="#"
+            <Link
+              href="/signup"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Start a 14 day free trial
-            </a>
+              Create an account
+            </Link>
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -11,6 +11,7 @@
     "@fortawesome/pro-duotone-svg-icons": "^6.6.0",
     "@fortawesome/pro-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@types/luxon": "^3.4.2",
     "@types/node": "20.14.11",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
@@ -31,6 +32,7 @@
     "@apollo/experimental-nextjs-app-support": "^0.11.2",
     "@aws-amplify/adapter-nextjs": "^1.2.8",
     "@aws-amplify/backend": "^1.0.4",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "@stripe/react-stripe-js": "^2.7.3",
@@ -39,6 +41,7 @@
     "aws-amplify": "^6.4.1",
     "aws-appsync-auth-link": "^3.0.7",
     "clsx": "^2.1.1",
-    "formik": "^2.4.6"
+    "formik": "^2.4.6",
+    "luxon": "^3.4.4"
   }
 }

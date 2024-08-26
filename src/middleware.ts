@@ -2,16 +2,17 @@ import { runWithAmplifyServerContext } from '@/utils/amplify-utils';
 import { fetchAuthSession } from 'aws-amplify/auth/server';
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { cookies } from 'next/headers'
  
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
     const response = NextResponse.next();
 
     const authenticated = await runWithAmplifyServerContext({
-      nextServerContext: { request, response },
+      nextServerContext: { request, response, cookies },
       operation: async (contextSpec) => {
         try {
-          const session = await fetchAuthSession(contextSpec, {});
+          const session = await fetchAuthSession(contextSpec, {forceRefresh: true});
           return session.tokens !== undefined;
         } catch (error) {
           console.log(error);

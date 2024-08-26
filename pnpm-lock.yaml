@@ -13,6 +13,9 @@ dependencies:
   '@aws-amplify/backend':
     specifier: ^1.0.4
     version: 1.0.4(@aws-sdk/client-cloudformation@3.616.0)(@aws-sdk/client-s3@3.616.0)(@aws-sdk/client-sso-oidc@3.616.0)(@aws-sdk/types@3.609.0)(aws-cdk-lib@2.149.0)(constructs@10.3.0)(zod@3.23.8)
+  '@fortawesome/free-solid-svg-icons':
+    specifier: ^6.6.0
+    version: 6.6.0
   '@headlessui/react':
     specifier: ^2.1.2
     version: 2.1.2(react-dom@18.3.1)(react@18.3.1)
@@ -40,6 +43,9 @@ dependencies:
   formik:
     specifier: ^2.4.6
     version: 2.4.6(react@18.3.1)
+  luxon:
+    specifier: ^3.4.4
+    version: 3.4.4
 
 devDependencies:
   '@fortawesome/fontawesome-svg-core':
@@ -57,6 +63,9 @@ devDependencies:
   '@fortawesome/react-fontawesome':
     specifier: ^0.2.2
     version: 0.2.2(@fortawesome/fontawesome-svg-core@6.6.0)(react@18.3.1)
+  '@types/luxon':
+    specifier: ^3.4.2
+    version: 3.4.2
   '@types/node':
     specifier: 20.14.11
     version: 20.14.11
@@ -3607,7 +3616,6 @@ packages:
   /@fortawesome/fontawesome-common-types@6.6.0:
     resolution: {integrity: sha512-xyX0X9mc0kyz9plIyryrRbl7ngsA9jz77mCZJsUkLl+ZKs0KWObgaEBoSgQiYWAsSmjz/yjl0F++Got0Mdp4Rw==, tarball: https://npm.fontawesome.com/@fortawesome/fontawesome-common-types/-/6.6.0/fontawesome-common-types-6.6.0.tgz}
     engines: {node: '>=6'}
-    dev: true
 
   /@fortawesome/fontawesome-svg-core@6.6.0:
     resolution: {integrity: sha512-KHwPkCk6oRT4HADE7smhfsKudt9N/9lm6EJ5BVg0tD1yPA5hht837fB87F8pn15D8JfTqQOjhKTktwmLMiD7Kg==, tarball: https://npm.fontawesome.com/@fortawesome/fontawesome-svg-core/-/6.6.0/fontawesome-svg-core-6.6.0.tgz}
@@ -3622,6 +3630,13 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-common-types': 6.6.0
     dev: true
+
+  /@fortawesome/free-solid-svg-icons@6.6.0:
+    resolution: {integrity: sha512-IYv/2skhEDFc2WGUcqvFJkeK39Q+HyPf5GHUrT/l2pKbtgEIv1al1TKd6qStR5OIwQdN1GZP54ci3y4mroJWjA==, tarball: https://npm.fontawesome.com/@fortawesome/free-solid-svg-icons/-/6.6.0/free-solid-svg-icons-6.6.0.tgz}
+    engines: {node: '>=6'}
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.6.0
+    dev: false
 
   /@fortawesome/pro-duotone-svg-icons@6.6.0:
     resolution: {integrity: sha512-ke5aL4+P0aTc5pxfP9JclD87LQX4sPdj9i2YpYeJaNArtHXc/3QheR98G1G9uk257jIXuI2HTfeCXW4N6+2TXQ==, tarball: https://npm.fontawesome.com/@fortawesome/pro-duotone-svg-icons/-/6.6.0/pro-duotone-svg-icons-6.6.0.tgz}
@@ -5073,6 +5088,10 @@ packages:
       '@types/react': 18.3.3
       hoist-non-react-statics: 3.3.2
     dev: false
+
+  /@types/luxon@3.4.2:
+    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
+    dev: true
 
   /@types/mdast@4.0.4:
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -6934,6 +6953,11 @@ packages:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
       yallist: 3.1.1
+
+  /luxon@3.4.4:
+    resolution: {integrity: sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /map-cache@0.2.2:
     resolution: {integrity: sha512-8y/eV9QQZCiyn1SprXSrCmqJN0yNRATe+PO8ztwqrvrbdRLA3eYJF0yaR0YayLWkMbsQSKWS9N2gPcGEc4UsZg==}
