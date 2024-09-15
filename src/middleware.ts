@@ -21,7 +21,6 @@ export async function middleware(request: NextRequest) {
       },
     });
 
-    console.log("Authenticated", authenticated);
   
     if (authenticated) {
       return response;

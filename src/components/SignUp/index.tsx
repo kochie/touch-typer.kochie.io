@@ -34,28 +34,6 @@ export default function SignIn() {
           <Formik
             initialValues={{ email: "", password: "", code: "" }}
             onSubmit={async ({ email, password, code }) => {
-              // if (nextStep === "START_SIGNUP") {
-              //   const signUpResult = await signUp({
-              //     username: email,
-              //     password: password,
-              //     options: {
-              //       autoSignIn: true,
-              //       userAttributes: {
-              //         email: email,
-              //       },
-              //     },
-              //   });
-              //   setStep(signUpResult.nextStep.signUpStep)
-              //   if (signUpResult.isSignUpComplete) router.push("/account");
-              // } else if (nextStep === "CONFIRM_SIGN_UP") {
-              //   const confirmSignUpResult = await confirmSignUp({confirmationCode: code, username: email})
-              //   setStep(confirmSignUpResult.nextStep.signUpStep)
-              //   if (confirmSignUpResult.nextStep) router.push("/account");
-              // } else if (nextStep === "COMPLETE_AUTO_SIGN_IN") {
-              //   const signInResult = await autoSignIn()
-              //   if (signInResult.isSignedIn) router.push("/account");
-              // }
-              // console.log(nextStep)
               try {
                 switch (nextStep) {
                   case "START_SIGNUP": {

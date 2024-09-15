@@ -8,8 +8,6 @@ import { getCurrentUser } from "aws-amplify/auth/server";
 import { Schema } from "@/utils/resources";
 // import outputs from "@/amplify_outputs.json";
 
-console.log("USERPOOL", process.env.NEXT_PUBLIC_USERPOOL_ID);
-console.log("CLIENT ID", process.env.NEXT_PUBLIC_USERPOOL_CLIENT_ID);
 
 const outputs = {
   Auth: {
@@ -20,7 +18,6 @@ const outputs = {
   },
 };
 
-console.log(outputs)
 
 export const { runWithAmplifyServerContext } = createServerRunner({
   config: outputs,

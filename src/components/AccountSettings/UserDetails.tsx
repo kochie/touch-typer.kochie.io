@@ -18,7 +18,6 @@ export function UserDetails({ user }: { user: FetchUserAttributesOutput }) {
         username: user.preferred_username,
       }}
       onSubmit={async (values) => {
-        // console.log(values);
         await updateUserAttributes({
           userAttributes: {
             preferred_username: user.username,

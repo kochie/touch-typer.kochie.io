@@ -66,7 +66,6 @@ interface ModifyPlanSectionProps {
 }
 
 function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
-  console.log(subscription);
 
   const router = useRouter();
   
@@ -84,7 +83,6 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
       },
     }).then((res) => res.json());
 
-    console.log(data.url);
 
     router.push(data.url);
   }

@@ -13,7 +13,6 @@ export default async function PaymentsPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  console.log(searchParams);
   if (typeof searchParams.purchasePrice !== "string") {
     return <div>Invalid purchase price {searchParams.purchasePrice}</div>;
   }
@@ -26,13 +25,6 @@ export default async function PaymentsPage({
         (session) => session.tokens?.idToken?.toString() ?? ""
       ),
   });
-
-  // console.log(
-  //   "LOOKUP",
-  //   JSON.stringify({
-  //     lookup_key: priceId,
-  //   })
-  // );
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_REST_URL}/create-checkout-session`,
@@ -48,7 +40,6 @@ export default async function PaymentsPage({
     }
   ).then((res) => res.json());
 
-  console.log("RESPONSE", response);
 
   return (
     <div className="">
