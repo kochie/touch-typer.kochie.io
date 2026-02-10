@@ -9,13 +9,24 @@ import { toast } from "react-toastify";
 import { Notification } from "@/components/Notification";
 import { Field, Form, Formik } from "formik";
 
+// Base URL for auth redirects. Prefer NEXT_PUBLIC_SITE_URL in production so the redirect
+// we send to Supabase is correct. The link in the reset email is also controlled by
+// Supabase Dashboard → Authentication → URL Configuration → Site URL (set that to your
+// production URL, e.g. https://touch-typer.kochie.io).
+function getAuthBaseUrl(): string {
+  if (typeof window !== "undefined") {
+    return process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+  }
+  return process.env.NEXT_PUBLIC_SITE_URL ?? "";
+}
+
 export default function ForgotPasswordPage() {
   const supabase = useSupabaseClient();
   const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
 
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
-  const callbackUrl = `${origin}/auth/callback?next=/auth/set-password`;
+  const baseUrl = getAuthBaseUrl();
+  const callbackUrl = `${baseUrl}/auth/callback?next=/auth/set-password`;
 
   return (
     <div className="h-full flex flex-col justify-center items-center bg-slate-100 min-h-screen">
