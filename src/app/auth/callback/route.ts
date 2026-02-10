@@ -7,12 +7,13 @@ const ALLOWED_NEXT = new Set(['/account', '/auth/set-password']);
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
-  const token = requestUrl.searchParams.get('token');
+  const accessToken = requestUrl.searchParams.get('access_token');
+  const refreshToken = requestUrl.searchParams.get('refresh_token');
   const nextPath = requestUrl.searchParams.get('next');
   const redirectTo = ALLOWED_NEXT.has(nextPath ?? '') ? nextPath! : '/account';
   const targetPath = redirectTo === '/account' ? '/account?open_in_app=1' : redirectTo;
 
-  if (!token) {
+  if (!accessToken || !refreshToken) {
     return NextResponse.redirect(new URL('/signin?error=missing_token', requestUrl.origin));
   }
 
@@ -35,7 +36,7 @@ export async function GET(request: NextRequest) {
     }
   );
 
-  const { error } = await supabase.auth.exchangeCodeForSession(token);
+  const { error } = await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken})
 
   if (error) {
     console.error('Auth callback exchange error:', error.message);
