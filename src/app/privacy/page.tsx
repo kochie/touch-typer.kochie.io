@@ -1,6 +1,7 @@
 import { compile, run } from "@mdx-js/mdx";
+import { readFile } from "fs/promises";
+import path from "path";
 import * as runtime from "react/jsx-runtime";
-import PrivacyPolicy from "./privacy_policy.md";
 import { ReactNode } from "react";
 
 const components = {
@@ -10,8 +11,12 @@ const components = {
 }
 
 export default async function Page() {
+  const markdown = await readFile(
+    path.join(process.cwd(), "src/app/privacy/privacy_policy.md"),
+    "utf-8"
+  );
   const code = String(
-    await compile(PrivacyPolicy, { outputFormat: "function-body" })
+    await compile(markdown, { outputFormat: "function-body" })
   );
 
   const { default: MDXContent } = await run(code, {
