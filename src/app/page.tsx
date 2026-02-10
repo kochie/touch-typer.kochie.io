@@ -10,28 +10,9 @@ import { Inconsolata } from "next/font/google";
 import Script from "next/script";
 import analytics from "@/assets/analytics.png";
 import Link from "next/link";
-import { DOMAttributes } from "react";
 import { Metadata, Viewport } from "next";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] });
-
-interface MsStoreBadge {
-  size: string;
-  productid: string;
-  theme: string;
-  language: string;
-  animation: string;
-}
-
-type CustomElement<T> = Partial<T & DOMAttributes<T> & { children: any }>;
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      ["ms-store-badge"]: CustomElement<HTMLDivElement & MsStoreBadge>;
-    }
-  }
-}
 
 const description =
   "Improve your typing skills or learn a new keyboard layout with Touch Typer. Available on Mac, Windows, and Linux.";

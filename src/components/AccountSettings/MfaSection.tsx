@@ -20,8 +20,9 @@ export function MfaSection() {
   const [unenrolling, setUnenrolling] = useState<string | null>(null);
 
   const loadFactors = async () => {
-    const { data: { factors: list } } = await supabase.auth.mfa.listFactors();
-    setFactors(list?.totp ?? []);
+    const { data } = await supabase.auth.mfa.listFactors();
+    const list = data?.all?.filter((f) => f.factor_type === "totp") ?? [];
+    setFactors(list);
     setLoading(false);
   };
 

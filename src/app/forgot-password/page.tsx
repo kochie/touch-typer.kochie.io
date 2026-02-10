@@ -106,10 +106,10 @@ export default function ForgotPasswordPage() {
             <button
               type="button"
               onClick={async () => {
-                const { error } = await supabase.auth.resend({
-                  type: "recovery",
+                const { error } = await supabase.auth.resetPasswordForEmail(
                   email,
-                });
+                  { redirectTo: callbackUrl }
+                );
                 if (error) {
                   toast(Notification, {
                     type: "error",
