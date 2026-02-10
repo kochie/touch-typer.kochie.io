@@ -1,4 +1,5 @@
 import AccountSettings from "@/components/AccountSettings";
+import { OpenInAppBanner } from "@/components/OpenInAppBanner";
 import SignOutButton from "@/components/SignOutButton";
 import { Suspense } from "react";
 
@@ -6,7 +7,11 @@ export default function AccountPage() {
   return (
     <div className="min-h-full py-10 bg-slate-200">
       <main className="">
-        <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
+        <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+          <Suspense fallback={null}>
+            <OpenInAppBanner />
+          </Suspense>
+          <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 mt-0">
           <div className="grid grid-cols-1 gap-4 lg:col-span-2">
             <Suspense>
               <AccountSettings />
@@ -14,6 +19,7 @@ export default function AccountPage() {
           </div>
           <div className="grid grid-cols-1 gap-4">
             <SettingsMenu />
+          </div>
           </div>
         </div>
       </main>

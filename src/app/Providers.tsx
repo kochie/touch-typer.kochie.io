@@ -1,17 +1,15 @@
 "use client";
 
-import ConfigureAmplifyClientSide from "@/components/ConfigureAmplify";
+import { SupabaseProvider } from "@/lib/supabase-provider";
 import { ToastContainer } from "react-toastify";
-import { ApolloWrapper } from "@/utils/apollo-provider";
 
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Providers({ children }: React.PropsWithChildren<{}>) {
   return (
-    <ApolloWrapper>
+    <SupabaseProvider>
       <ToastContainer />
-      <ConfigureAmplifyClientSide />
       {children}
-    </ApolloWrapper>
+    </SupabaseProvider>
   );
 }

@@ -1,24 +1,23 @@
 "use client";
-import {
-  signUp,
-  confirmSignUp,
-  SignUpOutput,
-  ConfirmSignUpOutput,
-  autoSignIn,
-} from "aws-amplify/auth";
+
 import { Formik, Field as FormikField, Form } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 import Logo from "@/assets/logo.svg";
 import { Button, Field, Label, Transition } from "@headlessui/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Notification } from "../Notification";
+import { useSupabaseClient } from "@/lib/supabase-provider";
 
-export default function SignIn() {
+type SignUpStep = "START_SIGNUP" | "CONFIRM_EMAIL" | "DONE";
+
+export default function SignUp() {
   const router = useRouter();
-  const [nextStep, setStep] = useState("START_SIGNUP");
+  const supabase = useSupabaseClient();
+  const [step, setStep] = useState<SignUpStep>("START_SIGNUP");
+  const [email, setEmail] = useState("");
 
   return (
     <>
@@ -31,136 +30,195 @@ export default function SignIn() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <Formik
-            initialValues={{ email: "", password: "", code: "" }}
-            onSubmit={async ({ email, password, code }) => {
-              try {
-                switch (nextStep) {
-                  case "START_SIGNUP": {
-                    const signUpResult = await signUp({
-                      username: email,
-                      password: password,
-                      options: {
-                        autoSignIn: true,
-                        userAttributes: {
-                          email: email,
-                        },
+          {step === "START_SIGNUP" && (
+            <Formik
+              initialValues={{ email: "", password: "", name: "" }}
+              onSubmit={async ({ email, password, name }, { setSubmitting }) => {
+                try {
+                  const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                      data: {
+                        name,
+                      },
+                      emailRedirectTo: `${window.location.origin}/account`,
+                    },
+                  });
+
+                  if (error) {
+                    toast(Notification, {
+                      type: "error",
+                      data: {
+                        title: "Error Signing Up",
+                        message: error.message,
+                        type: "error",
                       },
                     });
-                    setStep(signUpResult.nextStep.signUpStep);
-                    if (signUpResult.isSignUpComplete) router.push("/account");
-                    break;
+                    return;
                   }
-                  case "CONFIRM_SIGN_UP": {
-                    const confirmSignUpResult = await confirmSignUp({
-                      confirmationCode: code,
-                      username: email,
+
+                  // Check if email confirmation is required
+                  if (data.user && !data.session) {
+                    // Email confirmation required
+                    setEmail(email);
+                    setStep("CONFIRM_EMAIL");
+                    toast(Notification, {
+                      type: "success",
+                      data: {
+                        title: "Check Your Email",
+                        message: "We sent you a confirmation link. Please check your email to verify your account.",
+                        type: "success",
+                      },
                     });
-                    setStep(confirmSignUpResult.nextStep.signUpStep);
-                    if (confirmSignUpResult.nextStep) router.push("/account");
-                    break;
-                  }
-                  case "COMPLETE_AUTO_SIGN_IN": {
-                    const signInResult = await autoSignIn();
-                    if (signInResult.isSignedIn) router.push("/account");
-                    break;
-                  }
-                  case "DONE": {
+                  } else if (data.session) {
+                    // Auto signed in (email confirmation disabled)
                     router.push("/account");
-                    break;
                   }
-                }
-              } catch (error) {
-
-
-                toast(Notification, {
-                  // toastId: id,
-                  type: "error",
-                  data: {
-                    title: "Error Signing Up",
-                    message: error as any,
+                } catch (error: any) {
+                  toast(Notification, {
                     type: "error",
-                  },
-                });
-              }
-            }}
-          >
-            <Form className="space-y-6">
-              <Field>
-                <Label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Email address
-                </Label>
-                <div className="mt-2">
-                  <FormikField
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </Field>
-
-              <Transition show={nextStep === "START_SIGNUP"}>
-                <Field>
-                  <div className="flex items-center justify-between">
+                    data: {
+                      title: "Error Signing Up",
+                      message: error.message || "An unexpected error occurred",
+                      type: "error",
+                    },
+                  });
+                } finally {
+                  setSubmitting(false);
+                }
+              }}
+            >
+              {({ isSubmitting }) => (
+                <Form className="space-y-6">
+                  <Field>
                     <Label
-                      htmlFor="password"
+                      htmlFor="name"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
-                      Password
+                      Name
                     </Label>
-                  </div>
-                  <div className="mt-2">
-                    <FormikField
-                      id="password"
-                      name="password"
-                      type="password"
-                      required
-                      autoComplete="current-password"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </Field>
-              </Transition>
+                    <div className="mt-2">
+                      <FormikField
+                        id="name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </Field>
 
-              <Transition show={nextStep === "CONFIRM_SIGN_UP"}>
-                <Field>
-                  <div className="flex items-center justify-between">
+                  <Field>
                     <Label
-                      htmlFor="password"
+                      htmlFor="email"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
-                      Verification Code
+                      Email address
                     </Label>
-                  </div>
-                  <div className="mt-2">
-                    <FormikField
-                      id="code"
-                      name="code"
-                      type="code"
-                      required
-                      autoComplete="otp"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </Field>
-              </Transition>
+                    <div className="mt-2">
+                      <FormikField
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        autoComplete="email"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </Field>
 
-              <div>
-                <Button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Sign in
-                </Button>
+                  <Field>
+                    <div className="flex items-center justify-between">
+                      <Label
+                        htmlFor="password"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Password
+                      </Label>
+                    </div>
+                    <div className="mt-2">
+                      <FormikField
+                        id="password"
+                        name="password"
+                        type="password"
+                        required
+                        autoComplete="new-password"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                    <p className="mt-1 text-xs text-gray-500">
+                      At least 6 characters
+                    </p>
+                  </Field>
+
+                  <div>
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
+                    >
+                      {isSubmitting ? "Creating account..." : "Create account"}
+                    </Button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          )}
+
+          {step === "CONFIRM_EMAIL" && (
+            <div className="text-center space-y-4">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                <h3 className="text-lg font-medium text-green-800">
+                  Check your email
+                </h3>
+                <p className="mt-2 text-sm text-green-700">
+                  We sent a confirmation link to <strong>{email}</strong>.
+                  Please click the link to verify your account.
+                </p>
               </div>
-            </Form>
-          </Formik>
+              <button
+                onClick={async () => {
+                  const { error } = await supabase.auth.resend({
+                    type: "signup",
+                    email,
+                  });
+                  if (error) {
+                    toast(Notification, {
+                      type: "error",
+                      data: {
+                        title: "Error",
+                        message: error.message,
+                        type: "error",
+                      },
+                    });
+                  } else {
+                    toast(Notification, {
+                      type: "success",
+                      data: {
+                        title: "Email Sent",
+                        message: "Confirmation email resent successfully",
+                        type: "success",
+                      },
+                    });
+                  }
+                }}
+                className="text-sm text-indigo-600 hover:text-indigo-500"
+              >
+                Resend confirmation email
+              </button>
+            </div>
+          )}
+
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Already have an account?{" "}
+            <Link
+              href="/signin"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
+              Sign in
+            </Link>
+          </p>
         </div>
       </div>
     </>

@@ -1,11 +1,10 @@
 import { StripeCheckout } from "@/components/Payment";
-import { runWithAmplifyServerContext } from "@/utils/amplify-utils";
-import { fetchAuthSession } from "aws-amplify/auth/server";
-import { cookies } from "next/headers";
+import { createServerSupabaseClient } from "@/lib/supabase-server";
+import { redirect } from "next/navigation";
 
-const priceMap: { [key: string]: string } = {
-  monthly: process.env.MONTHLY_PRICE_ID!,
-  annually: process.env.YEARLY_PRICE_ID!,
+const lookupKeyMap: { [key: string]: string } = {
+  monthly: "premium_monthly",
+  annually: "premium_yearly",
 };
 
 export default async function PaymentsPage({
@@ -13,37 +12,35 @@ export default async function PaymentsPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  if (typeof searchParams.purchasePrice !== "string") {
-    return <div>Invalid purchase price {searchParams.purchasePrice}</div>;
+  const params = await searchParams;
+  
+  if (typeof params.purchasePrice !== "string") {
+    return <div>Invalid purchase price {params.purchasePrice}</div>;
   }
-  const priceId = priceMap[searchParams.purchasePrice];
+  
+  const lookupKey = lookupKeyMap[params.purchasePrice];
+  if (!lookupKey) {
+    return <div>Invalid purchase option</div>;
+  }
 
-  const token = await runWithAmplifyServerContext({
-    nextServerContext: { cookies },
-    operation: (contextSpec) =>
-      fetchAuthSession(contextSpec).then(
-        (session) => session.tokens?.idToken?.toString() ?? ""
-      ),
+  const supabase = await createServerSupabaseClient();
+  
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    redirect("/signin");
+  }
+
+  const { data, error } = await supabase.functions.invoke("create-checkout-session", {
+    body: { lookup_key: lookupKey },
   });
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_REST_URL}/create-checkout-session`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify({
-        lookup_key: priceId,
-      }),
-    }
-  ).then((res) => res.json());
-
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="">
-      <StripeCheckout options={{ clientSecret: response.clientSecret }} />
+      <StripeCheckout options={{ clientSecret: data.clientSecret }} />
     </div>
   );
 }

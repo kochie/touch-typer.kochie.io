@@ -1,11 +1,10 @@
 "use client";
 
-import { InputLeaderboard, Scores } from "@/generated/graphql";
-import { GET_LEADERBOARD } from "@/transactions/getLeaderboard";
-import { useQuery } from "@apollo/client";
+import { getLeaderboard, type LeaderboardScore } from "@/transactions/getLeaderboard";
 import { toast } from "react-toastify";
 import { Notification } from "../Notification";
 import { Duration } from "luxon";
+import { useEffect, useState } from "react";
 
 export interface LeaderboardSectionProps {
   keyboard: string;
@@ -18,37 +17,53 @@ export default function LeaderboardSection({
   language,
   level,
 }: LeaderboardSectionProps) {
-  const { data, loading, error } = useQuery<
-    { leaderboards: Scores[] },
-    { leaderboard: InputLeaderboard }
-  >(GET_LEADERBOARD, {
-    variables: {
-      leaderboard: {
-        keyboard,
-        language,
-        level,
-      },
-    },
-  });
+  const [scores, setScores] = useState<LeaderboardScore[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-  if (loading || !data) {
+  useEffect(() => {
+    async function fetchLeaderboard() {
+      try {
+        setLoading(true);
+        const data = await getLeaderboard({
+          keyboard,
+          language,
+          level,
+        });
+        setScores(data);
+      } catch (err) {
+        setError(err as Error);
+        toast(Notification, {
+          data: {
+            title: "Error",
+            message: (err as Error).message,
+            type: "error",
+          },
+          type: "error",
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchLeaderboard();
+  }, [keyboard, language, level]);
+
+  if (loading) {
     return <p>Loading...</p>;
   }
 
   if (error) {
-    toast(Notification, {
-      data: {
-        title: "Error",
-        message: error.message,
-        type: "error",
-      },
-      type: "error",
-    });
+    return <p className="text-red-500">Failed to load leaderboard</p>;
+  }
+
+  if (scores.length === 0) {
+    return <p className="text-gray-500">No scores yet. Be the first!</p>;
   }
 
   return (
     <ul role="list" className="divide-y divide-gray-100">
-      {data.leaderboards.map((score) => (
+      {scores.map((score) => (
         <li
           key={`${score.username}-${score.datetime}`}
           className="flex justify-between gap-x-6 py-5"
@@ -76,7 +91,7 @@ export default function LeaderboardSection({
                   Incorrect: {score.incorrect}
                 </span>
                 <span className="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-xs font-medium text-purple-700">
-                  CPM: {((score.correct + score.incorrect) / (score.time ) *60000).toFixed(2)}
+                  CPM: {score.cpm?.toFixed(2) || ((score.correct + score.incorrect) / score.time * 60000).toFixed(2)}
                 </span>
               </p>
             </div>
