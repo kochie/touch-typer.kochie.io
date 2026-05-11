@@ -2,32 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useSupabaseClient } from "@/lib/supabase-provider";
+import { useUser } from "@/lib/supabase-provider";
 
 export function OpenInAppBanner() {
   const searchParams = useSearchParams();
-  const supabase = useSupabaseClient();
+  const { user } = useUser();
   const [dismissed, setDismissed] = useState(false);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     const openInApp = searchParams.get("open_in_app") === "1";
-    if (!openInApp || dismissed) {
-      setShow(false);
-      return;
-    }
-    const check = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setShow(!!session);
-    };
-    check();
-  }, [searchParams, supabase, dismissed]);
+    setShow(openInApp && !dismissed && !!user);
+  }, [searchParams, dismissed, user]);
 
   const handleOpenInApp = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.access_token || !session?.refresh_token) return;
-    const url = `touchtyper://auth-callback?access_token=${encodeURIComponent(session.access_token)}&refresh_token=${encodeURIComponent(session.refresh_token)}`;
-    window.location.href = url;
+    if (!user) return;
+
+    const response = await fetch('/api/auth/app-code', { method: 'POST' });
+    if (!response.ok) return;
+    const { code } = await response.json();
+
+    window.location.href = `touchtyper://auth-callback?code=${encodeURIComponent(code)}`;
   };
 
   if (!show) return null;
@@ -35,7 +30,7 @@ export function OpenInAppBanner() {
   return (
     <div className="rounded-lg bg-accent/10 border border-accent/30 p-4 mb-6 flex items-center justify-between gap-4">
       <p className="text-sm text-accent-deep">
-        You’re signed in on the web. Open the Touch Typer app to use this account there too.
+        You&apos;re signed in on the web. Open the Touch Typer app to use this account there too.
       </p>
       <div className="flex items-center gap-2 shrink-0">
         <button
