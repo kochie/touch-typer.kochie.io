@@ -218,7 +218,10 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
             {subscription.next_billing_date && (
               <span>
                 {" "}Will renew on{" "}
-                {new Date(subscription.next_billing_date).toLocaleDateString()}
+                {Temporal.Instant.from(subscription.next_billing_date)
+                  .toZonedDateTimeISO(Temporal.Now.timeZoneId())
+                  .toPlainDate()
+                  .toLocaleString()}
               </span>
             )}
           </Description>
