@@ -3,8 +3,14 @@
 import { getLeaderboard, type LeaderboardScore } from "@/transactions/getLeaderboard";
 import { toast } from "react-toastify";
 import { Notification } from "../Notification";
-import { Duration } from "luxon";
 import { useEffect, useState } from "react";
+
+function formatDuration(ms: number, format: "m:ss.SSS"): string {
+  const mins = Math.floor(ms / 60_000);
+  const secs = Math.floor((ms % 60_000) / 1_000);
+  const msRemainder = Math.floor(ms % 1_000);
+  return `${mins}:${String(secs).padStart(2, "0")}.${String(msRemainder).padStart(3, "0")}`;
+}
 
 export interface LeaderboardSectionProps {
   keyboard: string;
@@ -99,9 +105,7 @@ export default function LeaderboardSection({
 
               <div className="">
                 <p className="text-sm font-semibold leading-6 text-fg">
-                  {Duration.fromMillis(score.time)
-                    .rescale()
-                    .toFormat("m:s.SSS")}
+                  {formatDuration(score.time, "m:ss.SSS")}
                 </p>
                 <p className="text-xs leading-2 text-fg/70">
                   {(
