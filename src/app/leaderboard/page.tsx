@@ -57,18 +57,18 @@ export default function LeaderboardPage() {
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">
             Top typists, globally.
           </h1>
-          <p className="mt-4 text-base text-ink/70">
+          <p className="mt-4 text-base text-fg/70">
             Updated in near real time. Filter by layout and time window.
           </p>
 
           <div className="mt-8">
             <Fieldset>
               <Field>
-                <Label className="block text-sm font-medium text-ink/80 mb-1">
+                <Label className="block text-sm font-medium text-fg/80 mb-1">
                   Keyboard
                 </Label>
                 <Select
-                  className="mt-1 block rounded-lg border border-line bg-paper px-3 py-2 text-sm text-ink shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+                  className="mt-1 block rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg shadow-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
                   name="keyboard"
                   value={keyboard}
                   onChange={(event) =>

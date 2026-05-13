@@ -50,7 +50,7 @@ export default function LeaderboardSection({
   }, [keyboard, language, level]);
 
   if (loading) {
-    return <p className="text-ink/60">Loading...</p>;
+    return <p className="text-fg/60">Loading...</p>;
   }
 
   if (error) {
@@ -58,24 +58,24 @@ export default function LeaderboardSection({
   }
 
   if (scores.length === 0) {
-    return <p className="text-ink/50">No scores yet. Be the first!</p>;
+    return <p className="text-fg/50">No scores yet. Be the first!</p>;
   }
 
   return (
-    <div className="rounded-xl border border-line bg-paper-soft overflow-hidden">
-      <ul role="list" className="divide-y divide-line/60">
+    <div className="rounded-xl border border-border bg-bg-elevated overflow-hidden">
+      <ul role="list" className="divide-y divide-border/60">
         {scores.map((score) => (
           <li
             key={`${score.username}-${score.datetime}`}
-            className="flex justify-between gap-x-6 py-5 px-6 border-b border-line/60 hover:bg-paper last:border-b-0 transition-colors"
+            className="flex justify-between gap-x-6 py-5 px-6 border-b border-border/60 hover:bg-bg last:border-b-0 transition-colors"
           >
             <div className="flex min-w-0 gap-x-4">
               <div className="min-w-0 flex-auto">
-                <p className="text-sm font-semibold leading-6 text-ink">
+                <p className="text-sm font-semibold leading-6 text-fg">
                   {score.username}
                 </p>
                 <time
-                  className="mt-1 text-xs leading-5 text-ink/50"
+                  className="mt-1 text-xs leading-5 text-fg/50"
                   dateTime={score.datetime}
                 >
                   {new Date(score.datetime).toLocaleString()}
@@ -84,7 +84,7 @@ export default function LeaderboardSection({
             </div>
             <div className="shrink-0 flex gap-6 items-center">
               <div className="">
-                <p className="flex gap-1 truncate text-xs leading-5 text-ink/50">
+                <p className="flex gap-1 truncate text-xs leading-5 text-fg/50">
                   <span className="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
                     Correct: {score.correct}
                   </span>
@@ -98,12 +98,12 @@ export default function LeaderboardSection({
               </div>
 
               <div className="">
-                <p className="text-sm font-semibold leading-6 text-ink">
+                <p className="text-sm font-semibold leading-6 text-fg">
                   {Duration.fromMillis(score.time)
                     .rescale()
                     .toFormat("m:s.SSS")}
                 </p>
-                <p className="text-xs leading-2 text-ink/70">
+                <p className="text-xs leading-2 text-fg/70">
                   {(
                     score.correct /
                     (score.incorrect + score.correct)

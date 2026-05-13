@@ -13,11 +13,11 @@ export const metadata = {
 };
 
 const components = {
-  h1: ({children}: {children?: ReactNode}) => <h1 className="text-2xl font-bold mt-8 mb-4 text-ink">{children}</h1>,
-  h2: ({children}: {children?: ReactNode}) => <h2 className="text-xl font-semibold mt-6 mb-3 text-ink">{children}</h2>,
+  h1: ({children}: {children?: ReactNode}) => <h1 className="text-2xl font-bold mt-8 mb-4 text-fg">{children}</h1>,
+  h2: ({children}: {children?: ReactNode}) => <h2 className="text-xl font-semibold mt-6 mb-3 text-fg">{children}</h2>,
   a: ({children, href}: {children?: ReactNode, href?: string}) => <a href={href} className="text-accent hover:text-accent-deep underline">{children}</a>,
-  p: ({children}: {children?: ReactNode}) => <p className="mb-4 text-ink/80 leading-relaxed">{children}</p>,
-  ul: ({children}: {children?: ReactNode}) => <ul className="mb-4 list-disc list-inside text-ink/80 space-y-1">{children}</ul>,
+  p: ({children}: {children?: ReactNode}) => <p className="mb-4 text-fg/80 leading-relaxed">{children}</p>,
+  ul: ({children}: {children?: ReactNode}) => <ul className="mb-4 list-disc list-inside text-fg/80 space-y-1">{children}</ul>,
   li: ({children}: {children?: ReactNode}) => <li className="leading-relaxed">{children}</li>,
 }
 
@@ -40,7 +40,7 @@ export default async function Page() {
       <Section tone="paper" density="default">
         <Container width="narrow">
           <Eyebrow>Legal</Eyebrow>
-          <h1 className="mt-3 text-4xl font-bold text-ink">Privacy</h1>
+          <h1 className="mt-3 text-4xl font-bold text-fg">Privacy</h1>
           <div className="mt-8 prose-styles">
             <MDXContent components={components}/>
           </div>
