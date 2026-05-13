@@ -42,7 +42,7 @@ export function BigFeatureBlock({
             <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight leading-tight">
               {title}
             </h2>
-            <p className="mt-4 text-base text-ink/70 leading-relaxed max-w-prose">
+            <p className="mt-4 text-base text-fg/70 leading-relaxed max-w-prose">
               {body}
             </p>
             <Link
@@ -53,7 +53,7 @@ export function BigFeatureBlock({
             </Link>
           </div>
           <div className={clsx(imagePosition === "left" && "md:order-1")}>
-            <div className="rounded-xl border border-line bg-paper-soft p-2 shadow-sm">
+            <div className="rounded-xl border border-accent bg-bg-elevated p-2 shadow-accent-glow">
               <Image
                 src={imageSrc}
                 alt={imageAlt}
