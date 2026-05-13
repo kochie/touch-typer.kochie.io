@@ -176,7 +176,7 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
             type="button"
             onClick={handlePaymentUpdate}
             disabled={isLoading}
-            className="transition duration-200 rounded-md bg-slate-100 px-3.5 py-2.5 text-sm font-semibold text-slate-600 shadow-sm hover:bg-slate-200 disabled:opacity-50"
+            className="transition duration-200 rounded-md bg-bg-elevated px-3.5 py-2.5 text-sm font-semibold text-fg/80 shadow-sm hover:bg-bg-elevated/80 disabled:opacity-50"
           >
             {isLoading ? "Loading..." : "Change on Stripe"}
           </button>
@@ -200,7 +200,7 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
             type="button"
             onClick={() => handleSwitchInterval(isYearly ? "monthly" : "yearly")}
             disabled={!!switchingInterval}
-            className="transition duration-200 rounded-md bg-slate-100 px-3.5 py-2.5 text-sm font-semibold text-slate-600 shadow-sm hover:bg-slate-200 disabled:opacity-50"
+            className="transition duration-200 rounded-md bg-bg-elevated px-3.5 py-2.5 text-sm font-semibold text-fg/80 shadow-sm hover:bg-bg-elevated/80 disabled:opacity-50"
           >
             {switchingInterval
               ? "Updating..."
@@ -250,13 +250,13 @@ function UpgradeSection() {
             <RadioGroup
               value={billingPeriod}
               onChange={setBillingPeriod}
-              className="my-3 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 "
+              className="my-3 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-border"
             >
               {billingPeriods.map((option) => (
                 <Radio
                   key={option.value}
                   value={option.value}
-                  className="cursor-pointer rounded-md px-2.5 py-1 text-gray-500 data-[checked]:bg-slate-600 data-[checked]:text-white"
+                  className="cursor-pointer rounded-md px-2.5 py-1 text-fg/80 data-[checked]:bg-accent data-[checked]:text-paper"
                 >
                   {option.label}
                 </Radio>
@@ -268,7 +268,7 @@ function UpgradeSection() {
       <div>
         <Link
           href={`/checkout?purchasePrice=${billingPeriod}`}
-          className="inline-block transition duration-200 rounded-md bg-slate-100 px-3.5 py-2.5 text-sm font-semibold text-slate-600 shadow-sm hover:bg-slate-200"
+          className="inline-block transition duration-200 rounded-md bg-bg-elevated px-3.5 py-2.5 text-sm font-semibold text-fg/80 shadow-sm hover:bg-bg-elevated/80"
         >
           Buy Premium
         </Link>
