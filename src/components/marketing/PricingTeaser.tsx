@@ -49,7 +49,7 @@ export function PricingTeaser() {
               ))}
             </ul>
             <div className="mt-6 flex items-center gap-3">
-              <Button href="/buy" variant="primary" size="md">
+              <Button href="/buy/plans" variant="primary" size="md">
                 Go Premium
               </Button>
               <Button href="/pricing" variant="ghost" size="md">

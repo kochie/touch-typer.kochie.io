@@ -86,7 +86,7 @@ export default function PricingPage() {
                 ))}
               </ul>
               <div className="mt-8">
-                <Button href="/buy" variant="primary" size="md" className="w-full">
+                <Button href="/buy/plans" variant="primary" size="md" className="w-full">
                   Go Premium
                 </Button>
               </div>
