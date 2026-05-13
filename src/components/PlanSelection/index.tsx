@@ -121,8 +121,8 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
     try {
       setIsLoading(true);
       
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
         throw new Error("Cannot update payment without a valid session");
       }
 
