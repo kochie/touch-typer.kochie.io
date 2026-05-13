@@ -1,8 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { DownloadMenu } from "./DownloadMenu";
 import { MobileSheet } from "./MobileSheet";
+import { ThemeToggle } from "./ThemeToggle";
+import { HeaderLogo } from "./HeaderLogo";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
@@ -21,18 +22,11 @@ export default async function Header() {
   const signedIn = !!user;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur-md">
       <Container width="wide">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center" aria-label="Touch Typer home">
-            <Image
-              src="/logo-ink.svg"
-              alt="Touch Typer"
-              width={730}
-              height={284}
-              priority
-              className="h-8 w-auto"
-            />
+            <HeaderLogo />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -40,21 +34,25 @@ export default async function Header() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-sm text-ink/80 hover:text-ink transition-colors"
+                className="text-sm text-fg/80 hover:text-fg transition-colors"
               >
                 {l.label}
               </Link>
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
+            <ThemeToggle />
             <Button href={signedIn ? "/account" : "/signin"} variant="ghost" size="md">
               {signedIn ? "Account" : "Sign in"}
             </Button>
             <DownloadMenu />
           </div>
 
-          <MobileSheet signedIn={signedIn} />
+          <div className="md:hidden flex items-center gap-1">
+            <ThemeToggle />
+            <MobileSheet signedIn={signedIn} />
+          </div>
         </div>
       </Container>
     </header>
