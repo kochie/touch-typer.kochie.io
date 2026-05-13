@@ -10,12 +10,21 @@ export function Hero() {
       density="spacious"
       className="relative overflow-hidden bg-gradient-to-br from-accent-soft to-bg"
     >
-      {/* Decorative radial blob top-right */}
+      {/* Decorative radial blob top-right — slow blue throb */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full"
+        className="pointer-events-none absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full accent-throb"
         style={{
-          background: "radial-gradient(circle, rgba(45,133,210,0.18), transparent 70%)",
+          background: "radial-gradient(circle, rgba(45,133,210,0.32), transparent 70%)",
+        }}
+      />
+      {/* Second blob, lower-left, offset phase for layered breath */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-40 -left-32 w-[520px] h-[520px] rounded-full accent-throb"
+        style={{
+          background: "radial-gradient(circle, rgba(45,133,210,0.22), transparent 70%)",
+          animationDelay: "-3.5s",
         }}
       />
 

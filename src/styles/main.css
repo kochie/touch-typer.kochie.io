@@ -37,12 +37,27 @@ html {
   50.01%, 100% { opacity: 0; }
 }
 
+@keyframes accent-throb {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.08); }
+}
+
 @layer utilities {
   .cursor-blink {
     animation: blink-cursor 1s steps(1, end) infinite;
   }
   @media (prefers-reduced-motion: reduce) {
     .cursor-blink { animation: none; opacity: 1; }
+  }
+
+  /* Slow blue throb for the hero radial blob — ~7s breath cycle */
+  .accent-throb {
+    animation: accent-throb 7s ease-in-out infinite;
+    transform-origin: center;
+    will-change: opacity, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .accent-throb { animation: none; opacity: 0.8; transform: none; }
   }
 
   /* Accent shadow for amplified-color treatments */

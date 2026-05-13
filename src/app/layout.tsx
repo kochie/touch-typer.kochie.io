@@ -37,11 +37,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head></head>
       <body className="min-h-screen grid grid-rows-[auto_1fr_auto] font-sans antialiased text-fg bg-bg">
         <Fathom />
-        <Header />
-        <div>
-          <Providers>{children}</Providers>
-        </div>
-        <Footer />
+        <Providers>
+          <Header />
+          <div>{children}</div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
