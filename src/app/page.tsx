@@ -1,18 +1,29 @@
 import { Metadata, Viewport } from "next";
+import { Hero } from "@/components/marketing/Hero";
+
+const description =
+  "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
 
 export const metadata: Metadata = {
-  title: "Touch Typer",
-  description: "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux.",
+  title: "Touch Typer — Practice typing. Get measurably faster.",
+  description,
+  alternates: { canonical: "https://touch-typer.kochie.io" },
+  openGraph: {
+    type: "website",
+    title: "Touch Typer",
+    description,
+    url: "https://touch-typer.kochie.io",
+    siteName: "Touch Typer",
+  },
+  twitter: { card: "summary_large_image", site: "@kochie", creator: "@kochie" },
 };
 
-export const viewport: Viewport = {
-  themeColor: "#fafaf9",
-};
+export const viewport: Viewport = { themeColor: "#fafaf9" };
 
 export default function Page() {
   return (
-    <main className="container mx-auto px-6 py-24">
-      <h1 className="text-4xl font-semibold">Touch Typer — rebuild in progress</h1>
+    <main>
+      <Hero />
     </main>
   );
 }
