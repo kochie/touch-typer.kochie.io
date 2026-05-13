@@ -22,7 +22,7 @@ export default function SignIn() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const logoSrc =
-    mounted && resolvedTheme === "dark" ? "/logo-white.svg" : "/logo-ink.svg";
+    mounted && resolvedTheme === "dark" ? "/logo-color.svg" : "/logo-ink.svg";
   const [mode, setMode] = useState<SignInMode>("password");
   const [magicLinkSent, setMagicLinkSent] = useState(false);
   const [magicLinkEmail, setMagicLinkEmail] = useState("");

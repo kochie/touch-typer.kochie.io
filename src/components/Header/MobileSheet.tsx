@@ -31,7 +31,7 @@ export function MobileSheet({ signedIn }: MobileSheetProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  const logoSrc = mounted && resolvedTheme === "dark" ? "/logo-white.svg" : "/logo-ink.svg";
+  const logoSrc = mounted && resolvedTheme === "dark" ? "/logo-color.svg" : "/logo-ink.svg";
 
   return (
     <>

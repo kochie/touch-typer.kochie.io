@@ -9,9 +9,11 @@ export function HeaderLogo() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // During SSR + initial paint, render the light-mode logo. After mount, swap if needed.
-  // (The image dimensions stay constant, so no layout shift.)
-  const src = mounted && resolvedTheme === "dark" ? "/logo-white.svg" : "/logo-ink.svg";
+  // Light: blue keyboards + ink accents (logo-ink).
+  // Dark:  blue keyboards + white accents (logo-color, the original dark-bg variant).
+  // The flat all-white /logo-white.svg is reserved for surfaces that need maximum
+  // contrast (e.g. Footer) where preserving the brand-blue would clash.
+  const src = mounted && resolvedTheme === "dark" ? "/logo-color.svg" : "/logo-ink.svg";
 
   return (
     <Image

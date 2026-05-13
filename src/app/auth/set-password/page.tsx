@@ -14,7 +14,7 @@ function ThemedLogo() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const logoSrc =
-    mounted && resolvedTheme === "dark" ? "/logo-white.svg" : "/logo-ink.svg";
+    mounted && resolvedTheme === "dark" ? "/logo-color.svg" : "/logo-ink.svg";
   return (
     <Image
       src={logoSrc}

@@ -23,7 +23,7 @@ export default function SignUp() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const logoSrc =
-    mounted && resolvedTheme === "dark" ? "/logo-white.svg" : "/logo-ink.svg";
+    mounted && resolvedTheme === "dark" ? "/logo-color.svg" : "/logo-ink.svg";
   const [step, setStep] = useState<SignUpStep>("START_SIGNUP");
   const [email, setEmail] = useState("");
 
