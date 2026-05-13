@@ -36,3 +36,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# worktree-local pnpm config (not for the branch)
+/pnpm-workspace.yaml
