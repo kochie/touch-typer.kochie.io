@@ -34,6 +34,7 @@
     "motion": "^12.38.0",
     "next": "^16.1.6",
     "next-mdx-remote": "^5.0.0",
+    "next-themes": "^0.4.6",
     "postcss": "^8.5.6",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -41,8 +42,5 @@
     "sharp": "^0.34.5",
     "tailwindcss": "^4.1.18",
     "typescript": "5.9.3"
-  },
-  "dependencies": {
-    "next-themes": "^0.4.6"
   }
 }
