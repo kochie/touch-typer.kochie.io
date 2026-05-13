@@ -243,9 +243,9 @@ export default function SignIn() {
         {mode === "magic_link" && magicLinkSent && (
           <Card tone="paper">
             <div className="space-y-4">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-green-800">Check your email</h3>
-                <p className="mt-1 text-sm text-green-700">
+              <div className="bg-good/10 border border-good/30 rounded-lg p-4">
+                <h3 className="text-sm font-medium text-good">Check your email</h3>
+                <p className="mt-1 text-sm text-good/80">
                   We sent a sign-in link to <strong>{magicLinkEmail}</strong>. Click the link to sign in.
                 </p>
               </div>

@@ -34,7 +34,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-paper/10 bg-ink-soft text-paper">
       <Container width="wide">
-        <div className="py-16 grid gap-10 grid-cols-2 md:grid-cols-4">
+        <div className="py-16 grid gap-10 grid-cols-2 sm:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Image
               src="/logo-white.svg"

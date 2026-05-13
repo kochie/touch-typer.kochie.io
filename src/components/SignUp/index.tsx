@@ -183,11 +183,11 @@ export default function SignUp() {
         {step === "CONFIRM_EMAIL" && (
           <Card tone="paper">
             <div className="text-center space-y-4">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-                <h3 className="text-lg font-medium text-green-800">
+              <div className="bg-good/10 border border-good/30 rounded-lg p-6">
+                <h3 className="text-lg font-medium text-good">
                   Check your email
                 </h3>
-                <p className="mt-2 text-sm text-green-700">
+                <p className="mt-2 text-sm text-good/80">
                   We sent a confirmation link to <strong>{email}</strong>.
                   Please click the link to verify your account.
                 </p>

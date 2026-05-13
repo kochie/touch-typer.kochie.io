@@ -85,10 +85,10 @@ export default function LeaderboardSection({
             <div className="shrink-0 flex gap-6 items-center">
               <div className="">
                 <p className="flex gap-1 truncate text-xs leading-5 text-fg/50">
-                  <span className="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
+                  <span className="inline-flex items-center rounded-md bg-good/15 px-2 py-1 text-xs font-medium text-good">
                     Correct: {score.correct}
                   </span>
-                  <span className="inline-flex items-center rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
+                  <span className="inline-flex items-center rounded-md bg-bad/15 px-2 py-1 text-xs font-medium text-bad">
                     Incorrect: {score.incorrect}
                   </span>
                   <span className="inline-flex items-center rounded-md bg-accent/10 px-2 py-1 text-xs font-medium text-accent">
