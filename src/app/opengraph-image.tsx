@@ -24,8 +24,9 @@ export default async function OpengraphImage() {
         <div style={{ fontSize: 84, fontWeight: 700, lineHeight: 1.05, letterSpacing: -2 }}>
           Practice typing.
         </div>
-        <div style={{ fontSize: 84, fontWeight: 700, lineHeight: 1.05, letterSpacing: -2 }}>
-          Get measurably <span style={{ color: "#2d85d2" }}>faster.</span>
+        <div style={{ display: "flex", fontSize: 84, fontWeight: 700, lineHeight: 1.05, letterSpacing: -2 }}>
+          <span>Get measurably&nbsp;</span>
+          <span style={{ color: "#2d85d2" }}>faster.</span>
         </div>
         <div style={{ fontSize: 28, color: "#6b7280", marginTop: 32 }}>
           Free desktop typing tutor · Mac, Windows, Linux
