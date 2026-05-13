@@ -25,10 +25,10 @@ export function FeatureMarquee() {
         <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
           {items.map((item) => (
             <a key={item.name} href={item.href} className="block">
-              <Card tone="paper" className="h-full transition-colors hover:border-ink/40">
+              <Card tone="paper" className="h-full transition-colors hover:border-accent/40">
                 <FeatureGlyph icon={item.icon} size="sm" ariaLabel={item.name} />
                 <div className="mt-3 font-semibold text-sm">{item.name}</div>
-                <div className="mt-1 text-xs text-mute">{item.blurb}</div>
+                <div className="mt-1 text-xs text-fg-muted">{item.blurb}</div>
               </Card>
             </a>
           ))}

@@ -29,10 +29,10 @@ export function Tier2Grid() {
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item) => (
-            <Card key={item.title} tone="paper-soft">
-              <FeatureGlyph icon={item.icon} size="sm" ariaLabel={item.title} />
+            <Card key={item.title} tone="paper-soft" className="transition-colors hover:border-accent/40">
+              <FeatureGlyph icon={item.icon} size="sm" tone="accent" ariaLabel={item.title} />
               <div className="mt-4 font-semibold">{item.title}</div>
-              <p className="mt-2 text-sm text-ink/70 leading-relaxed">{item.body}</p>
+              <p className="mt-2 text-sm text-fg/70 leading-relaxed">{item.body}</p>
             </Card>
           ))}
         </div>

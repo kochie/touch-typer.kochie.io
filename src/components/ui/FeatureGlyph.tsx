@@ -3,6 +3,7 @@ import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import clsx from "clsx";
 
 type Size = "sm" | "md" | "lg";
+type Tone = "ink" | "accent";
 
 const sizes: Record<Size, string> = {
   sm: "w-8 h-8 text-base",
@@ -10,9 +11,15 @@ const sizes: Record<Size, string> = {
   lg: "w-12 h-12 text-xl",
 };
 
+const tones: Record<Tone, string> = {
+  ink: "bg-ink text-paper",
+  accent: "bg-accent text-paper",
+};
+
 interface FeatureGlyphProps {
   icon: IconDefinition;
   size?: Size;
+  tone?: Tone;
   className?: string;
   ariaLabel?: string;
 }
@@ -20,6 +27,7 @@ interface FeatureGlyphProps {
 export function FeatureGlyph({
   icon,
   size = "md",
+  tone = "ink",
   className,
   ariaLabel,
 }: FeatureGlyphProps) {
@@ -28,8 +36,9 @@ export function FeatureGlyph({
       role="img"
       aria-label={ariaLabel}
       className={clsx(
-        "inline-flex items-center justify-center rounded-lg bg-ink text-paper",
+        "inline-flex items-center justify-center rounded-lg",
         sizes[size],
+        tones[tone],
         className,
       )}
     >
