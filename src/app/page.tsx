@@ -9,6 +9,7 @@ import { AiCoachBlock } from "@/components/marketing/blocks/AiCoachBlock";
 import { StatsBlock } from "@/components/marketing/blocks/StatsBlock";
 import { LayoutsBlock } from "@/components/marketing/blocks/LayoutsBlock";
 import { CodeModeSection } from "@/components/marketing/CodeModeSection";
+import { Tier2Grid } from "@/components/marketing/Tier2Grid";
 
 const description =
   "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
@@ -39,6 +40,7 @@ export default function Page() {
       <StatsBlock />
       <LayoutsBlock />
       <CodeModeSection />
+      <Tier2Grid />
     </main>
   );
 }
