@@ -32,7 +32,12 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", site: "@kochie", creator: "@kochie" },
 };
 
-export const viewport: Viewport = { themeColor: "#fafaf9" };
+export const viewport: Viewport = {
+  themeColor: [
+    { color: "#fafaf9", media: "(prefers-color-scheme: light)" },
+    { color: "#0d1117", media: "(prefers-color-scheme: dark)" },
+  ],
+};
 
 export default function Page() {
   return (
