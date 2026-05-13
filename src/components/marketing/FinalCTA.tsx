@@ -14,7 +14,7 @@ export function FinalCTA() {
             Free download. No account required to start practicing.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Button href="https://apps.apple.com/au/app/touch-typer/id1637786724" variant="inverse" size="lg">
+            <Button href="https://apps.apple.com/au/app/touch-typer/id1637786724" variant="accent" size="lg" className="shadow-accent">
               Download for Mac
             </Button>
             <Button href="https://www.microsoft.com/store/apps/9NG3CCFL631D" variant="inverse" size="lg">
