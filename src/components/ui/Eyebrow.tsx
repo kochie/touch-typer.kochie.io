@@ -4,9 +4,9 @@ import clsx from "clsx";
 type EyebrowTone = "default" | "accent" | "muted";
 
 const tones: Record<EyebrowTone, string> = {
-  default: "text-mute",
+  default: "text-fg-muted",
   accent: "text-accent",
-  muted: "text-mute/70",
+  muted: "text-fg-muted/70",
 };
 
 interface EyebrowProps extends HTMLAttributes<HTMLSpanElement> {

@@ -26,7 +26,7 @@ export const Token = {
     <span className="text-accent">{children}</span>
   ),
   Comment: ({ children }: { children: ReactNode }) => (
-    <span className="text-mute">{children}</span>
+    <span className="text-fg-muted">{children}</span>
   ),
   String: ({ children }: { children: ReactNode }) => (
     <span className="text-warm">{children}</span>

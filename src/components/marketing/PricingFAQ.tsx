@@ -43,7 +43,7 @@ export function PricingFAQ() {
           <h2 className="mt-3 text-3xl font-semibold">Common questions.</h2>
         </div>
 
-        <div className="mt-10 divide-y divide-line border-y border-line">
+        <div className="mt-10 divide-y divide-border border-y border-border">
           {faqs.map((f) => (
             <Disclosure key={f.q} as="div" className="py-4">
               {({ open }) => (
@@ -52,10 +52,10 @@ export function PricingFAQ() {
                     <span className="font-medium">{f.q}</span>
                     <FontAwesomeIcon
                       icon={faChevronDown}
-                      className={`text-mute transition-transform ${open ? "rotate-180" : ""}`}
+                      className={`text-fg-muted transition-transform ${open ? "rotate-180" : ""}`}
                     />
                   </DisclosureButton>
-                  <DisclosurePanel className="mt-3 text-sm text-ink/70 leading-relaxed">
+                  <DisclosurePanel className="mt-3 text-sm text-fg/70 leading-relaxed">
                     {f.a}
                   </DisclosurePanel>
                 </>

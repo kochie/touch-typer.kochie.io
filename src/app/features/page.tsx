@@ -33,7 +33,7 @@ export default function FeaturesPage() {
           <h1 className="mt-4 text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1] max-w-3xl">
             Everything Touch Typer can do.
           </h1>
-          <p className="mt-6 text-lg text-ink/70 max-w-2xl">
+          <p className="mt-6 text-lg text-fg/70 max-w-2xl">
             Five hero features that make Touch Typer different — and a handful of small ones that round it out.
           </p>
           <nav className="mt-8 flex flex-wrap gap-2">
@@ -41,7 +41,7 @@ export default function FeaturesPage() {
               <a
                 key={a.id}
                 href={`#${a.id}`}
-                className="text-sm rounded-full border border-line bg-paper-soft px-4 py-2 hover:bg-paper transition-colors"
+                className="text-sm rounded-full border border-border bg-bg-elevated px-4 py-2 hover:bg-bg transition-colors"
               >
                 {a.label}
               </a>

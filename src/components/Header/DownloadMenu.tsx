@@ -20,7 +20,7 @@ export function DownloadMenu() {
       </MenuButton>
       <MenuItems
         anchor="bottom end"
-        className="mt-2 w-56 rounded-lg border border-line bg-paper p-1 shadow-lg focus:outline-none"
+        className="mt-2 w-56 rounded-lg border border-border bg-bg p-1 shadow-lg focus:outline-none"
       >
         {items.map((item) => (
           <MenuItem key={item.href}>
@@ -28,7 +28,7 @@ export function DownloadMenu() {
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 rounded px-3 py-2 text-sm hover:bg-paper-soft data-[focus]:bg-paper-soft"
+              className="flex items-center gap-3 rounded px-3 py-2 text-sm hover:bg-bg-elevated data-[focus]:bg-bg-elevated"
             >
               <FontAwesomeIcon icon={item.icon} className="w-4" />
               {item.label}

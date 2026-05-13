@@ -16,7 +16,7 @@ export function SocialProofStrip() {
           {stats.map((s) => (
             <div key={s.label}>
               <div className="text-3xl sm:text-4xl font-semibold tracking-tight">{s.value}</div>
-              <div className="mt-1 text-xs uppercase tracking-[0.1em] text-mute">{s.label}</div>
+              <div className="mt-1 text-xs uppercase tracking-[0.1em] text-fg-muted">{s.label}</div>
             </div>
           ))}
         </div>

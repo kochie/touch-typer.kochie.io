@@ -32,7 +32,7 @@ function Cell({ value }: { value: boolean | string }) {
     return <FontAwesomeIcon icon={faCheck} className="text-good" aria-label="Included" />;
   }
   if (value === false) {
-    return <FontAwesomeIcon icon={faMinus} className="text-mute" aria-label="Not included" />;
+    return <FontAwesomeIcon icon={faMinus} className="text-fg-muted" aria-label="Not included" />;
   }
   return <span className="text-sm">{value}</span>;
 }
@@ -49,15 +49,15 @@ export function PricingMatrix() {
         <div className="mt-10 overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>
-              <tr className="border-b border-line">
-                <th className="py-4 pr-4 text-sm font-semibold text-ink/80">Feature</th>
-                <th className="py-4 px-4 text-sm font-semibold text-ink/80 text-center w-32">Free</th>
-                <th className="py-4 px-4 text-sm font-semibold text-ink text-center w-32">Premium</th>
+              <tr className="border-b border-border">
+                <th className="py-4 pr-4 text-sm font-semibold text-fg/80">Feature</th>
+                <th className="py-4 px-4 text-sm font-semibold text-fg/80 text-center w-32">Free</th>
+                <th className="py-4 px-4 text-sm font-semibold text-fg text-center w-32">Premium</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.label} className="border-b border-line/60">
+                <tr key={r.label} className="border-b border-border/60">
                   <td className="py-4 pr-4 text-sm">{r.label}</td>
                   <td className="py-4 px-4 text-center"><Cell value={r.free} /></td>
                   <td className="py-4 px-4 text-center"><Cell value={r.premium} /></td>

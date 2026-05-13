@@ -32,7 +32,7 @@ export default async function ChangelogPage() {
         <Container width="narrow">
           <Eyebrow>Changelog</Eyebrow>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">What's new.</h1>
-          <p className="mt-4 text-base text-ink/70">
+          <p className="mt-4 text-base text-fg/70">
             Recent releases, ordered newest first.{" "}
             <a href="/changelog/rss.xml" className="text-accent hover:text-accent-deep">
               RSS feed
@@ -48,10 +48,10 @@ export default async function ChangelogPage() {
             {entries.map((entry) => (
               <article key={entry.slug} id={entry.slug}>
                 <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-xs uppercase tracking-[0.1em] text-mute">
+                  <span className="text-xs uppercase tracking-[0.1em] text-fg-muted">
                     {formatDate(entry.date)}
                   </span>
-                  <span className="text-xs rounded-full bg-paper-soft border border-line px-2 py-0.5">
+                  <span className="text-xs rounded-full bg-bg-elevated border border-border px-2 py-0.5">
                     v{entry.version}
                   </span>
                   {entry.tags.map((t) => (
@@ -61,7 +61,7 @@ export default async function ChangelogPage() {
                   ))}
                 </div>
                 <h2 className="mt-3 text-2xl font-semibold tracking-tight">{entry.title}</h2>
-                <div className="mt-4 text-base text-ink/80 leading-relaxed prose-styles">
+                <div className="mt-4 text-base text-fg/80 leading-relaxed prose-styles">
                   <MDXRemote source={entry.body} />
                 </div>
               </article>
