@@ -12,7 +12,7 @@ export default async function AccountSettings() {
   
   if (!user) {
     return (
-      <div className="bg-paper border border-line rounded-xl p-6">
+      <div className="bg-bg border border-border rounded-xl p-6">
         <p>Please sign in to view your account settings.</p>
       </div>
     );
@@ -60,8 +60,8 @@ export default async function AccountSettings() {
       <UserDetails user={userData} />
       <ChangePasswordForm />
       <MfaSection />
-      <div className="divide-y divide-line overflow-hidden bg-paper border border-line rounded-xl">
-        <div className="px-4 py-5 sm:px-6 text-ink font-medium">Subscription Plans</div>
+      <div className="divide-y divide-border overflow-hidden bg-bg border border-border rounded-xl">
+        <div className="px-4 py-5 sm:px-6 text-fg font-medium">Subscription Plans</div>
         <div className="px-4 py-5 sm:p-6">
           <PricingPlans subscription={subscriptionData} />
         </div>

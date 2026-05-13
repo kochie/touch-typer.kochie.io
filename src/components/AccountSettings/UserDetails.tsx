@@ -79,14 +79,14 @@ export function UserDetails({ user }: { user: UserData }) {
     >
       {({ isSubmitting }) => (
         <Form>
-          <div className="divide-y divide-line overflow-hidden bg-paper border border-line rounded-xl">
-            <div className="px-4 py-5 sm:px-6 text-ink font-medium">Account Details</div>
+          <div className="divide-y divide-border overflow-hidden bg-bg border border-border rounded-xl">
+            <div className="px-4 py-5 sm:px-6 text-fg font-medium">Account Details</div>
             <div className="px-4 py-5 sm:p-6">
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <Field className="sm:col-span-3 row-start-1">
                   <Label
                     htmlFor="username"
-                    className="block text-sm font-medium leading-6 text-ink"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Username
                   </Label>
@@ -97,14 +97,14 @@ export function UserDetails({ user }: { user: UserData }) {
                       name="username"
                       type="text"
                       autoComplete="username"
-                      className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
                 <Field className="sm:col-span-3">
                   <Label
                     htmlFor="name"
-                    className="block text-sm font-medium leading-6 text-ink"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Name
                   </Label>
@@ -115,14 +115,14 @@ export function UserDetails({ user }: { user: UserData }) {
                       name="name"
                       type="text"
                       autoComplete="name"
-                      className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
                 <Field className="sm:col-span-4 row-start-2">
                   <Label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-ink"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Email
                   </Label>
@@ -133,9 +133,9 @@ export function UserDetails({ user }: { user: UserData }) {
                       type="email"
                       autoComplete="email"
                       disabled
-                      className="block w-full rounded-md border border-line bg-paper-soft py-1.5 text-ink/50 shadow-sm placeholder:text-ink/40 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg-elevated py-1.5 text-fg/50 shadow-sm placeholder:text-fg/40 sm:text-sm sm:leading-6"
                     />
-                    <p className="mt-1 text-xs text-ink/60">
+                    <p className="mt-1 text-xs text-fg/60">
                       Contact support to change your email
                     </p>
                   </div>
@@ -143,7 +143,7 @@ export function UserDetails({ user }: { user: UserData }) {
                 <Field className="sm:col-span-4 row-start-3">
                   <Label
                     htmlFor="phone"
-                    className="block text-sm font-medium leading-6 text-ink"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Phone Number
                   </Label>
@@ -153,7 +153,7 @@ export function UserDetails({ user }: { user: UserData }) {
                       name="phone"
                       type="text"
                       autoComplete="tel"
-                      className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>

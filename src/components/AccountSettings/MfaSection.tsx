@@ -111,26 +111,26 @@ export function MfaSection() {
   };
 
   return (
-    <div className="divide-y divide-line overflow-hidden bg-paper border border-line rounded-xl">
+    <div className="divide-y divide-border overflow-hidden bg-bg border border-border rounded-xl">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-base font-semibold leading-7 text-ink">Two-factor authentication</h3>
-        <p className="mt-1 text-sm text-ink/60">
+        <h3 className="text-base font-semibold leading-7 text-fg">Two-factor authentication</h3>
+        <p className="mt-1 text-sm text-fg/60">
           Add an extra layer of security with an authenticator app.
         </p>
       </div>
       <div className="px-4 py-5 sm:p-6 space-y-6">
         {loading ? (
-          <p className="text-sm text-ink/60">Loading...</p>
+          <p className="text-sm text-fg/60">Loading...</p>
         ) : (
           <>
             {factors.length > 0 && (
               <div>
-                <p className="text-sm font-medium text-ink mb-2">Active factors</p>
+                <p className="text-sm font-medium text-fg mb-2">Active factors</p>
                 <ul className="space-y-2">
                   {factors.map((f) => (
                     <li
                       key={f.id}
-                      className="flex items-center justify-between rounded-md bg-paper-soft border border-line px-3 py-2 text-sm"
+                      className="flex items-center justify-between rounded-md bg-bg-elevated border border-border px-3 py-2 text-sm"
                     >
                       <span>{f.friendly_name ?? f.factor_type ?? f.id}</span>
                       <button
@@ -161,7 +161,7 @@ export function MfaSection() {
               )
             ) : (
               <div className="space-y-4">
-                <p className="text-sm text-ink/80">
+                <p className="text-sm text-fg/80">
                   Scan this QR code with your authenticator app (e.g. Google Authenticator, Authy), then enter the code below.
                 </p>
                 {qrCode && (
@@ -170,12 +170,12 @@ export function MfaSection() {
                   </div>
                 )}
                 {secret && (
-                  <p className="text-xs text-ink/60 break-all font-mono">
+                  <p className="text-xs text-fg/60 break-all font-mono">
                     Or enter this secret manually: {secret}
                   </p>
                 )}
                 <form onSubmit={handleEnrollVerify} className="space-y-2">
-                  <Label htmlFor="mfa-code" className="block text-sm font-medium text-ink">
+                  <Label htmlFor="mfa-code" className="block text-sm font-medium text-fg">
                     Verification code
                   </Label>
                   <Input
@@ -184,7 +184,7 @@ export function MfaSection() {
                     onChange={(e) => setVerifyCode(e.target.value)}
                     placeholder="000000"
                     maxLength={6}
-                    className="block w-full max-w-xs rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
+                    className="block w-full max-w-xs rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
                   />
                   <div className="flex gap-2">
                     <Button type="submit" variant="primary" size="md">

@@ -11,8 +11,8 @@ export function ChangePasswordForm() {
   const supabase = useSupabaseClient();
 
   return (
-    <div className="divide-y divide-line overflow-hidden bg-paper border border-line rounded-xl">
-      <div className="px-4 py-5 sm:px-6 text-ink font-medium">Change password</div>
+    <div className="divide-y divide-border overflow-hidden bg-bg border border-border rounded-xl">
+      <div className="px-4 py-5 sm:px-6 text-fg font-medium">Change password</div>
       <div className="px-4 py-5 sm:p-6">
         <Formik
           initialValues={{
@@ -78,7 +78,7 @@ export function ChangePasswordForm() {
           {({ isSubmitting, errors }) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="currentPassword" className="block text-sm font-medium text-ink">
+                <label htmlFor="currentPassword" className="block text-sm font-medium text-fg">
                   Current password
                 </label>
                 <div className="mt-1">
@@ -89,12 +89,12 @@ export function ChangePasswordForm() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
+                    className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
                   />
                 </div>
               </div>
               <div>
-                <label htmlFor="newPassword" className="block text-sm font-medium text-ink">
+                <label htmlFor="newPassword" className="block text-sm font-medium text-fg">
                   New password
                 </label>
                 <div className="mt-1">
@@ -104,7 +104,7 @@ export function ChangePasswordForm() {
                     name="newPassword"
                     type="password"
                     autoComplete="new-password"
-                    className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
+                    className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
                   />
                 </div>
                 {errors.newPassword && (
@@ -112,7 +112,7 @@ export function ChangePasswordForm() {
                 )}
               </div>
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-ink">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-fg">
                   Confirm new password
                 </label>
                 <div className="mt-1">
@@ -122,7 +122,7 @@ export function ChangePasswordForm() {
                     name="confirmPassword"
                     type="password"
                     autoComplete="new-password"
-                    className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
+                    className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
                   />
                 </div>
                 {errors.confirmPassword && (
