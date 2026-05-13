@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import type { Metadata } from "next";
 
 import "@/styles/main.css";
 
@@ -11,6 +12,12 @@ import Fathom from "./Fathom";
 import Providers from "./Providers";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://touch-typer.kochie.io",
+  ),
+};
 
 const inter = Inter({
   subsets: ["latin"],

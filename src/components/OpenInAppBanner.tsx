@@ -33,22 +33,22 @@ export function OpenInAppBanner() {
   if (!show) return null;
 
   return (
-    <div className="rounded-lg bg-indigo-50 border border-indigo-200 p-4 mb-6 flex items-center justify-between gap-4">
-      <p className="text-sm text-indigo-800">
+    <div className="rounded-lg bg-accent/10 border border-accent/30 p-4 mb-6 flex items-center justify-between gap-4">
+      <p className="text-sm text-accent-deep">
         You’re signed in on the web. Open the Touch Typer app to use this account there too.
       </p>
       <div className="flex items-center gap-2 shrink-0">
         <button
           type="button"
           onClick={handleOpenInApp}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+          className="rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-paper shadow-sm hover:bg-accent-deep transition-colors"
         >
           Open in app
         </button>
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          className="text-indigo-600 hover:text-indigo-800 text-sm"
+          className="text-accent hover:text-accent-deep text-sm"
           aria-label="Dismiss"
         >
           Dismiss
