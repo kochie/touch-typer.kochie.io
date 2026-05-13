@@ -163,7 +163,7 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
   
   return (
     <div className="flex flex-col gap-4">
-      <Field className="grid grid-cols-5">
+      <Field className="flex flex-col gap-3 sm:grid sm:grid-cols-5 sm:items-center sm:gap-0">
         <div className="col-span-4">
           <Label className="text-sm/6 font-medium">Current Plan</Label>
           <Description className="text-sm/6 text-black/50">
@@ -182,7 +182,7 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
           </button>
         </div>
       </Field>
-      <Field className="grid grid-cols-5">
+      <Field className="flex flex-col gap-3 sm:grid sm:grid-cols-5 sm:items-center sm:gap-0">
         <div className="col-span-4">
           <Label className="text-sm/6 font-medium">
             Change to{" "}
@@ -231,7 +231,7 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
 function UpgradeSection() {
   const [billingPeriod, setBillingPeriod] = useState(PurchaseLength.Monthly);
   return (
-    <Field className="grid grid-cols-6">
+    <Field className="flex flex-col gap-3 sm:grid sm:grid-cols-6 sm:items-center sm:gap-0">
       <div className="col-span-5">
         <div>
           <Label className="text-sm/6 font-medium">Upgrade to Premium</Label>
@@ -246,7 +246,7 @@ function UpgradeSection() {
               <PriceOption price={20} label="per month, billed annually" />
             ) : null}
           </div>
-          <div className="w-48">
+          <div className="w-full max-w-xs">
             <RadioGroup
               value={billingPeriod}
               onChange={setBillingPeriod}

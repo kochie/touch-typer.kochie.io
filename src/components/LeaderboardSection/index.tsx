@@ -63,11 +63,11 @@ export default function LeaderboardSection({
 
   return (
     <div className="rounded-xl border border-border bg-bg-elevated overflow-hidden">
-      <ul role="list" className="divide-y divide-border/60">
+      <ul role="list" className="divide-y divide-border/60 overflow-x-auto">
         {scores.map((score) => (
           <li
             key={`${score.username}-${score.datetime}`}
-            className="flex justify-between gap-x-6 py-5 px-6 border-b border-border/60 hover:bg-bg last:border-b-0 transition-colors"
+            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-x-6 py-5 px-6 border-b border-border/60 hover:bg-bg last:border-b-0 transition-colors"
           >
             <div className="flex min-w-0 gap-x-4">
               <div className="min-w-0 flex-auto">
