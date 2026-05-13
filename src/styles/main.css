@@ -36,3 +36,16 @@ html {
     .cursor-blink { animation: none; opacity: 1; }
   }
 }
+
+@layer components {
+  .prose-styles p { margin-bottom: 1em; }
+  .prose-styles p:last-child { margin-bottom: 0; }
+  .prose-styles strong { font-weight: 600; color: var(--color-ink); }
+  .prose-styles em { font-style: italic; }
+  .prose-styles ul { list-style: disc; padding-left: 1.25em; margin-bottom: 1em; }
+  .prose-styles ol { list-style: decimal; padding-left: 1.25em; margin-bottom: 1em; }
+  .prose-styles li { margin-bottom: 0.25em; }
+  .prose-styles a { color: var(--color-accent); text-decoration: underline; }
+  .prose-styles a:hover { color: var(--color-accent-deep); }
+  .prose-styles code { font-family: var(--font-mono); font-size: 0.9em; background: var(--color-paper-soft); padding: 0.1em 0.3em; border-radius: 0.25em; }
+}
