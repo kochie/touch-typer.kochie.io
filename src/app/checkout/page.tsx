@@ -1,6 +1,9 @@
 import { StripeCheckout } from "@/components/Payment";
 import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { redirect } from "next/navigation";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
 const lookupKeyMap: { [key: string]: string } = {
   monthly: "premium_monthly",
@@ -13,18 +16,34 @@ export default async function PaymentsPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const params = await searchParams;
-  
+
   if (typeof params.purchasePrice !== "string") {
-    return <div>Invalid purchase price {params.purchasePrice}</div>;
+    return (
+      <main>
+        <Section tone="paper" density="compact">
+          <Container width="narrow">
+            <p className="text-ink/70">Invalid purchase price {params.purchasePrice}</p>
+          </Container>
+        </Section>
+      </main>
+    );
   }
-  
+
   const lookupKey = lookupKeyMap[params.purchasePrice];
   if (!lookupKey) {
-    return <div>Invalid purchase option</div>;
+    return (
+      <main>
+        <Section tone="paper" density="compact">
+          <Container width="narrow">
+            <p className="text-ink/70">Invalid purchase option</p>
+          </Container>
+        </Section>
+      </main>
+    );
   }
 
   const supabase = await createServerSupabaseClient();
-  
+
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) {
     redirect("/signin");
@@ -35,12 +54,28 @@ export default async function PaymentsPage({
   });
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <main>
+        <Section tone="paper" density="compact">
+          <Container width="narrow">
+            <p className="text-ink/70">Error: {error.message}</p>
+          </Container>
+        </Section>
+      </main>
+    );
   }
 
   return (
-    <div className="">
-      <StripeCheckout options={{ clientSecret: data.clientSecret }} />
-    </div>
+    <main>
+      <Section tone="paper" density="compact">
+        <Container width="narrow">
+          <Eyebrow>Checkout</Eyebrow>
+          <h1 className="mt-3 text-3xl font-bold text-ink">Complete your purchase</h1>
+          <div className="mt-8">
+            <StripeCheckout options={{ clientSecret: data.clientSecret }} />
+          </div>
+        </Container>
+      </Section>
+    </main>
   );
 }
