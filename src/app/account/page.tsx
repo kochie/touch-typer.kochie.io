@@ -1,42 +1,47 @@
 import AccountSettings from "@/components/AccountSettings";
 import { OpenInAppBanner } from "@/components/OpenInAppBanner";
 import SignOutButton from "@/components/SignOutButton";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Suspense } from "react";
 
 export default function AccountPage() {
   return (
-    <div className="min-h-full py-10 bg-slate-200">
-      <main className="">
-        <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+    <main>
+      <Section tone="paper-soft" density="default">
+        <Container width="wide">
           <Suspense fallback={null}>
             <OpenInAppBanner />
           </Suspense>
-          <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8 mt-0">
-          <div className="grid grid-cols-1 gap-4 lg:col-span-2">
-            <Suspense>
-              <AccountSettings />
-            </Suspense>
+          <Eyebrow>Account</Eyebrow>
+          <h1 className="mt-3 text-3xl font-bold text-ink">Your account</h1>
+          <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-3 lg:gap-8">
+            <div className="grid grid-cols-1 gap-6 lg:col-span-2">
+              <Suspense>
+                <AccountSettings />
+              </Suspense>
+            </div>
+            <div className="grid grid-cols-1 gap-6">
+              <SettingsMenu />
+            </div>
           </div>
-          <div className="grid grid-cols-1 gap-4">
-            <SettingsMenu />
-          </div>
-          </div>
-        </div>
-      </main>
-    </div>
+        </Container>
+      </Section>
+    </main>
   );
 }
 
 function SettingsMenu() {
   return (
     <div className="flex flex-col gap-5 sticky">
-      <div className="overflow-hidden bg-white shadow rounded-lg">
+      <div className="overflow-hidden bg-paper shadow-sm rounded-xl border border-line">
         <div className="px-4 py-5 sm:p-6">
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+            <h3 className="text-lg leading-6 font-medium text-ink">
               Settings
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            <p className="mt-1 max-w-2xl text-sm text-ink/60">
               Manage your account settings.
             </p>
             <div className="">
