@@ -4,9 +4,11 @@ import clsx from "clsx";
 type Tone = "paper" | "paper-soft" | "ink" | "ink-soft";
 type Density = "compact" | "default" | "spacious";
 
+// paper / paper-soft are now theme-aware (flip with theme).
+// ink / ink-soft stay never-swap (always dark in both themes).
 const tones: Record<Tone, string> = {
-  paper: "bg-paper text-ink",
-  "paper-soft": "bg-paper-soft text-ink",
+  paper: "bg-bg text-fg",
+  "paper-soft": "bg-bg-elevated text-fg",
   ink: "bg-ink text-paper",
   "ink-soft": "bg-ink-soft text-paper",
 };
