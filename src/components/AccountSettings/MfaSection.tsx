@@ -137,7 +137,7 @@ export function MfaSection() {
                         type="button"
                         onClick={() => handleUnenroll(f)}
                         disabled={unenrolling === f.id}
-                        className="text-red-600 hover:text-red-500 text-sm font-medium disabled:opacity-50"
+                        className="text-bad hover:text-bad/80 text-sm font-medium disabled:opacity-50"
                       >
                         {unenrolling === f.id ? "Disabling..." : "Disable"}
                       </button>
