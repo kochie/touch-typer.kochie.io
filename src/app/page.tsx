@@ -10,6 +10,7 @@ import { StatsBlock } from "@/components/marketing/blocks/StatsBlock";
 import { LayoutsBlock } from "@/components/marketing/blocks/LayoutsBlock";
 import { CodeModeSection } from "@/components/marketing/CodeModeSection";
 import { Tier2Grid } from "@/components/marketing/Tier2Grid";
+import { SocialProofStrip } from "@/components/marketing/SocialProofStrip";
 
 const description =
   "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
@@ -41,6 +42,7 @@ export default function Page() {
       <LayoutsBlock />
       <CodeModeSection />
       <Tier2Grid />
+      <SocialProofStrip />
     </main>
   );
 }
