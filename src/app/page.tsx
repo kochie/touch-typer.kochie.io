@@ -1,6 +1,13 @@
+// TODO(user): Capture real screenshots before launch.
+// Replace public/screenshots/{pvp,coach,stats,layouts}.png with real product captures.
+// Target dimensions: 1200×760 PNG at 2x display density.
 import { Metadata, Viewport } from "next";
 import { Hero } from "@/components/marketing/Hero";
 import { FeatureMarquee } from "@/components/marketing/FeatureMarquee";
+import { PvpBlock } from "@/components/marketing/blocks/PvpBlock";
+import { AiCoachBlock } from "@/components/marketing/blocks/AiCoachBlock";
+import { StatsBlock } from "@/components/marketing/blocks/StatsBlock";
+import { LayoutsBlock } from "@/components/marketing/blocks/LayoutsBlock";
 
 const description =
   "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
@@ -26,6 +33,10 @@ export default function Page() {
     <main>
       <Hero />
       <FeatureMarquee />
+      <PvpBlock />
+      <AiCoachBlock />
+      <StatsBlock />
+      <LayoutsBlock />
     </main>
   );
 }
