@@ -6,13 +6,10 @@ import divider4 from "@/assets/layered-peaks-haikei-1.svg";
 import DOTMS from "@/assets/Download_on_the_Mac_App_Store_Badge_US-UK_RGB_wht_092917.svg";
 import example1 from "@/assets/example_1.png";
 import Image from "next/image";
-import { Inconsolata } from "next/font/google";
 import Script from "next/script";
 import analytics from "@/assets/analytics.png";
 import Link from "next/link";
 import { Metadata, Viewport } from "next";
-
-const inconsolata = Inconsolata({ subsets: ["latin"] });
 
 const description =
   "Improve your typing skills or learn a new keyboard layout with Touch Typer. Available on Mac, Windows, and Linux.";
@@ -54,7 +51,7 @@ export const viewport: Viewport = {
 export default function Page() {
   return (
     <>
-      <div className={inconsolata.className}>
+      <div>
         <div className="bg-[#464953] w-full min-h-[50vh] flex flex-col pt-24 gap-28 items-center justify-center">
           <Image src={logo} alt="logo" width="300" className="min-w-min" />
           <div className="text-white text-2xl typewriter">
