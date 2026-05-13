@@ -2,11 +2,12 @@ import { ReactNode, HTMLAttributes } from "react";
 import clsx from "clsx";
 
 type CardTone = "paper" | "paper-soft" | "ink";
-type Emphasis = "default" | "featured";
+type Emphasis = "default" | "featured" | "gradient";
 
+// paper / paper-soft are theme-aware; ink stays never-swap.
 const tones: Record<CardTone, string> = {
-  paper: "bg-paper border-line",
-  "paper-soft": "bg-paper-soft border-line",
+  paper: "bg-bg border-border",
+  "paper-soft": "bg-bg-elevated border-border",
   ink: "bg-ink border-ink-soft text-paper",
 };
 
@@ -23,12 +24,18 @@ export function Card({
   className,
   ...rest
 }: CardProps) {
+  // emphasis="gradient" overrides tone styling with an accent gradient — used by Premium pricing card.
+  const gradientClasses =
+    emphasis === "gradient"
+      ? "bg-gradient-to-br from-accent to-accent-deep border-transparent text-paper shadow-accent"
+      : tones[tone];
+
   return (
     <div
       className={clsx(
         "rounded-xl border p-6",
-        tones[tone],
-        emphasis === "featured" && "border-ink shadow-sm",
+        gradientClasses,
+        emphasis === "featured" && "border-fg shadow-sm",
         className,
       )}
       {...rest}
