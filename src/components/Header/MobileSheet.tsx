@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/pro-solid-svg-icons";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
 interface MobileSheetProps {
@@ -43,7 +44,13 @@ export function MobileSheet({ signedIn }: MobileSheetProps) {
         <div className="fixed inset-0 flex">
           <DialogPanel className="ml-auto h-full w-full max-w-sm bg-paper p-6 flex flex-col gap-6">
             <div className="flex items-center justify-between">
-              <span className="font-semibold">Touch Typer</span>
+              <Image
+                src="/logo-color.svg"
+                alt="Touch Typer"
+                width={730}
+                height={284}
+                className="h-7 w-auto"
+              />
               <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
                 <FontAwesomeIcon icon={faXmark} />
               </button>

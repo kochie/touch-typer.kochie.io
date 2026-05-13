@@ -1,0 +1,230 @@
+<h2>Home page anatomy</h2>
+<p class="subtitle">Wireframe — section order, weights, and content density. Visual styling per the design system; this just locks the structure.</p>
+
+<style>
+  .wf { background: #fafaf9; border: 1px solid #d4d4d0; border-radius: 12px; padding: 0; max-width: 1100px; margin: 0 auto; overflow: hidden; font-family: 'Inter', -apple-system, system-ui, sans-serif; }
+  .wf-header { background: #fff; border-bottom: 1px solid #e5e5e0; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .wf-logo { font-weight: 700; font-size: 14px; }
+  .wf-nav { display: flex; gap: 20px; font-size: 13px; color: #555; }
+  .wf-nav-cta { display: flex; gap: 8px; }
+  .wf-btn { font-size: 12px; padding: 6px 12px; border-radius: 6px; }
+  .wf-btn-prim { background: #0f1115; color: #fafaf9; }
+  .wf-btn-sec { background: transparent; color: #0f1115; border: 1px solid #d4d4d0; }
+
+  .wf-section { padding: 40px 32px; border-bottom: 1px dashed #d4d4d0; position: relative; }
+  .wf-section::before { content: attr(data-label); position: absolute; left: 8px; top: 8px; font-size: 10px; color: #999; font-family: ui-monospace, Menlo, monospace; letter-spacing: 0.05em; }
+  .wf-section:last-child { border-bottom: none; }
+
+  /* Hero */
+  .wf-hero { background: linear-gradient(180deg, #fff 0%, #fafaf9 100%); padding: 80px 48px 60px; }
+  .wf-eyebrow { font-size: 11px; color: #6b7280; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+  .wf-headline { font-size: 44px; line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 16px; max-width: 18ch; }
+  .wf-headline em { font-style: normal; color: #2d85d2; }
+  .wf-headline .cursor { display: inline-block; width: 6px; height: 38px; background: #2d85d2; vertical-align: -6px; margin-left: 4px; }
+  .wf-sub { font-size: 16px; color: #555; max-width: 55ch; line-height: 1.55; margin: 0 0 28px; }
+  .wf-hero-cta { display: flex; gap: 12px; }
+  .wf-hero-cta .wf-btn { font-size: 13px; padding: 10px 18px; }
+  .wf-store-row { display: flex; gap: 14px; margin-top: 36px; opacity: 0.85; }
+  .wf-store { padding: 10px 16px; background: #0f1115; color: #fafaf9; border-radius: 8px; font-size: 11px; }
+
+  /* Marquee features preview */
+  .wf-features-marquee { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 0 16px; }
+  .wf-feat-cell { padding: 16px; background: #fff; border: 1px solid #e5e5e0; border-radius: 8px; font-size: 11px; }
+  .wf-feat-cell .ico { width: 24px; height: 24px; background: #0f1115; color: #fafaf9; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; margin-bottom: 8px; }
+  .wf-feat-cell .lbl { font-weight: 600; }
+  .wf-feat-cell .desc { color: #888; margin-top: 4px; line-height: 1.4; }
+
+  /* Big feature blocks */
+  .wf-bigfeat { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  .wf-bigfeat .text .ey { font-size: 10px; color: #2d85d2; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .wf-bigfeat .text h3 { font-size: 24px; margin: 6px 0 12px; }
+  .wf-bigfeat .text p { font-size: 13px; color: #555; line-height: 1.6; margin: 0 0 14px; max-width: 38ch; }
+  .wf-bigfeat .text a { color: #2d85d2; font-size: 12px; font-weight: 600; }
+  .wf-media { background: #1f232b; height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 11px; font-family: ui-monospace, Menlo, monospace; }
+  .wf-bigfeat.reverse .text { order: 2; }
+
+  /* Code mode dark block */
+  .wf-codemode { background: #0e1116; color: #c9d1d9; padding: 50px 32px; border-radius: 12px; margin: 0 8px; font-family: ui-monospace, Menlo, monospace; }
+  .wf-codemode .ey { color: #58a6ff; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .wf-codemode h3 { color: #e6edf3; font-family: 'Inter', sans-serif; font-size: 22px; margin: 6px 0 10px; }
+  .wf-codemode p { font-size: 12px; color: #8b949e; max-width: 50ch; line-height: 1.6; margin: 0 0 14px; font-family: 'Inter', sans-serif; }
+  .wf-code-block { background: #1f232b; padding: 14px; border-radius: 6px; font-size: 11px; line-height: 1.7; }
+
+  /* Tier 2 grid */
+  .wf-tier2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .wf-tier2 .cell { padding: 14px; border: 1px solid #e5e5e0; border-radius: 8px; background: #fff; font-size: 11px; }
+  .wf-tier2 .cell .ico { width: 20px; height: 20px; border-radius: 4px; background: #f3f3ef; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 6px; font-size: 11px; }
+  .wf-tier2 .cell .lbl { font-weight: 600; font-size: 12px; }
+  .wf-tier2 .cell .desc { color: #888; margin-top: 4px; line-height: 1.4; }
+
+  /* Pricing teaser */
+  .wf-price-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 700px; margin: 0 auto; }
+  .wf-price-card { padding: 20px; background: #fff; border: 1px solid #e5e5e0; border-radius: 10px; }
+  .wf-price-card.featured { border-color: #0f1115; background: #fafaf9; }
+  .wf-price-card .name { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em; }
+  .wf-price-card .price { font-size: 24px; font-weight: 700; margin: 4px 0; }
+  .wf-price-card .price small { font-size: 11px; font-weight: 400; color: #6b7280; }
+  .wf-price-card ul { font-size: 11px; color: #555; padding-left: 14px; margin: 8px 0 12px; line-height: 1.7; }
+
+  /* Social proof */
+  .wf-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .wf-proof .stat { text-align: center; padding: 14px; }
+  .wf-proof .num { font-size: 28px; font-weight: 700; color: #0f1115; }
+  .wf-proof .lbl { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Final CTA */
+  .wf-finalcta { background: #0f1115; color: #fafaf9; padding: 60px 32px; text-align: center; border-radius: 12px; margin: 0 8px; }
+  .wf-finalcta h3 { font-family: 'Inter', sans-serif; font-size: 28px; margin: 0 0 10px; }
+  .wf-finalcta p { font-size: 13px; color: #c9d1d9; margin: 0 0 20px; }
+
+  /* Footer */
+  .wf-footer { background: #1f232b; color: #c9d1d9; padding: 32px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 24px; font-size: 11px; }
+  .wf-footer h5 { color: #fff; font-size: 10px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .wf-footer ul { padding: 0; list-style: none; margin: 0; line-height: 1.9; }
+  .wf-footer .brand .tag { color: #6b7280; font-size: 10px; margin-top: 8px; max-width: 30ch; }
+</style>
+
+<div class="wf">
+
+  <div class="wf-header">
+    <div class="wf-logo">⌨ Touch Typer</div>
+    <div class="wf-nav"><span>Features</span><span>Pricing</span><span>Changelog</span><span>Leaderboard</span></div>
+    <div class="wf-nav-cta"><span class="wf-btn wf-btn-sec">Sign in</span><span class="wf-btn wf-btn-prim">Download ↓</span></div>
+  </div>
+
+  <div class="wf-section wf-hero" data-label="§ hero">
+    <div class="wf-eyebrow">New — Real-time PvP duels</div>
+    <h1 class="wf-headline">Practice typing. Get measurably <em>faster<span class="cursor"></span></em>.</h1>
+    <p class="wf-sub">Touch Typer is the desktop typing tutor that turns deliberate practice into real progress. Free and open source. Mac, Windows, Linux.</p>
+    <div class="wf-hero-cta">
+      <span class="wf-btn wf-btn-prim">Download free ↓</span>
+      <span class="wf-btn wf-btn-sec">See features</span>
+    </div>
+    <div class="wf-store-row">
+      <span class="wf-store">Mac App Store</span>
+      <span class="wf-store">Microsoft Store</span>
+      <span class="wf-store">Snap Store</span>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ feature marquee — 5 hero features as quick previews">
+    <div class="wf-features-marquee">
+      <div class="wf-feat-cell"><span class="ico">⚔︎</span><div class="lbl">Real-time PvP</div><div class="desc">Duel anyone</div></div>
+      <div class="wf-feat-cell"><span class="ico">✨</span><div class="lbl">AI Coach</div><div class="desc">Adaptive drills</div></div>
+      <div class="wf-feat-cell"><span class="ico">📈</span><div class="lbl">Deep stats</div><div class="desc">Track progress</div></div>
+      <div class="wf-feat-cell"><span class="ico">⌨︎</span><div class="lbl">Layouts</div><div class="desc">Dvorak, Colemak…</div></div>
+      <div class="wf-feat-cell"><span class="ico">{ }</span><div class="lbl">Code Mode</div><div class="desc">40+ languages</div></div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ big-feature block — PvP (alternating layout)">
+    <div class="wf-bigfeat">
+      <div class="text">
+        <div class="ey">Real-time PvP</div>
+        <h3>Race friends. Race strangers. Race the clock.</h3>
+        <p>Live 60-second duels with WPM, accuracy, and error feedback as you type. Invite a friend with a shareable link.</p>
+        <a href="#">Learn more →</a>
+      </div>
+      <div class="wf-media">[ pvp.mp4 — split-screen race ]</div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ big-feature block — AI Coach (reversed)">
+    <div class="wf-bigfeat reverse">
+      <div class="text">
+        <div class="ey">AI Coach · Premium</div>
+        <h3>Your weakest keys, on a schedule.</h3>
+        <p>AI Coach reads your last 30 days of practice, generates targeted drills for the keys you struggle with, and shows you why progress stalled.</p>
+        <a href="#">Learn more →</a>
+      </div>
+      <div class="wf-media">[ coach.png — drill recommendation UI ]</div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ big-feature block — Stats">
+    <div class="wf-bigfeat">
+      <div class="text">
+        <div class="ey">Analytics</div>
+        <h3>See progress in numbers and pictures.</h3>
+        <p>WPM and accuracy over time. Per-key heatmaps. Streaks, goals, milestones. Everything synced across your devices.</p>
+        <a href="#">Learn more →</a>
+      </div>
+      <div class="wf-media">[ stats.png — WPM chart over 6 months ]</div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ big-feature block — Multi-layout (reversed)">
+    <div class="wf-bigfeat reverse">
+      <div class="text">
+        <div class="ey">Keyboard layouts</div>
+        <h3>QWERTY, Dvorak, Colemak — switch in one click.</h3>
+        <p>Practice on the layout you use, or learn a new one. Drills adapt to layout. Switch back any time.</p>
+        <a href="#">Learn more →</a>
+      </div>
+      <div class="wf-media">[ layout-picker.png ]</div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ Code Mode — monospace contrast block">
+    <div class="wf-codemode">
+      <div class="ey">Code Mode</div>
+      <h3>Practice the syntax you actually write.</h3>
+      <p>Type TypeScript, Python, Rust, Go, and 40+ more languages — with real syntax highlighting, real indentation, and the special characters that actually slow you down.</p>
+      <div class="wf-code-block">
+        <span style="color: #58a6ff">function</span> wpm(chars: <span style="color: #58a6ff">number</span>) {<br/>
+        &nbsp;&nbsp;<span style="color: #58a6ff">return</span> chars / 5;<br/>
+        }<br/>
+        <span style="color: #6b7280">// 4.2s · 81 wpm · 0 errors</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ tier-2 feature grid — heatmap / streaks / goals / leaderboard">
+    <div class="wf-tier2">
+      <div class="cell"><span class="ico">▦</span><div class="lbl">Heatmap</div><div class="desc">See your weakest keys at a glance</div></div>
+      <div class="cell"><span class="ico">🔥</span><div class="lbl">Streaks</div><div class="desc">Practice daily, protect streaks</div></div>
+      <div class="cell"><span class="ico">◎</span><div class="lbl">Goals &amp; challenges</div><div class="desc">Hit measurable targets</div></div>
+      <div class="cell"><span class="ico">🏆</span><div class="lbl">Leaderboard</div><div class="desc">Compete globally</div></div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ social proof — stats strip">
+    <div class="wf-proof">
+      <div class="stat"><div class="num">10k+</div><div class="lbl">Users</div></div>
+      <div class="stat"><div class="num">3 platforms</div><div class="lbl">Mac · Win · Linux</div></div>
+      <div class="stat"><div class="num">Open source</div><div class="lbl">MIT-licensed</div></div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ pricing teaser — 2 cards, link to /pricing for matrix">
+    <div class="wf-price-teaser">
+      <div class="wf-price-card">
+        <div class="name">Free</div>
+        <div class="price">$0</div>
+        <ul><li>Core typing tests</li><li>Stats &amp; streaks</li><li>Multi-layout</li><li>PvP duels</li></ul>
+        <span class="wf-btn wf-btn-sec">Download</span>
+      </div>
+      <div class="wf-price-card featured">
+        <div class="name">Premium</div>
+        <div class="price">$2.99<small>/mo</small></div>
+        <ul><li>Everything in Free</li><li>AI Coach + custom drills</li><li>AI insights</li><li>Streak freezes weekly</li></ul>
+        <span class="wf-btn wf-btn-prim">Go Premium</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-section" data-label="§ final CTA">
+    <div class="wf-finalcta">
+      <h3>Start typing better today.</h3>
+      <p>Free download. No account required to start practicing.</p>
+      <span class="wf-btn wf-btn-prim" style="background: #fafaf9; color: #0f1115;">Download ↓</span>
+    </div>
+  </div>
+
+  <div class="wf-footer">
+    <div class="brand"><h5>⌨ Touch Typer</h5><div class="tag">The desktop typing tutor that turns deliberate practice into real progress.</div></div>
+    <div><h5>Product</h5><ul><li>Features</li><li>Pricing</li><li>Changelog</li><li>Download</li></ul></div>
+    <div><h5>Account</h5><ul><li>Sign in</li><li>Sign up</li><li>Leaderboard</li></ul></div>
+    <div><h5>Legal</h5><ul><li>Privacy</li><li>GitHub</li><li>Contact</li></ul></div>
+  </div>
+</div>

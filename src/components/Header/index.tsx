@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { DownloadMenu } from "./DownloadMenu";
 import { MobileSheet } from "./MobileSheet";
@@ -23,9 +24,15 @@ export default async function Header() {
     <header className="sticky top-0 z-40 border-b border-line bg-paper/80 backdrop-blur-md">
       <Container width="wide">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <span className="font-mono">⌨</span>
-            <span>Touch Typer</span>
+          <Link href="/" className="flex items-center" aria-label="Touch Typer home">
+            <Image
+              src="/logo-color.svg"
+              alt="Touch Typer"
+              width={730}
+              height={284}
+              priority
+              className="h-8 w-auto"
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">

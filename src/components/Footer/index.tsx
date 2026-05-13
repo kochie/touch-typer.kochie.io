@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -35,10 +36,13 @@ export default function Footer() {
       <Container width="wide">
         <div className="py-16 grid gap-10 grid-cols-2 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 font-semibold">
-              <span className="font-mono">⌨</span>
-              <span>Touch Typer</span>
-            </div>
+            <Image
+              src="/logo-white.svg"
+              alt="Touch Typer"
+              width={2501}
+              height={1054}
+              className="h-8 w-auto"
+            />
             <p className="mt-3 text-sm text-paper/70 max-w-xs">
               The desktop typing tutor that turns deliberate practice into real progress.
             </p>
