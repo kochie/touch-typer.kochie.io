@@ -5,7 +5,6 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import { useTheme } from "next-themes";
 
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -13,18 +12,12 @@ import { useTheme } from "next-themes";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export function StripeCheckout({options}: {options: {clientSecret: string}}) {
-  const { resolvedTheme } = useTheme();
-
-  const mergedOptions = {
-    ...options,
-    appearance: {
-      theme: (resolvedTheme === "dark" ? "night" : "stripe") as "stripe" | "night",
-    },
-  };
-
   return (
     <div id="checkout" className="my-16">
-      <EmbeddedCheckoutProvider stripe={stripePromise} options={mergedOptions}>
+      {/* NOTE: Stripe Embedded Checkout’s appearance (including dark/light theme) must be
+          configured server-side during Stripe Session creation, not client-side. See
+          docs/superpowers/notes/project-b-billing-bugs.md for the Project B follow-up. */}
+      <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
     </div>
