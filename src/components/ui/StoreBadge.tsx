@@ -42,7 +42,7 @@ export function StoreBadge({ store }: StoreBadgeProps) {
     );
   }
 
-  // ms
+  // ms — wrap so we can constrain the custom element to the same h-12 as the others
   return (
     <>
       <Script
@@ -50,14 +50,16 @@ export function StoreBadge({ store }: StoreBadgeProps) {
         src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"
         strategy="afterInteractive"
       />
-      <ms-store-badge
-        productid="9NG3CCFL631D"
-        size="large"
-        window-mode="full"
-        theme="light"
-        language="en"
-        animation="on"
-      />
+      <span className="inline-block h-12 [&_ms-store-badge]:h-12 [&_ms-store-badge]:block">
+        <ms-store-badge
+          productid="9NG3CCFL631D"
+          size="small"
+          window-mode="full"
+          theme="light"
+          language="en"
+          animation="on"
+        />
+      </span>
     </>
   );
 }
