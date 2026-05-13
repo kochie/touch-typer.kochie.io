@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PricingMatrix } from "@/components/marketing/PricingMatrix";
 import { PricingFAQ } from "@/components/marketing/PricingFAQ";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Pricing — Touch Typer",
@@ -32,6 +33,19 @@ const premiumFeatures = [
 export default function PricingPage() {
   return (
     <main>
+      <JsonLd
+        id="ld-faqpage"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            { "@type": "Question", name: "Is there a free trial of Premium?", acceptedAnswer: { "@type": "Answer", text: "There's no time-limited trial, but the Free tier is generous." } },
+            { "@type": "Question", name: "Can I cancel anytime?", acceptedAnswer: { "@type": "Answer", text: "Yes. Cancel from the billing portal anytime — you keep Premium until the end of your current billing period." } },
+            { "@type": "Question", name: "What payment methods do you accept?", acceptedAnswer: { "@type": "Answer", text: "Through Stripe: Visa, Mastercard, Amex, Apple Pay, Google Pay, Link. Through the Mac App Store: whatever Apple ID has on file." } },
+            { "@type": "Question", name: "Is Touch Typer open source?", acceptedAnswer: { "@type": "Answer", text: "Yes — MIT-licensed at github.com/kochie/touch-type." } },
+          ],
+        }}
+      />
       <Section tone="paper" density="default">
         <Container width="default">
           <div className="text-center max-w-2xl mx-auto">

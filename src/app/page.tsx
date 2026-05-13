@@ -13,6 +13,7 @@ import { Tier2Grid } from "@/components/marketing/Tier2Grid";
 import { SocialProofStrip } from "@/components/marketing/SocialProofStrip";
 import { PricingTeaser } from "@/components/marketing/PricingTeaser";
 import { FinalCTA } from "@/components/marketing/FinalCTA";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 const description =
   "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
@@ -36,6 +37,17 @@ export const viewport: Viewport = { themeColor: "#fafaf9" };
 export default function Page() {
   return (
     <main>
+      <JsonLd
+        id="ld-software-app"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Touch Typer",
+          operatingSystem: "macOS, Windows, Linux",
+          applicationCategory: "EducationApplication",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        }}
+      />
       <Hero />
       <FeatureMarquee />
       <PvpBlock />
