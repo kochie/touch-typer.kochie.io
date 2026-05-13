@@ -74,19 +74,19 @@ export default function PricingPage() {
                 </Button>
               </div>
             </Card>
-            <Card tone="paper" emphasis="featured">
-              <Eyebrow tone="accent">Premium · Most popular</Eyebrow>
+            <Card emphasis="gradient">
+              <Eyebrow tone="default" className="!text-paper/80">Premium · Most popular</Eyebrow>
               <div className="mt-3 text-5xl font-bold">
-                $2.99<span className="text-base font-normal text-mute">/mo</span>
+                $2.99<span className="text-base font-normal text-paper/70">/mo</span>
               </div>
-              <div className="text-sm text-mute mt-1">or $2.39/mo billed yearly</div>
-              <ul className="mt-6 space-y-3 text-sm text-ink/80">
+              <div className="text-sm text-paper/70 mt-1">or $2.39/mo billed yearly</div>
+              <ul className="mt-6 space-y-3 text-sm text-paper/90">
                 {premiumFeatures.map((f) => (
                   <li key={f}>· {f}</li>
                 ))}
               </ul>
               <div className="mt-8">
-                <Button href="/buy/plans" variant="primary" size="md" className="w-full">
+                <Button href="/buy/plans" variant="inverse" size="md" className="w-full">
                   Go Premium
                 </Button>
               </div>

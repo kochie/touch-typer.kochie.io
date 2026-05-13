@@ -37,22 +37,22 @@ export function PricingTeaser() {
               </Button>
             </div>
           </Card>
-          <Card tone="paper" emphasis="featured">
-            <Eyebrow tone="accent">Premium · Most popular</Eyebrow>
+          <Card emphasis="gradient">
+            <Eyebrow tone="default" className="!text-paper/80">Premium · Most popular</Eyebrow>
             <div className="mt-3 text-4xl font-bold">
-              $2.99<span className="text-base font-normal text-mute">/month</span>
+              $2.99<span className="text-base font-normal text-paper/70">/month</span>
             </div>
-            <div className="text-xs text-mute mt-1">or $2.39/mo billed yearly</div>
-            <ul className="mt-4 space-y-2 text-sm text-ink/80">
+            <div className="text-xs text-paper/70 mt-1">or $2.39/mo billed yearly</div>
+            <ul className="mt-4 space-y-2 text-sm text-paper/90">
               {premiumFeatures.map((f) => (
                 <li key={f}>· {f}</li>
               ))}
             </ul>
             <div className="mt-6 flex items-center gap-3">
-              <Button href="/buy/plans" variant="primary" size="md">
+              <Button href="/buy/plans" variant="inverse" size="md">
                 Go Premium
               </Button>
-              <Button href="/pricing" variant="ghost" size="md">
+              <Button href="/pricing" variant="ghost" size="md" className="!text-paper/80 hover:!text-paper hover:!bg-paper/10">
                 Compare →
               </Button>
             </div>
