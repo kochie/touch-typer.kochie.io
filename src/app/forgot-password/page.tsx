@@ -8,6 +8,9 @@ import { useSupabaseClient } from "@/lib/supabase-provider";
 import { toast } from "react-toastify";
 import { Notification } from "@/components/Notification";
 import { Field, Form, Formik } from "formik";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
 // Base URL for auth redirects. Prefer NEXT_PUBLIC_SITE_URL in production so the redirect
 // we send to Supabase is correct. The link in the reset email is also controlled by
@@ -29,22 +32,23 @@ export default function ForgotPasswordPage() {
   const callbackUrl = `${baseUrl}/auth/callback?next=/auth/set-password`;
 
   return (
-    <div className="h-full flex flex-col justify-center items-center bg-slate-100 min-h-screen">
+    <div className="min-h-screen bg-paper-soft flex flex-col justify-center items-center py-12 px-4 sm:px-6">
       <div className="w-full max-w-md">
-        <Image
-          alt="Touch Typer Logo"
-          src={Logo}
-          className="mx-auto h-10 w-auto"
-        />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Reset your password
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Enter your email and we’ll send you a link to set a new password.
-        </p>
-      </div>
+        <div className="text-center mb-8">
+          <Image
+            alt="Touch Typer Logo"
+            src={Logo}
+            className="mx-auto h-10 w-auto"
+          />
+          <Eyebrow className="mt-6 block">Account</Eyebrow>
+          <h1 className="mt-3 text-3xl font-bold text-ink">
+            Reset password
+          </h1>
+          <p className="mt-2 text-sm text-ink/60">
+            Enter your email and we&apos;ll send you a link to set a new password.
+          </p>
+        </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         {!sent ? (
           <Formik
             initialValues={{ email: "" }}
@@ -77,77 +81,83 @@ export default function ForgotPasswordPage() {
             }}
           >
             {({ isSubmitting }) => (
-              <Form className="space-y-6 bg-white rounded-xl shadow-xl p-8">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Email address
-                  </label>
-                  <div className="mt-2">
-                    <Field
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-                    />
+              <Card tone="paper">
+                <Form className="space-y-6">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium leading-6 text-ink"
+                    >
+                      Email address
+                    </label>
+                    <div className="mt-2">
+                      <Field
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
+                      />
+                    </div>
                   </div>
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
-                >
-                  {isSubmitting ? "Sending..." : "Send reset link"}
-                </button>
-              </Form>
+                  <Button
+                    type="submit"
+                    variant="accent"
+                    size="md"
+                    disabled={isSubmitting}
+                    className="w-full justify-center"
+                  >
+                    {isSubmitting ? "Sending..." : "Send reset link"}
+                  </Button>
+                </Form>
+              </Card>
             )}
           </Formik>
         ) : (
-          <div className="bg-white rounded-xl shadow-xl p-8 space-y-4">
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h3 className="text-sm font-medium text-green-800">Check your email</h3>
-              <p className="mt-1 text-sm text-green-700">
-                We sent a password reset link to <strong>{email}</strong>. Click the link to set a new password.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={async () => {
-                const { error } = await supabase.auth.resetPasswordForEmail(
-                  email,
-                  { redirectTo: callbackUrl }
-                );
-                if (error) {
-                  toast(Notification, {
-                    type: "error",
-                    data: { title: "Error", message: error.message, type: "error" },
-                  });
-                } else {
-                  toast(Notification, {
-                    type: "success",
-                    data: {
-                      title: "Email sent",
-                      message: "Reset link resent.",
+          <Card tone="paper">
+            <div className="space-y-4">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <h3 className="text-sm font-medium text-green-800">Check your email</h3>
+                <p className="mt-1 text-sm text-green-700">
+                  We sent a password reset link to <strong>{email}</strong>. Click the link to set a new password.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={async () => {
+                  const { error } = await supabase.auth.resetPasswordForEmail(
+                    email,
+                    { redirectTo: callbackUrl }
+                  );
+                  if (error) {
+                    toast(Notification, {
+                      type: "error",
+                      data: { title: "Error", message: error.message, type: "error" },
+                    });
+                  } else {
+                    toast(Notification, {
                       type: "success",
-                    },
-                  });
-                }
-              }}
-              className="text-sm text-indigo-600 hover:text-indigo-500"
-            >
-              Resend reset link
-            </button>
-          </div>
+                      data: {
+                        title: "Email sent",
+                        message: "Reset link resent.",
+                        type: "success",
+                      },
+                    });
+                  }
+                }}
+                className="text-sm text-accent hover:text-accent-deep"
+              >
+                Resend reset link
+              </button>
+            </div>
+          </Card>
         )}
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <p className="mt-10 text-center text-sm text-ink/60">
           <Link
             href="/signin"
-            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            className="font-semibold leading-6 text-accent hover:text-accent-deep"
           >
             Back to sign in
           </Link>
