@@ -4,9 +4,9 @@ import { Formik, Field as FormikField, Form } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Logo from "@/assets/logo.svg";
+import { useTheme } from "next-themes";
 import { Button as HUIButton, Field, Label, Transition } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Notification } from "../Notification";
 import { useSupabaseClient } from "@/lib/supabase-provider";
@@ -19,6 +19,11 @@ type SignUpStep = "START_SIGNUP" | "CONFIRM_EMAIL" | "DONE";
 export default function SignUp() {
   const router = useRouter();
   const supabase = useSupabaseClient();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const logoSrc =
+    mounted && resolvedTheme === "dark" ? "/logo-white.svg" : "/logo-ink.svg";
   const [step, setStep] = useState<SignUpStep>("START_SIGNUP");
   const [email, setEmail] = useState("");
 
@@ -26,7 +31,13 @@ export default function SignUp() {
     <div className="min-h-screen bg-bg-elevated flex flex-col justify-center items-center py-12 px-4 sm:px-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Image alt="Touch Typer" src={Logo} className="mx-auto h-10 w-auto" />
+          <Image
+            src={logoSrc}
+            alt="Touch Typer"
+            width={730}
+            height={284}
+            className="mx-auto h-10 w-auto"
+          />
           <Eyebrow className="mt-6 block">Account</Eyebrow>
           <h1 className="mt-3 text-3xl font-bold text-fg">Create account</h1>
         </div>

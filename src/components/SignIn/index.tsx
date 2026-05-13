@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Field, Form } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Logo from "@/assets/logo-dark.png";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useSupabaseClient } from "@/lib/supabase-provider";
 import { toast } from "react-toastify";
 import { Notification } from "../Notification";
@@ -18,6 +18,11 @@ type SignInMode = "password" | "magic_link";
 export default function SignIn() {
   const router = useRouter();
   const supabase = useSupabaseClient();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const logoSrc =
+    mounted && resolvedTheme === "dark" ? "/logo-white.svg" : "/logo-ink.svg";
   const [mode, setMode] = useState<SignInMode>("password");
   const [magicLinkSent, setMagicLinkSent] = useState(false);
   const [magicLinkEmail, setMagicLinkEmail] = useState("");
@@ -30,8 +35,10 @@ export default function SignIn() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Image
-            alt="Touch Typer Logo"
-            src={Logo}
+            src={logoSrc}
+            alt="Touch Typer"
+            width={730}
+            height={284}
             className="mx-auto h-10 w-auto"
           />
           <Eyebrow className="mt-6 block">Account</Eyebrow>
