@@ -18,7 +18,7 @@ export function ThemeToggle() {
       <button
         type="button"
         aria-label="Toggle dark mode"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-fg/80"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-fg/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-fg focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
       >
         <span className="block h-4 w-4" />
       </button>
@@ -31,7 +31,7 @@ export function ThemeToggle() {
       type="button"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-fg/80 hover:bg-bg-elevated transition-colors"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-fg/80 hover:bg-bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-fg focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
     >
       <FontAwesomeIcon icon={isDark ? faSun : faMoon} className="h-4 w-4" />
     </button>

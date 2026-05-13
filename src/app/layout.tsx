@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head></head>
-      <body className="min-h-screen grid grid-rows-[auto_1fr_auto] font-sans antialiased text-ink bg-paper">
+      <body className="min-h-screen grid grid-rows-[auto_1fr_auto] font-sans antialiased text-fg bg-bg">
         <Fathom />
         <Header />
         <div>
