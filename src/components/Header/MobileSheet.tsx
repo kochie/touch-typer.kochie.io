@@ -39,7 +39,7 @@ export function MobileSheet({ signedIn }: MobileSheetProps) {
         type="button"
         aria-label="Open menu"
         onClick={() => setOpen(true)}
-        className="p-2 text-fg md:hidden"
+        className="p-3 text-fg md:hidden"
       >
         <FontAwesomeIcon icon={faBars} />
       </button>
@@ -50,7 +50,7 @@ export function MobileSheet({ signedIn }: MobileSheetProps) {
           <DialogPanel className="ml-auto h-full w-full max-w-sm bg-bg p-6 flex flex-col gap-6">
             <div className="flex items-center justify-between">
               <Image src={logoSrc} alt="Touch Typer" width={730} height={284} className="h-7 w-auto" />
-              <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2 text-fg">
+              <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-3 text-fg">
                 <FontAwesomeIcon icon={faXmark} />
               </button>
             </div>

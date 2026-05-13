@@ -34,7 +34,7 @@ export function Hero() {
             New — Real-time PvP duels
           </span>
 
-          <h1 className="mt-5 text-5xl sm:text-6xl font-bold tracking-tight leading-[1.05]">
+          <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
             Practice typing. Get measurably{" "}
             <span className="text-accent border-b-4 border-accent pb-1">
               faster

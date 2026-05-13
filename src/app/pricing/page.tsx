@@ -51,7 +51,7 @@ export default function PricingPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Pricing</Eyebrow>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1]">
-              Free to download. <br/>Affordable to upgrade.
+              Free to download. Affordable to upgrade.
             </h1>
             <p className="mt-6 text-lg text-fg/70">
               Pick a plan when you're ready. No trial games, no manipulative pricing tactics.
@@ -61,7 +61,7 @@ export default function PricingPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
             <Card tone="paper">
               <Eyebrow>Free</Eyebrow>
-              <div className="mt-3 text-5xl font-bold">$0</div>
+              <div className="mt-3 text-4xl sm:text-5xl font-bold">$0</div>
               <div className="text-sm text-fg-muted mt-1">Forever</div>
               <ul className="mt-6 space-y-3 text-sm text-fg/80">
                 {freeFeatures.map((f) => (
@@ -76,7 +76,7 @@ export default function PricingPage() {
             </Card>
             <Card emphasis="gradient">
               <Eyebrow tone="default" className="!text-paper/80">Premium · Most popular</Eyebrow>
-              <div className="mt-3 text-5xl font-bold">
+              <div className="mt-3 text-4xl sm:text-5xl font-bold">
                 $2.99<span className="text-base font-normal text-paper/70">/mo</span>
               </div>
               <div className="text-sm text-paper/70 mt-1">or $2.39/mo billed yearly</div>

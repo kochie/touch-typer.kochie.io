@@ -48,7 +48,7 @@ export function PricingTeaser() {
                 <li key={f}>· {f}</li>
               ))}
             </ul>
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-6 flex flex-wrap items-center gap-3">
               <Button href="/buy/plans" variant="inverse" size="md">
                 Go Premium
               </Button>

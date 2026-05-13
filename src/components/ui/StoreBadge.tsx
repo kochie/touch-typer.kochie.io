@@ -20,7 +20,7 @@ export function StoreBadge({ store }: StoreBadgeProps) {
         <img
           src="https://tools.applemediaservices.com/api/badges/download-on-the-mac-app-store/black/en-us"
           alt="Download on the Mac App Store"
-          className="h-12"
+          className="h-12 max-w-full"
         />
       </Link>
     );
@@ -36,7 +36,7 @@ export function StoreBadge({ store }: StoreBadgeProps) {
         <img
           src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"
           alt="Get it from the Snap Store"
-          className="h-12"
+          className="h-12 max-w-full"
         />
       </Link>
     );

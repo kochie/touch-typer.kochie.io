@@ -124,7 +124,7 @@ export default function SignIn() {
                         type="email"
                         required
                         autoComplete="email"
-                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-2.5 sm:py-1.5 text-base text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -153,7 +153,7 @@ export default function SignIn() {
                         type="password"
                         required
                         autoComplete="current-password"
-                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-2.5 sm:py-1.5 text-base text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -221,7 +221,7 @@ export default function SignIn() {
                         type="email"
                         required
                         autoComplete="email"
-                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-2.5 sm:py-1.5 text-base text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
