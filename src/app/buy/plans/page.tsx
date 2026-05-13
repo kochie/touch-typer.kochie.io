@@ -50,11 +50,11 @@ export default function BuyPlansStage() {
         <Container width="default">
           <div className="mx-auto max-w-4xl text-center">
             <Eyebrow tone="accent">Pricing</Eyebrow>
-            <p className="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+            <p className="mt-3 text-4xl font-bold tracking-tight text-fg sm:text-5xl">
               Choose your plan
             </p>
           </div>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-ink/70 text-center">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-fg/70 text-center">
             Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et
             quasi iusto modi velit ut non voluptas in. Explicabo id ut laborum.
           </p>
@@ -63,13 +63,13 @@ export default function BuyPlansStage() {
               <RadioGroup
                 value={frequency}
                 onChange={setFrequency}
-                className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-line"
+                className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-border"
               >
                 {frequencies.map((option) => (
                   <Radio
                     key={option.value}
                     value={option}
-                    className="cursor-pointer rounded-full px-2.5 py-1 text-ink/60 data-[checked]:bg-accent data-[checked]:text-paper"
+                    className="cursor-pointer rounded-full px-2.5 py-1 text-fg/60 data-[checked]:bg-accent data-[checked]:text-paper"
                   >
                     {option.label}
                   </Radio>
@@ -78,29 +78,29 @@ export default function BuyPlansStage() {
             </fieldset>
           </div>
           <div className="mt-20 flow-root max-w-4xl mx-auto">
-            <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-line sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:grid-cols-2 lg:divide-x lg:divide-y-0 xl:-mx-4">
+            <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-border sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:grid-cols-2 lg:divide-x lg:divide-y-0 xl:-mx-4">
               {tiers.map((tier) => (
                 <div key={tier.id} className="pt-16 lg:px-8 lg:pt-0 xl:px-14">
                   <h3
                     id={tier.id}
-                    className="text-base font-semibold leading-7 text-ink"
+                    className="text-base font-semibold leading-7 text-fg"
                   >
                     {tier.name}
                   </h3>
                   <p className="mt-6 flex items-baseline gap-x-1">
-                    <span className="text-5xl font-bold tracking-tight text-ink">
+                    <span className="text-5xl font-bold tracking-tight text-fg">
                       {tier.price.monthly}
                     </span>
                     {tier.price.monthly === "Free" ? null : (
-                      <span className="text-sm font-semibold leading-6 text-ink/60">
+                      <span className="text-sm font-semibold leading-6 text-fg/60">
                         /month
                       </span>
                     )}
                   </p>
                   {tier.price.monthly === "Free" ? (
-                    <p className="mt-3 text-sm leading-6 text-ink/60">No cost, free forever.</p>
+                    <p className="mt-3 text-sm leading-6 text-fg/60">No cost, free forever.</p>
                   ) : (
-                    <p className="mt-3 text-sm leading-6 text-ink/60">
+                    <p className="mt-3 text-sm leading-6 text-fg/60">
                       {tier.price.annually} per month if paid annually
                     </p>
                   )}
@@ -113,12 +113,12 @@ export default function BuyPlansStage() {
                   >
                     Buy plan
                   </Button>
-                  <p className="mt-10 text-sm font-semibold leading-6 text-ink">
+                  <p className="mt-10 text-sm font-semibold leading-6 text-fg">
                     {tier.description}
                   </p>
                   <ul
                     role="list"
-                    className="mt-6 space-y-3 text-sm leading-6 text-ink/70"
+                    className="mt-6 space-y-3 text-sm leading-6 text-fg/70"
                   >
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex gap-x-3">

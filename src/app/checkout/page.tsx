@@ -22,7 +22,7 @@ export default async function PaymentsPage({
       <main>
         <Section tone="paper" density="compact">
           <Container width="narrow">
-            <p className="text-ink/70">Invalid purchase price {params.purchasePrice}</p>
+            <p className="text-fg/70">Invalid purchase price {params.purchasePrice}</p>
           </Container>
         </Section>
       </main>
@@ -35,7 +35,7 @@ export default async function PaymentsPage({
       <main>
         <Section tone="paper" density="compact">
           <Container width="narrow">
-            <p className="text-ink/70">Invalid purchase option</p>
+            <p className="text-fg/70">Invalid purchase option</p>
           </Container>
         </Section>
       </main>
@@ -58,7 +58,7 @@ export default async function PaymentsPage({
       <main>
         <Section tone="paper" density="compact">
           <Container width="narrow">
-            <p className="text-ink/70">Error: {error.message}</p>
+            <p className="text-fg/70">Error: {error.message}</p>
           </Container>
         </Section>
       </main>
@@ -70,7 +70,7 @@ export default async function PaymentsPage({
       <Section tone="paper" density="compact">
         <Container width="narrow">
           <Eyebrow>Checkout</Eyebrow>
-          <h1 className="mt-3 text-3xl font-bold text-ink">Complete your purchase</h1>
+          <h1 className="mt-3 text-3xl font-bold text-fg">Complete your purchase</h1>
           <div className="mt-8">
             <StripeCheckout options={{ clientSecret: data.clientSecret }} />
           </div>
