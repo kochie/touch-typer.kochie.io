@@ -1,0 +1,18 @@
+/* Design tokens — single source of truth for color and type.
+ * Surfaced as Tailwind v4 theme tokens via the @theme directive in main.css. */
+
+:root {
+  /* Color */
+  --color-ink: #0f1115;
+  --color-ink-soft: #1f232b;
+  --color-mute: #6b7280;
+  --color-line: #e5e5e0;
+  --color-paper-soft: #f3f3ef;
+  --color-paper: #fafaf9;
+  --color-accent: #2d85d2;
+  --color-accent-deep: #1e5e96;
+  --color-warm: #d97757;
+  --color-good: #16a34a;
+  --color-warn: #d97706;
+  --color-bad: #dc2626;
+}
