@@ -1,5 +1,6 @@
 import { Metadata, Viewport } from "next";
 import { Hero } from "@/components/marketing/Hero";
+import { FeatureMarquee } from "@/components/marketing/FeatureMarquee";
 
 const description =
   "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
@@ -24,6 +25,7 @@ export default function Page() {
   return (
     <main>
       <Hero />
+      <FeatureMarquee />
     </main>
   );
 }
