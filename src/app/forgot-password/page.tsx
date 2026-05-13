@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
   const callbackUrl = `${baseUrl}/auth/callback?next=/auth/set-password`;
 
   return (
-    <div className="min-h-screen bg-paper-soft flex flex-col justify-center items-center py-12 px-4 sm:px-6">
+    <div className="min-h-screen bg-bg-elevated flex flex-col justify-center items-center py-12 px-4 sm:px-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Image
@@ -41,10 +41,10 @@ export default function ForgotPasswordPage() {
             className="mx-auto h-10 w-auto"
           />
           <Eyebrow className="mt-6 block">Account</Eyebrow>
-          <h1 className="mt-3 text-3xl font-bold text-ink">
+          <h1 className="mt-3 text-3xl font-bold text-fg">
             Reset password
           </h1>
-          <p className="mt-2 text-sm text-ink/60">
+          <p className="mt-2 text-sm text-fg/60">
             Enter your email and we&apos;ll send you a link to set a new password.
           </p>
         </div>
@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium leading-6 text-ink"
+                      className="block text-sm font-medium leading-6 text-fg"
                     >
                       Email address
                     </label>
@@ -97,7 +97,7 @@ export default function ForgotPasswordPage() {
                         type="email"
                         autoComplete="email"
                         required
-                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
+                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -154,7 +154,7 @@ export default function ForgotPasswordPage() {
           </Card>
         )}
 
-        <p className="mt-10 text-center text-sm text-ink/60">
+        <p className="mt-10 text-center text-sm text-fg/60">
           <Link
             href="/signin"
             className="font-semibold leading-6 text-accent hover:text-accent-deep"

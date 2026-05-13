@@ -23,12 +23,12 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
 
   return (
-    <div className="min-h-screen bg-paper-soft flex flex-col justify-center items-center py-12 px-4 sm:px-6">
+    <div className="min-h-screen bg-bg-elevated flex flex-col justify-center items-center py-12 px-4 sm:px-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Image alt="Touch Typer" src={Logo} className="mx-auto h-10 w-auto" />
           <Eyebrow className="mt-6 block">Account</Eyebrow>
-          <h1 className="mt-3 text-3xl font-bold text-ink">Create account</h1>
+          <h1 className="mt-3 text-3xl font-bold text-fg">Create account</h1>
         </div>
 
         {step === "START_SIGNUP" && (
@@ -96,7 +96,7 @@ export default function SignUp() {
                   <Field>
                     <Label
                       htmlFor="name"
-                      className="block text-sm font-medium leading-6 text-ink"
+                      className="block text-sm font-medium leading-6 text-fg"
                     >
                       Name
                     </Label>
@@ -106,7 +106,7 @@ export default function SignUp() {
                         name="name"
                         type="text"
                         autoComplete="name"
-                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </Field>
@@ -114,7 +114,7 @@ export default function SignUp() {
                   <Field>
                     <Label
                       htmlFor="email"
-                      className="block text-sm font-medium leading-6 text-ink"
+                      className="block text-sm font-medium leading-6 text-fg"
                     >
                       Email address
                     </Label>
@@ -125,7 +125,7 @@ export default function SignUp() {
                         type="email"
                         required
                         autoComplete="email"
-                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </Field>
@@ -134,7 +134,7 @@ export default function SignUp() {
                     <div className="flex items-center justify-between">
                       <Label
                         htmlFor="password"
-                        className="block text-sm font-medium leading-6 text-ink"
+                        className="block text-sm font-medium leading-6 text-fg"
                       >
                         Password
                       </Label>
@@ -146,10 +146,10 @@ export default function SignUp() {
                         type="password"
                         required
                         autoComplete="new-password"
-                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
-                    <p className="mt-1 text-xs text-ink/60">
+                    <p className="mt-1 text-xs text-fg/60">
                       At least 6 characters
                     </p>
                   </Field>
@@ -215,7 +215,7 @@ export default function SignUp() {
           </Card>
         )}
 
-        <p className="mt-10 text-center text-sm text-ink/60">
+        <p className="mt-10 text-center text-sm text-fg/60">
           Already have an account?{" "}
           <Link
             href="/signin"

@@ -26,7 +26,7 @@ export default function SignIn() {
   const callbackUrl = `${origin}/auth/callback`;
 
   return (
-    <div className="min-h-screen bg-paper-soft flex flex-col justify-center items-center py-12 px-4 sm:px-6">
+    <div className="min-h-screen bg-bg-elevated flex flex-col justify-center items-center py-12 px-4 sm:px-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Image
@@ -35,19 +35,19 @@ export default function SignIn() {
             className="mx-auto h-10 w-auto"
           />
           <Eyebrow className="mt-6 block">Account</Eyebrow>
-          <h1 className="mt-3 text-3xl font-bold text-ink">
+          <h1 className="mt-3 text-3xl font-bold text-fg">
             Sign in
           </h1>
         </div>
 
-        <div className="flex rounded-lg border border-line bg-paper p-1 mb-6">
+        <div className="flex rounded-lg border border-border bg-bg p-1 mb-6">
           <button
             type="button"
             onClick={() => setMode("password")}
             className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${
               mode === "password"
                 ? "bg-accent text-paper shadow"
-                : "text-ink/70 hover:bg-paper-soft"
+                : "text-fg/70 hover:bg-bg-elevated"
             }`}
           >
             Password
@@ -58,7 +58,7 @@ export default function SignIn() {
             className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${
               mode === "magic_link"
                 ? "bg-accent text-paper shadow"
-                : "text-ink/70 hover:bg-paper-soft"
+                : "text-fg/70 hover:bg-bg-elevated"
             }`}
           >
             Email link
@@ -106,7 +106,7 @@ export default function SignIn() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium leading-6 text-ink"
+                      className="block text-sm font-medium leading-6 text-fg"
                     >
                       Email address
                     </label>
@@ -117,7 +117,7 @@ export default function SignIn() {
                         type="email"
                         required
                         autoComplete="email"
-                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -126,7 +126,7 @@ export default function SignIn() {
                     <div className="flex items-center justify-between">
                       <label
                         htmlFor="password"
-                        className="block text-sm font-medium leading-6 text-ink"
+                        className="block text-sm font-medium leading-6 text-fg"
                       >
                         Password
                       </label>
@@ -146,7 +146,7 @@ export default function SignIn() {
                         type="password"
                         required
                         autoComplete="current-password"
-                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -203,7 +203,7 @@ export default function SignIn() {
                   <div>
                     <label
                       htmlFor="magic-email"
-                      className="block text-sm font-medium leading-6 text-ink"
+                      className="block text-sm font-medium leading-6 text-fg"
                     >
                       Email address
                     </label>
@@ -214,7 +214,7 @@ export default function SignIn() {
                         type="email"
                         required
                         autoComplete="email"
-                        className="block w-full rounded-md border border-line bg-paper py-1.5 text-ink shadow-sm placeholder:text-ink/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -242,7 +242,7 @@ export default function SignIn() {
                   We sent a sign-in link to <strong>{magicLinkEmail}</strong>. Click the link to sign in.
                 </p>
               </div>
-              <p className="text-xs text-ink/60">
+              <p className="text-xs text-fg/60">
                 Link expires in about an hour. You can request a new link below.
               </p>
               <button
@@ -256,7 +256,7 @@ export default function SignIn() {
           </Card>
         )}
 
-        <p className="mt-10 text-center text-sm text-ink/60">
+        <p className="mt-10 text-center text-sm text-fg/60">
           Not a member?{" "}
           <Link
             href="/signup"
