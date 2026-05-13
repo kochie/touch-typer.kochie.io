@@ -8,6 +8,7 @@ import { PvpBlock } from "@/components/marketing/blocks/PvpBlock";
 import { AiCoachBlock } from "@/components/marketing/blocks/AiCoachBlock";
 import { StatsBlock } from "@/components/marketing/blocks/StatsBlock";
 import { LayoutsBlock } from "@/components/marketing/blocks/LayoutsBlock";
+import { CodeModeSection } from "@/components/marketing/CodeModeSection";
 
 const description =
   "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
@@ -37,6 +38,7 @@ export default function Page() {
       <AiCoachBlock />
       <StatsBlock />
       <LayoutsBlock />
+      <CodeModeSection />
     </main>
   );
 }
