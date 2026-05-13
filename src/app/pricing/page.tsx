@@ -53,7 +53,7 @@ export default function PricingPage() {
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1]">
               Free to download. <br/>Affordable to upgrade.
             </h1>
-            <p className="mt-6 text-lg text-ink/70">
+            <p className="mt-6 text-lg text-fg/70">
               Pick a plan when you're ready. No trial games, no manipulative pricing tactics.
             </p>
           </div>
@@ -62,8 +62,8 @@ export default function PricingPage() {
             <Card tone="paper">
               <Eyebrow>Free</Eyebrow>
               <div className="mt-3 text-5xl font-bold">$0</div>
-              <div className="text-sm text-mute mt-1">Forever</div>
-              <ul className="mt-6 space-y-3 text-sm text-ink/80">
+              <div className="text-sm text-fg-muted mt-1">Forever</div>
+              <ul className="mt-6 space-y-3 text-sm text-fg/80">
                 {freeFeatures.map((f) => (
                   <li key={f}>· {f}</li>
                 ))}

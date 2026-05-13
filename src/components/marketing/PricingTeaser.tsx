@@ -26,7 +26,7 @@ export function PricingTeaser() {
           <Card tone="paper">
             <Eyebrow>Free</Eyebrow>
             <div className="mt-3 text-4xl font-bold">$0</div>
-            <ul className="mt-4 space-y-2 text-sm text-ink/80">
+            <ul className="mt-4 space-y-2 text-sm text-fg/80">
               {freeFeatures.map((f) => (
                 <li key={f}>· {f}</li>
               ))}
