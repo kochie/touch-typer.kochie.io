@@ -10,7 +10,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 const faqs = [
   {
     q: "Is there a free trial of Premium?",
-    a: "Yearly plans include a 7-day free trial — you get full Premium for a week and won't be charged if you cancel before the trial ends. Monthly plans don't include a trial. The Free tier is also generous on its own: PvP, heatmaps, full stats, multi-layout, and Code Mode forever.",
+    a: "Yes — both monthly and yearly subscriptions include a 7-day free trial when you subscribe via the web. You get full Premium for a week and won't be charged if you cancel before the trial ends. The Free tier is also generous on its own: PvP, heatmaps, full stats, multi-layout, and Code Mode forever.",
   },
   {
     q: "Can I cancel anytime?",
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "What's the difference between buying on the Mac App Store and subscribing here?",
-    a: "Both unlock the same Premium features. Apple's App Store rules require purchases inside the Mac App Store build to go through Apple's payment system — so MAS subscriptions are billed by Apple and managed in your Apple ID. Subscribing here on the web instead goes through Stripe, which lets us offer the 7-day yearly trial and is managed from /account.",
+    a: "Both unlock the same Premium features. Apple's App Store rules require purchases inside the Mac App Store build to go through Apple's payment system — so MAS subscriptions are billed by Apple and managed in your Apple ID. Subscribing here on the web instead goes through Stripe, which includes the 7-day free trial on both monthly and yearly, and is managed from /account.",
   },
   {
     q: "What payment methods do you accept?",
