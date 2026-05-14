@@ -1,179 +1,100 @@
+import { AppChrome } from "./AppChrome";
+
 export function PvpWireframe() {
   return (
     <svg
       viewBox="0 0 1200 760"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Real-time PvP duel showing two players racing on a shared prompt with live CPM and progress bars"
+      aria-label="Arena screen waiting for a PvP opponent with a shareable invite link and Play Now button"
       className="w-full h-full block"
       style={{ fontFamily: "var(--font-sans, ui-sans-serif, system-ui)" }}
     >
       <rect width="1200" height="760" fill="var(--color-bg)" />
 
-      {/* Top bar */}
-      <g>
-        <text x="40" y="56" fontSize="11" fill="var(--color-fg-muted)" letterSpacing="0.1em">
-          PVP DUEL · BEST OF 3
-        </text>
-        <text x="40" y="86" fontSize="22" fontWeight="600" fill="var(--color-fg)">
-          Round 2 of 3
-        </text>
+      <AppChrome activeTab="ARENA" />
 
-        {/* Round dots */}
-        <g transform="translate(220, 70)">
-          <circle cx="0" cy="0" r="8" fill="var(--color-good)" />
-          <circle cx="22" cy="0" r="8" fill="var(--color-accent)" />
-          <circle cx="44" cy="0" r="8" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
-        </g>
-
-        {/* Timer */}
-        <g transform="translate(1040, 42)">
-          <rect width="120" height="56" rx="10" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
-          <text x="60" y="24" fontSize="10" fill="var(--color-fg-muted)" textAnchor="middle" letterSpacing="0.08em">
-            TIME LEFT
-          </text>
-          <text x="60" y="46" fontSize="22" fontWeight="700" fill="var(--color-fg)" textAnchor="middle">
-            0:42
-          </text>
-        </g>
+      {/* Flag / pennant glyph above title */}
+      <g transform="translate(600, 156)" fill="var(--color-warn)">
+        <path d="M -8 0 L 8 6 L -8 12 Z" />
+        <line x1="-8" y1="0" x2="-8" y2="20" stroke="var(--color-warn)" strokeWidth="2" />
       </g>
 
-      {/* Shared prompt card */}
-      <g transform="translate(40, 124)">
-        <rect width="1120" height="220" rx="12" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+      {/* Title block — centered */}
+      <text x="600" y="216" fontSize="34" fontWeight="700" fill="var(--color-fg)" textAnchor="middle">
+        Your race awaits
+      </text>
+      <text x="600" y="252" fontSize="14" fill="var(--color-fg-muted)" textAnchor="middle">
+        Pick your moment — you can race now or come back later.
+      </text>
+      <text x="600" y="274" fontSize="14" fill="var(--color-fg-muted)" textAnchor="middle">
+        The other side won&apos;t see your score until they finish theirs.
+      </text>
 
-        {/* Prompt text - rendered as several tspans with different states */}
-        <text x="40" y="80" fontSize="22" fill="var(--color-fg)" fontFamily="ui-monospace, Menlo, monospace">
-          <tspan fill="var(--color-fg-muted)">{`The `}</tspan>
-          <tspan fill="var(--color-fg-muted)">{`quick `}</tspan>
-          <tspan fill="var(--color-fg-muted)">{`brown `}</tspan>
-          <tspan fill="var(--color-fg-muted)">{`fox `}</tspan>
-          <tspan fill="var(--color-fg-muted)">{`jumps `}</tspan>
-          <tspan fill="var(--color-fg-muted)">{`over `}</tspan>
-          <tspan fill="var(--color-fg)">{`the `}</tspan>
-          <tspan fill="var(--color-fg)" fontWeight="600">{`la`}</tspan>
-          <tspan fill="var(--color-fg)" textDecoration="underline">{`z`}</tspan>
-          <tspan fill="var(--color-fg)">{`y `}</tspan>
-          <tspan fill="var(--color-fg)">{`sleeping `}</tspan>
+      {/* Invite link card */}
+      <g transform="translate(380, 316)">
+        <rect width="440" height="118" rx="14" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+        <text x="220" y="32" fontSize="13" fontWeight="600" fill="var(--color-fg-muted)" textAnchor="middle">
+          Invite Link
         </text>
-        <text x="40" y="120" fontSize="22" fill="var(--color-fg-muted)" fontFamily="ui-monospace, Menlo, monospace">
-          {"dog beneath the silver-grey clouds."}
-        </text>
-
-        {/* Position markers below prompt */}
-        {/* "You" marker */}
-        <g transform="translate(420, 160)">
-          <polygon points="0,0 -7,12 7,12" fill="var(--color-accent)" />
-          <rect x="-26" y="14" width="52" height="20" rx="4" fill="var(--color-accent)" />
-          <text x="0" y="28" fontSize="11" fontWeight="600" fill="#ffffff" textAnchor="middle">
-            You
+        {/* URL field */}
+        <g transform="translate(22, 50)">
+          <rect width="360" height="40" rx="8" fill="var(--color-bg)" stroke="var(--color-border)" />
+          <text
+            x="16"
+            y="26"
+            fontSize="13"
+            fontFamily="ui-monospace, Menlo, monospace"
+            fontWeight="600"
+            fill="var(--color-fg)"
+          >
+            touchtyper://pvp/invite/SCRNSHT5HJIV
           </text>
         </g>
-
-        {/* "Opponent" marker - slightly ahead */}
-        <g transform="translate(488, 160)">
-          <polygon points="0,0 -7,12 7,12" fill="var(--color-warm)" />
-          <rect x="-44" y="14" width="88" height="20" rx="4" fill="var(--color-warm)" />
-          <text x="0" y="28" fontSize="11" fontWeight="600" fill="#ffffff" textAnchor="middle">
-            kbd_warrior
-          </text>
+        {/* Copy icon button */}
+        <g transform="translate(396, 50)">
+          <rect width="40" height="40" rx="8" fill="var(--color-bg)" stroke="var(--color-border)" />
+          <g transform="translate(12, 12)" fill="none" stroke="var(--color-fg-muted)" strokeWidth="1.6" strokeLinecap="round">
+            <path d="M 4 8 a 4 4 0 0 1 4 -4 L 12 4 a 4 4 0 0 1 4 4 L 12 12" />
+            <path d="M 12 8 a 4 4 0 0 0 -4 4 L 4 12 a 4 4 0 0 0 -4 -4 L 4 4" transform="translate(0, -4)" />
+          </g>
         </g>
+        <text x="220" y="108" fontSize="11" fill="var(--color-fg-muted)" textAnchor="middle">
+          Share this with one person — first to use it claims the second slot.
+        </text>
       </g>
 
-      {/* Player 1 - You */}
-      <g transform="translate(40, 372)">
-        <rect width="1120" height="116" rx="12" fill="var(--color-bg-elevated)" stroke="var(--color-accent)" strokeWidth="2" />
-
-        {/* Avatar */}
-        <circle cx="48" cy="58" r="26" fill="var(--color-accent)" />
-        <text x="48" y="66" fontSize="22" fontWeight="700" fill="#ffffff" textAnchor="middle">
-          R
+      {/* Play Now button */}
+      <g transform="translate(380, 466)">
+        <rect width="440" height="54" rx="12" fill="var(--color-accent)" />
+        {/* Play icon */}
+        <polygon
+          transform="translate(192, 21)"
+          points="0,0 14,8 0,16"
+          fill="#ffffff"
+        />
+        <text x="232" y="34" fontSize="16" fontWeight="700" fill="#ffffff">
+          Play Now
         </text>
-
-        {/* Name + stats */}
-        <text x="92" y="42" fontSize="15" fontWeight="600" fill="var(--color-fg)">
-          You
-        </text>
-        <text x="92" y="64" fontSize="11" fill="var(--color-fg-muted)" letterSpacing="0.04em">
-          @kochie · personal best 312 CPM
-        </text>
-
-        {/* Progress bar */}
-        <rect x="92" y="78" width="780" height="14" rx="7" fill="var(--color-border)" />
-        <rect x="92" y="78" width="376" height="14" rx="7" fill="var(--color-accent)" />
-        <text x="92" y="106" fontSize="10" fill="var(--color-fg-muted)">
-          48% complete
-        </text>
-
-        {/* Live stats right side */}
-        <g transform="translate(920, 30)">
-          <text x="0" y="14" fontSize="10" fill="var(--color-fg-muted)" letterSpacing="0.08em">
-            CPM
-          </text>
-          <text x="0" y="44" fontSize="28" fontWeight="700" fill="var(--color-fg)">
-            287
-          </text>
-        </g>
-        <g transform="translate(1040, 30)">
-          <text x="0" y="14" fontSize="10" fill="var(--color-fg-muted)" letterSpacing="0.08em">
-            ACC
-          </text>
-          <text x="0" y="44" fontSize="28" fontWeight="700" fill="var(--color-good)">
-            98%
-          </text>
-        </g>
       </g>
 
-      {/* Player 2 - Opponent */}
-      <g transform="translate(40, 510)">
-        <rect width="1120" height="116" rx="12" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
-
-        {/* Avatar */}
-        <circle cx="48" cy="58" r="26" fill="var(--color-warm)" />
-        <text x="48" y="66" fontSize="22" fontWeight="700" fill="#ffffff" textAnchor="middle">
-          K
-        </text>
-
-        {/* Name + stats */}
-        <text x="92" y="42" fontSize="15" fontWeight="600" fill="var(--color-fg)">
-          kbd_warrior
-        </text>
-        <text x="92" y="64" fontSize="11" fill="var(--color-fg-muted)" letterSpacing="0.04em">
-          @austin · streak 24 days
-        </text>
-
-        {/* Progress bar */}
-        <rect x="92" y="78" width="780" height="14" rx="7" fill="var(--color-border)" />
-        <rect x="92" y="78" width="436" height="14" rx="7" fill="var(--color-warm)" />
-        <text x="92" y="106" fontSize="10" fill="var(--color-fg-muted)">
-          56% complete
-        </text>
-
-        {/* Live stats */}
-        <g transform="translate(920, 30)">
-          <text x="0" y="14" fontSize="10" fill="var(--color-fg-muted)" letterSpacing="0.08em">
-            CPM
-          </text>
-          <text x="0" y="44" fontSize="28" fontWeight="700" fill="var(--color-fg)">
-            301
-          </text>
+      {/* Cancel button */}
+      <g transform="translate(380, 532)">
+        <rect width="440" height="54" rx="12" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+        {/* Trash icon */}
+        <g transform="translate(196, 19)" fill="none" stroke="var(--color-fg-muted)" strokeWidth="1.6" strokeLinecap="round">
+          <path d="M 1 4 L 17 4" />
+          <path d="M 4 4 L 5 16 a 2 2 0 0 0 2 2 L 11 18 a 2 2 0 0 0 2 -2 L 14 4" />
+          <path d="M 6 4 L 6 1 L 12 1 L 12 4" />
         </g>
-        <g transform="translate(1040, 30)">
-          <text x="0" y="14" fontSize="10" fill="var(--color-fg-muted)" letterSpacing="0.08em">
-            ACC
-          </text>
-          <text x="0" y="44" fontSize="28" fontWeight="700" fill="var(--color-fg)">
-            94%
-          </text>
-        </g>
+        <text x="226" y="34" fontSize="15" fontWeight="600" fill="var(--color-fg)">
+          Cancel Game
+        </text>
       </g>
 
       {/* Bottom hint */}
-      <text x="40" y="688" fontSize="11" fill="var(--color-fg-muted)" letterSpacing="0.08em">
-        SHARE INVITE
-      </text>
-      <text x="40" y="712" fontSize="14" fontFamily="ui-monospace, Menlo, monospace" fill="var(--color-accent)">
-        touchtyper://duel/A1B2-C3D4
+      <text x="600" y="654" fontSize="12" fill="var(--color-fg-muted)" textAnchor="middle">
+        No account needed — your opponent can play straight from the link.
       </text>
     </svg>
   );

@@ -1,120 +1,128 @@
-type KeyDef = { x: number; w?: number; label: string; sub?: string; tone?: string };
+import { AppChrome } from "./AppChrome";
 
-const KEY_W = 64;
-const KEY_H = 60;
-const KEY_GAP = 8;
+type Key = {
+  label: string;
+  /** width in 1u units */
+  w?: number;
+  /** small label drawn above the main label (mac modifier glyphs) */
+  glyph?: string;
+  /** size override for the main label (modifier keys use smaller) */
+  small?: boolean;
+};
 
-// y-offsets per row
-const ROW_Y = [380, 452, 524, 596, 668];
+const UNIT = 62;
+const GAP = 5;
+const KEY_H = 50;
+const LEFT = 118;
 
-// Row 1 — numbers
-const ROW_1: KeyDef[] = [
-  { x: 0, label: "`" },
-  { x: 1, label: "1", tone: "var(--color-warn)" },
-  { x: 2, label: "2", tone: "var(--color-warn)" },
-  { x: 3, label: "3" },
-  { x: 4, label: "4" },
-  { x: 5, label: "5" },
-  { x: 6, label: "6" },
-  { x: 7, label: "7", tone: "var(--color-bad)" },
-  { x: 8, label: "8", tone: "var(--color-warm)" },
-  { x: 9, label: "9" },
-  { x: 10, label: "0" },
-  { x: 11, label: "-" },
-  { x: 12, label: "=" },
-  { x: 13, w: 2, label: "⌫" },
+// Rows
+const ROW_1: Key[] = [
+  { label: "`" }, { label: "1" }, { label: "2" }, { label: "3" }, { label: "4" },
+  { label: "5" }, { label: "6" }, { label: "7" }, { label: "8" }, { label: "9" },
+  { label: "0" }, { label: "-" }, { label: "=" }, { label: "delete", w: 1.5, small: true },
 ];
 
-// Row 2 — QWERTY
-const ROW_2: KeyDef[] = [
-  { x: 0, w: 1.5, label: "tab" },
-  { x: 1.5, label: "Q", tone: "var(--color-warm)" },
-  { x: 2.5, label: "W" },
-  { x: 3.5, label: "E", tone: "var(--color-good)" },
-  { x: 4.5, label: "R", tone: "var(--color-good)" },
-  { x: 5.5, label: "T", tone: "var(--color-good)" },
-  { x: 6.5, label: "Y" },
-  { x: 7.5, label: "U" },
-  { x: 8.5, label: "I", tone: "var(--color-good)" },
-  { x: 9.5, label: "O" },
-  { x: 10.5, label: "P", tone: "var(--color-bad)" },
-  { x: 11.5, label: "[", tone: "var(--color-warm)" },
-  { x: 12.5, label: "]" },
-  { x: 13.5, w: 1.5, label: "\\" },
+const ROW_2: Key[] = [
+  { label: "tab", w: 1.5, small: true },
+  { label: "Q" }, { label: "W" }, { label: "E" }, { label: "R" }, { label: "T" },
+  { label: "Y" }, { label: "U" }, { label: "I" }, { label: "O" }, { label: "P" },
+  { label: "[" }, { label: "]" }, { label: "\\" },
 ];
 
-// Row 3 — Home row
-const ROW_3: KeyDef[] = [
-  { x: 0, w: 1.75, label: "caps" },
-  { x: 1.75, label: "A", tone: "var(--color-good)" },
-  { x: 2.75, label: "S", tone: "var(--color-good)" },
-  { x: 3.75, label: "D", tone: "var(--color-good)" },
-  { x: 4.75, label: "F", tone: "var(--color-good)" },
-  { x: 5.75, label: "G" },
-  { x: 6.75, label: "H" },
-  { x: 7.75, label: "J", tone: "var(--color-good)" },
-  { x: 8.75, label: "K", tone: "var(--color-good)" },
-  { x: 9.75, label: "L", tone: "var(--color-good)" },
-  { x: 10.75, label: ";", tone: "var(--color-bad)" },
-  { x: 11.75, label: "'", tone: "var(--color-bad)" },
-  { x: 12.75, w: 2.25, label: "return" },
+const ROW_3: Key[] = [
+  { label: "caps lock", w: 1.75, small: true },
+  { label: "A" }, { label: "S" }, { label: "D" }, { label: "F" }, { label: "G" },
+  { label: "H" }, { label: "J" }, { label: "K" }, { label: "L" },
+  { label: ";" }, { label: "'" },
+  { label: "return", w: 1.75, small: true },
 ];
 
-// Row 4 — Shift row
-const ROW_4: KeyDef[] = [
-  { x: 0, w: 2.25, label: "shift" },
-  { x: 2.25, label: "Z", tone: "var(--color-warn)" },
-  { x: 3.25, label: "X", tone: "var(--color-warm)" },
-  { x: 4.25, label: "C" },
-  { x: 5.25, label: "V" },
-  { x: 6.25, label: "B", tone: "var(--color-warn)" },
-  { x: 7.25, label: "N" },
-  { x: 8.25, label: "M" },
-  { x: 9.25, label: "," },
-  { x: 10.25, label: "." },
-  { x: 11.25, label: "/", tone: "var(--color-warm)" },
-  { x: 12.25, w: 2.75, label: "shift" },
+const ROW_4: Key[] = [
+  { label: "shift", w: 2.25, small: true },
+  { label: "Z" }, { label: "X" }, { label: "C" }, { label: "V" }, { label: "B" },
+  { label: "N" }, { label: "M" }, { label: "," }, { label: "." }, { label: "/" },
+  { label: "shift", w: 2.25, small: true },
 ];
 
-// Row 5 — Modifiers + space
-const ROW_5: KeyDef[] = [
-  { x: 0, w: 1.25, label: "fn" },
-  { x: 1.25, w: 1.25, label: "⌃" },
-  { x: 2.5, w: 1.25, label: "⌥" },
-  { x: 3.75, w: 1.5, label: "⌘" },
-  { x: 5.25, w: 5.5, label: "" },
-  { x: 10.75, w: 1.5, label: "⌘" },
-  { x: 12.25, w: 1.25, label: "⌥" },
-  { x: 13.5, w: 1.5, label: "◀▶" },
+const ROW_5: Key[] = [
+  { label: "fn", small: true },
+  { label: "control", glyph: "⌃", small: true },
+  { label: "option", glyph: "⌥", small: true },
+  { label: "command", glyph: "⌘", w: 1.25, small: true },
+  { label: "", w: 5.5 },
+  { label: "command", glyph: "⌘", w: 1.25, small: true },
+  { label: "option", glyph: "⌥", small: true },
 ];
 
-function Key({ k, y }: { k: KeyDef; y: number }) {
-  const w = (k.w ?? 1) * KEY_W + ((k.w ?? 1) - 1) * KEY_GAP;
-  const x = 40 + k.x * (KEY_W + KEY_GAP);
-  const fill = k.tone ? k.tone : "var(--color-bg-elevated)";
-  const fillOpacity = k.tone ? 0.22 : 1;
-  const stroke = k.tone ?? "var(--color-border)";
+function KeyCap({ k, x, y }: { k: Key; x: number; y: number }) {
+  const w = (k.w ?? 1) * UNIT + ((k.w ?? 1) - 1) * GAP;
   return (
     <g transform={`translate(${x}, ${y})`}>
       <rect
         width={w}
         height={KEY_H}
-        rx="8"
-        fill={fill}
-        fillOpacity={fillOpacity}
-        stroke={stroke}
-        strokeWidth={k.tone ? 1.5 : 1}
+        rx="7"
+        fill="var(--color-bg-elevated)"
+        stroke="var(--color-border)"
       />
-      <text
-        x={w / 2}
-        y={KEY_H / 2 + 8}
-        fontSize={k.label.length > 2 ? "12" : "18"}
-        fontWeight="500"
-        fill="var(--color-fg)"
-        textAnchor="middle"
-      >
-        {k.label}
-      </text>
+      {k.glyph && (
+        <text
+          x={w / 2}
+          y={KEY_H / 2 - 2}
+          fontSize="11"
+          fill="var(--color-fg-muted)"
+          textAnchor="middle"
+        >
+          {k.glyph}
+        </text>
+      )}
+      {k.label && (
+        <text
+          x={k.small ? 10 : w / 2}
+          y={k.glyph ? KEY_H - 10 : KEY_H / 2 + (k.small ? 4 : 7)}
+          fontSize={k.small ? 11 : 17}
+          fontWeight={k.small ? 500 : 500}
+          fill="var(--color-fg)"
+          textAnchor={k.small ? "start" : "middle"}
+        >
+          {k.label}
+        </text>
+      )}
+    </g>
+  );
+}
+
+function renderRow(row: Key[], y: number) {
+  let cursor = LEFT;
+  return row.map((k, i) => {
+    const w = (k.w ?? 1) * UNIT + ((k.w ?? 1) - 1) * GAP;
+    const x = cursor;
+    cursor += w + GAP;
+    return <KeyCap key={`${y}-${i}`} k={k} x={x} y={y} />;
+  });
+}
+
+// Arrow key cluster — to the right of row 5's main keys
+function ArrowCluster({ x, y }: { x: number; y: number }) {
+  const half = (KEY_H - GAP) / 2;
+  return (
+    <g transform={`translate(${x}, ${y})`}>
+      {/* Up - half height top */}
+      <rect width={UNIT} height={half} rx="6" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+      <text x={UNIT / 2} y={half - 4} fontSize="11" fill="var(--color-fg)" textAnchor="middle">▲</text>
+      {/* Down - half height bottom */}
+      <rect y={half + GAP} width={UNIT} height={half} rx="6" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+      <text x={UNIT / 2} y={half + GAP + half - 4} fontSize="11" fill="var(--color-fg)" textAnchor="middle">▼</text>
+      {/* Left - full height */}
+      <g transform={`translate(${-(UNIT + GAP)}, ${half + GAP})`}>
+        <rect width={UNIT} height={half} rx="6" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+        <text x={UNIT / 2} y={half - 4} fontSize="11" fill="var(--color-fg)" textAnchor="middle">◀</text>
+      </g>
+      {/* Right - full height */}
+      <g transform={`translate(${UNIT + GAP}, ${half + GAP})`}>
+        <rect width={UNIT} height={half} rx="6" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+        <text x={UNIT / 2} y={half - 4} fontSize="11" fill="var(--color-fg)" textAnchor="middle">▶</text>
+      </g>
     </g>
   );
 }
@@ -125,102 +133,102 @@ export function LayoutsWireframe() {
       viewBox="0 0 1200 760"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Main practice screen showing typing prompt, live stats, and a keyboard with heatmap coloring on the slowest keys"
+      aria-label="Practice screen showing typos/CPM/accuracy stats and a Mac-style on-screen keyboard"
       className="w-full h-full block"
       style={{ fontFamily: "var(--font-sans, ui-sans-serif, system-ui)" }}
     >
       <rect width="1200" height="760" fill="var(--color-bg)" />
 
-      {/* Top header strip */}
-      <text x="40" y="56" fontSize="11" fill="var(--color-fg-muted)" letterSpacing="0.1em">
-        ENGLISH 1K · QWERTY US
-      </text>
-      <text x="40" y="84" fontSize="22" fontWeight="600" fill="var(--color-fg)">
-        Practice
-      </text>
+      <AppChrome activeTab="PRACTICE" />
 
-      {/* Live stats strip - top right */}
-      <g transform="translate(700, 42)">
-        <rect width="460" height="56" rx="10" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
-        {[
-          { x: 60, label: "CPM", value: "287", color: "var(--color-fg)" },
-          { x: 180, label: "ACC", value: "96%", color: "var(--color-good)" },
-          { x: 290, label: "ERR", value: "3", color: "var(--color-warm)" },
-          { x: 400, label: "TIME", value: "0:42", color: "var(--color-fg)" },
-        ].map((s) => (
-          <g key={s.label}>
-            <text x={s.x} y={22} fontSize="10" fill="var(--color-fg-muted)" letterSpacing="0.08em" textAnchor="middle">
-              {s.label}
-            </text>
-            <text x={s.x} y={44} fontSize="18" fontWeight="700" fill={s.color} textAnchor="middle">
-              {s.value}
-            </text>
+      {/* Breadcrumb */}
+      <g transform="translate(600, 124)">
+        <text x="0" y="0" fontSize="13" fill="var(--color-fg)" textAnchor="middle">
+          <tspan fill="var(--color-fg-muted)">Level 1</tspan>
+          <tspan fill="var(--color-fg-muted)">{`  ·  `}</tspan>
+          <tspan fill="var(--color-accent)" fontWeight="600">US QWERTY</tspan>
+          <tspan fill="var(--color-fg-muted)">{`  ·  `}</tspan>
+          <tspan fill="var(--color-fg-muted)">English</tspan>
+        </text>
+      </g>
+
+      {/* Stats strip — 3 inline groups */}
+      <g transform="translate(0, 180)" style={{ color: "var(--color-accent)" }}>
+        {/* Typos */}
+        <g transform="translate(380, 0)">
+          {/* portcullis/gate icon */}
+          <g fill="currentColor">
+            <rect x="0" y="2" width="28" height="22" rx="2" />
+            <rect x="-2" y="22" width="32" height="3" />
+            <g fill="var(--color-bg)">
+              <rect x="3" y="6" width="2" height="18" />
+              <rect x="9" y="6" width="2" height="18" />
+              <rect x="15" y="6" width="2" height="18" />
+              <rect x="21" y="6" width="2" height="18" />
+              <rect x="3" y="6" width="22" height="2" />
+              <rect x="3" y="12" width="22" height="2" />
+            </g>
           </g>
-        ))}
-      </g>
-
-      {/* Prompt area */}
-      <g transform="translate(40, 124)">
-        <rect width="1120" height="224" rx="12" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
-
-        {/* Already-typed words (muted) */}
-        <text x="40" y="80" fontSize="26" fill="var(--color-fg-muted)" fontFamily="ui-monospace, Menlo, monospace">
-          {"the quick brown fox jumps over the "}
-        </text>
-        {/* Current word being typed (with cursor) */}
-        <text x="40" y="124" fontSize="26" fontFamily="ui-monospace, Menlo, monospace">
-          <tspan fill="var(--color-fg)" fontWeight="600">{`la`}</tspan>
-          <tspan fill="var(--color-bad)" fontWeight="600" textDecoration="underline">{`z`}</tspan>
-          <tspan fill="var(--color-fg-muted)">{`y sleeping dog beneath`}</tspan>
-        </text>
-        {/* Cursor */}
-        <rect x="84" y="104" width="2" height="28" fill="var(--color-accent)">
-          <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
-        </rect>
-        {/* Upcoming words (faint) */}
-        <text x="40" y="168" fontSize="26" fill="var(--color-fg-muted)" fillOpacity="0.4" fontFamily="ui-monospace, Menlo, monospace">
-          {"the silver-grey clouds gather quietly"}
-        </text>
-
-        {/* Hint */}
-        <text x="40" y="204" fontSize="11" fill="var(--color-fg-muted)" letterSpacing="0.08em">
-          1 ERROR · KEEP GOING
-        </text>
-      </g>
-
-      {/* Heat legend */}
-      <g transform="translate(40, 364)">
-        <text x="0" y="0" fontSize="11" fill="var(--color-fg-muted)" letterSpacing="0.1em">
-          KEY HEAT
-        </text>
-        <g transform="translate(80, -10)">
-          <rect width="14" height="14" rx="3" fill="var(--color-good)" fillOpacity="0.22" stroke="var(--color-good)" />
-          <text x="22" y="11" fontSize="11" fill="var(--color-fg)">fast</text>
-          <rect x="68" y="0" width="14" height="14" rx="3" fill="var(--color-warn)" fillOpacity="0.22" stroke="var(--color-warn)" />
-          <text x="90" y="11" fontSize="11" fill="var(--color-fg)">avg</text>
-          <rect x="132" y="0" width="14" height="14" rx="3" fill="var(--color-warm)" fillOpacity="0.22" stroke="var(--color-warm)" />
-          <text x="154" y="11" fontSize="11" fill="var(--color-fg)">slow</text>
-          <rect x="200" y="0" width="14" height="14" rx="3" fill="var(--color-bad)" fillOpacity="0.22" stroke="var(--color-bad)" />
-          <text x="222" y="11" fontSize="11" fill="var(--color-fg)">problem</text>
+          <text x="42" y="22" fontSize="26" fontWeight="700" fill="var(--color-fg)">
+            0
+          </text>
+          <text x="74" y="22" fontSize="10" fontWeight="600" fill="var(--color-fg-muted)" letterSpacing="0.12em">
+            TYPOS
+          </text>
+        </g>
+        {/* CHAR/MIN */}
+        <g transform="translate(560, 0)">
+          {/* running figure */}
+          <g fill="currentColor">
+            <circle cx="13" cy="4" r="3" />
+            <path d="M 7 22 L 12 16 L 16 18 L 14 24 L 18 27 L 20 22 L 23 24 L 21 30 L 14 30 L 15 25 L 11 22 Z" />
+          </g>
+          <text x="42" y="22" fontSize="26" fontWeight="700" fill="var(--color-fg)">
+            0
+          </text>
+          <text x="74" y="22" fontSize="10" fontWeight="600" fill="var(--color-fg-muted)" letterSpacing="0.12em">
+            CHAR/MIN
+          </text>
+        </g>
+        {/* Accuracy */}
+        <g transform="translate(770, 0)">
+          {/* percent icon */}
+          <g fill="currentColor">
+            <circle cx="6" cy="6" r="4" />
+            <circle cx="22" cy="22" r="4" />
+            <rect x="-1" y="22" width="32" height="2.5" transform="rotate(-45 14 14)" />
+          </g>
+          <text x="42" y="22" fontSize="26" fontWeight="700" fill="var(--color-fg)">
+            0
+          </text>
+          <text x="74" y="22" fontSize="10" fontWeight="600" fill="var(--color-fg-muted)" letterSpacing="0.12em">
+            ACCURACY
+          </text>
         </g>
       </g>
 
-      {/* Keyboard */}
-      {ROW_1.map((k, i) => (
-        <Key key={`r1-${i}`} k={k} y={ROW_Y[0]} />
-      ))}
-      {ROW_2.map((k, i) => (
-        <Key key={`r2-${i}`} k={k} y={ROW_Y[1]} />
-      ))}
-      {ROW_3.map((k, i) => (
-        <Key key={`r3-${i}`} k={k} y={ROW_Y[2]} />
-      ))}
-      {ROW_4.map((k, i) => (
-        <Key key={`r4-${i}`} k={k} y={ROW_Y[3]} />
-      ))}
-      {ROW_5.map((k, i) => (
-        <Key key={`r5-${i}`} k={k} y={ROW_Y[4]} />
-      ))}
+      {/* Cursor */}
+      <rect x="599" y="280" width="2" height="32" fill="var(--color-warm)">
+        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+      </rect>
+
+      {/* Keyboard rows */}
+      {renderRow(ROW_1, 380)}
+      {renderRow(ROW_2, 380 + (KEY_H + GAP))}
+      {renderRow(ROW_3, 380 + 2 * (KEY_H + GAP))}
+      {renderRow(ROW_4, 380 + 3 * (KEY_H + GAP))}
+      {renderRow(ROW_5, 380 + 4 * (KEY_H + GAP))}
+
+      {/* Arrow cluster — sits where row 5 right-side keys end */}
+      <ArrowCluster
+        x={(() => {
+          // place after row-5's last key
+          let cursor = LEFT;
+          for (const k of ROW_5) cursor += (k.w ?? 1) * UNIT + ((k.w ?? 1) - 1) * GAP + GAP;
+          return cursor + UNIT + GAP;
+        })()}
+        y={380 + 4 * (KEY_H + GAP)}
+      />
     </svg>
   );
 }
