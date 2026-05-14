@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import type { Metadata } from "next";
 
 import "@/styles/main.css";
@@ -12,6 +12,7 @@ import Fathom from "./Fathom";
 import Providers from "./Providers";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { PastDueBanner } from "@/components/PastDueBanner";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -39,6 +40,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Fathom />
         <Providers>
           <Header />
+          <Suspense fallback={null}>
+            <PastDueBanner />
+          </Suspense>
           <div>{children}</div>
           <Footer />
         </Providers>
