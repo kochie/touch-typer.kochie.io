@@ -10,7 +10,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 const faqs = [
   {
     q: "Is there a free trial of Premium?",
-    a: "There's no time-limited trial, but the Free tier is generous — you get PvP, heatmaps, full stats, multi-layout, and Code Mode forever. Premium adds AI Coach, custom drills, AI insights, and streak freezes.",
+    a: "Yearly plans include a 7-day free trial — you get full Premium for a week and won't be charged if you cancel before the trial ends. Monthly plans don't include a trial. The Free tier is also generous on its own: PvP, heatmaps, full stats, multi-layout, and Code Mode forever.",
   },
   {
     q: "Can I cancel anytime?",
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "What's the difference between buying on the Mac App Store and subscribing here?",
-    a: "Both unlock the same Premium features. Mac App Store purchases are billed through Apple and managed in your Apple ID settings. Subscribing here goes through Stripe and is managed at /account. Pick whichever feels easier.",
+    a: "Both unlock the same Premium features. Apple's App Store rules require purchases inside the Mac App Store build to go through Apple's payment system — so MAS subscriptions are billed by Apple and managed in your Apple ID. Subscribing here on the web instead goes through Stripe, which lets us offer the 7-day yearly trial and is managed from /account.",
   },
   {
     q: "What payment methods do you accept?",
@@ -26,11 +26,24 @@ const faqs = [
   },
   {
     q: "Is Touch Typer open source?",
-    a: "Yes. The desktop app is MIT-licensed. The repository is at github.com/kochie/touch-type — contributions welcome.",
+    a: (
+      <>
+        Yes. The desktop app is MIT-licensed. The repository is at{" "}
+        <a
+          href="https://github.com/kochie/touch-type"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:text-fg"
+        >
+          github.com/kochie/touch-type
+        </a>
+        {" "}— contributions welcome.
+      </>
+    ),
   },
   {
     q: "What's your refund policy?",
-    a: "If you subscribed within the last 14 days and Premium isn't working for you, email me and I'll refund — no friction. After 14 days, you can still cancel anytime; you just won't be refunded retroactively.",
+    a: "Refunds within 7 days of purchase: for Stripe subscriptions, request via the Stripe customer portal from your account page; for Mac App Store purchases, request via Apple at reportaproblem.apple.com. After 7 days you can still cancel anytime to stop future charges, but past charges aren't refunded retroactively.",
   },
 ];
 
