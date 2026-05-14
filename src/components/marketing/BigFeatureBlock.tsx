@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import { Container } from "@/components/ui/Container";
@@ -13,10 +13,7 @@ interface BigFeatureBlockProps {
   body: ReactNode;
   linkHref: string;
   linkLabel: string;
-  /** Light-mode screenshot. Shown when the site is in light mode. */
-  imageSrcLight: string;
-  /** Dark-mode screenshot. Shown when the site is in dark mode. */
-  imageSrcDark: string;
+  imageSrc: string | StaticImageData;
   imageAlt: string;
   imagePosition?: "left" | "right";
   tone?: "paper" | "paper-soft";
@@ -30,8 +27,7 @@ export function BigFeatureBlock({
   body,
   linkHref,
   linkLabel,
-  imageSrcLight,
-  imageSrcDark,
+  imageSrc,
   imageAlt,
   imagePosition = "right",
   tone = "paper",
@@ -58,19 +54,10 @@ export function BigFeatureBlock({
           </div>
           <div className={clsx(imagePosition === "left" && "md:order-1")}>
             <div className="rounded-xl border border-accent bg-bg-elevated p-2 shadow-accent-glow">
-              {/* Light-mode image — hidden in dark mode */}
               <Image
-                src={imageSrcLight}
+                src={imageSrc}
                 alt={imageAlt}
-                className="rounded-lg w-full h-auto block dark:hidden"
-                width={1200}
-                height={760}
-              />
-              {/* Dark-mode image — hidden in light mode */}
-              <Image
-                src={imageSrcDark}
-                alt={imageAlt}
-                className="rounded-lg w-full h-auto hidden dark:block"
+                className="rounded-lg w-full h-auto"
                 width={1200}
                 height={760}
               />
