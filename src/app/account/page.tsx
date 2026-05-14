@@ -1,12 +1,18 @@
+import { redirect } from "next/navigation";
 import AccountSettings from "@/components/AccountSettings";
 import { OpenInAppBanner } from "@/components/OpenInAppBanner";
 import SignOutButton from "@/components/SignOutButton";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { SubscriptionCard } from "@/components/AccountSettings/SubscriptionCard";
+import { getUserAndSubscription } from "@/lib/get-user-and-subscription";
 import { Suspense } from "react";
 
-export default function AccountPage() {
+export default async function AccountPage() {
+  const { user, subscription } = await getUserAndSubscription();
+  if (!user) redirect("/signin");
+
   return (
     <main>
       <Section tone="paper-soft" density="default">
@@ -18,6 +24,7 @@ export default function AccountPage() {
           <h1 className="mt-3 text-3xl font-bold text-fg">Your account</h1>
           <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-3 lg:gap-8">
             <div className="grid grid-cols-1 gap-6 lg:col-span-2">
+              <SubscriptionCard subscription={subscription} />
               <Suspense>
                 <AccountSettings />
               </Suspense>
