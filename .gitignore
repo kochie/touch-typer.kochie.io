@@ -42,3 +42,6 @@ next-env.d.ts
 
 # superpowers brainstorm scratch
 .superpowers/
+
+# playwright MCP debug artifacts (local browser session dumps)
+.playwright-mcp/

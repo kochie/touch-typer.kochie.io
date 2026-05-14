@@ -97,7 +97,7 @@ export function UserDetails({ user }: { user: UserData }) {
                       name="username"
                       type="text"
                       autoComplete="username"
-                      className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg px-3 py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
@@ -115,7 +115,7 @@ export function UserDetails({ user }: { user: UserData }) {
                       name="name"
                       type="text"
                       autoComplete="name"
-                      className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg px-3 py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
@@ -128,12 +128,13 @@ export function UserDetails({ user }: { user: UserData }) {
                   </Label>
                   <div className="mt-2">
                     <FormikField
+                      as={Input}
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
                       disabled
-                      className="block w-full rounded-md border border-border bg-bg-elevated py-1.5 text-fg/50 shadow-sm placeholder:text-fg/40 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg-elevated px-3 py-1.5 text-fg/50 shadow-sm placeholder:text-fg/40 sm:text-sm sm:leading-6"
                     />
                     <p className="mt-1 text-xs text-fg/60">
                       Contact support to change your email
@@ -149,11 +150,12 @@ export function UserDetails({ user }: { user: UserData }) {
                   </Label>
                   <div className="mt-2">
                     <FormikField
+                      as={Input}
                       id="phone"
                       name="phone"
                       type="text"
                       autoComplete="tel"
-                      className="block w-full rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg px-3 py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
