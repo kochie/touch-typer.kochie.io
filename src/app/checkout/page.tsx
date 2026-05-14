@@ -1,64 +1,47 @@
-import { StripeCheckout } from "@/components/Payment";
-import { createServerSupabaseClient } from "@/lib/supabase-server";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { createServerSupabaseClient } from "@/lib/supabase-server";
+import CheckoutClient from "@/components/Payment";
 
-const lookupKeyMap: { [key: string]: string } = {
-  monthly: "premium_monthly",
-  annually: "premium_yearly",
+export const metadata: Metadata = {
+  title: "Checkout — Touch Typer",
+  description: "Start your 7-day free trial.",
 };
 
-export default async function PaymentsPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const params = await searchParams;
+interface PageProps {
+  searchParams: Promise<{ price?: string }>;
+}
 
-  if (typeof params.purchasePrice !== "string") {
-    return (
-      <main>
-        <Section tone="paper" density="compact">
-          <Container width="narrow">
-            <p className="text-fg/70">Invalid purchase price {params.purchasePrice}</p>
-          </Container>
-        </Section>
-      </main>
-    );
-  }
-
-  const lookupKey = lookupKeyMap[params.purchasePrice];
-  if (!lookupKey) {
-    return (
-      <main>
-        <Section tone="paper" density="compact">
-          <Container width="narrow">
-            <p className="text-fg/70">Invalid purchase option</p>
-          </Container>
-        </Section>
-      </main>
-    );
-  }
+export default async function CheckoutPage({ searchParams }: PageProps) {
+  const sp = await searchParams;
+  const lookupKey = sp.price === "premium_yearly" ? "premium_yearly" : "premium_monthly";
 
   const supabase = await createServerSupabaseClient();
-
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) {
-    redirect("/signin");
+    redirect(`/signin?redirect=/checkout?price=${lookupKey}`);
   }
 
   const { data, error } = await supabase.functions.invoke("create-checkout-session", {
     body: { lookup_key: lookupKey },
   });
 
-  if (error) {
+  if (error || !data?.clientSecret) {
     return (
       <main>
-        <Section tone="paper" density="compact">
+        <Section tone="paper" density="default">
           <Container width="narrow">
-            <p className="text-fg/70">Error: {error.message}</p>
+            <Eyebrow>Checkout</Eyebrow>
+            <h1 className="mt-3 text-3xl font-bold">Couldn&apos;t start checkout</h1>
+            <p className="mt-4 text-fg/70">
+              We hit an unexpected error setting up your checkout session. Try again in a minute,
+              or contact support if it persists.
+            </p>
           </Container>
         </Section>
       </main>
@@ -67,12 +50,18 @@ export default async function PaymentsPage({
 
   return (
     <main>
-      <Section tone="paper" density="compact">
+      <Section tone="paper" density="default">
         <Container width="narrow">
           <Eyebrow>Checkout</Eyebrow>
-          <h1 className="mt-3 text-3xl font-bold text-fg">Complete your purchase</h1>
+          <h1 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+            Start your free trial
+          </h1>
+          <p className="mt-3 text-fg/70">
+            Card required. We won&apos;t charge you until your 7-day trial ends, and you can cancel any
+            time.
+          </p>
           <div className="mt-8">
-            <StripeCheckout options={{ clientSecret: data.clientSecret }} />
+            <CheckoutClient clientSecret={data.clientSecret} />
           </div>
         </Container>
       </Section>
