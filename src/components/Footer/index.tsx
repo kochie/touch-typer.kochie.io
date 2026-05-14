@@ -24,7 +24,8 @@ const columns = [
   {
     title: "Legal",
     links: [
-      { href: "/privacy", label: "Privacy" },
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms & Conditions" },
       { href: "mailto:hello@kochie.io", label: "Contact" },
     ],
   },
