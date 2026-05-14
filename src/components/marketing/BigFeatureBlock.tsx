@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import { Container } from "@/components/ui/Container";
@@ -13,8 +12,7 @@ interface BigFeatureBlockProps {
   body: ReactNode;
   linkHref: string;
   linkLabel: string;
-  imageSrc: string | StaticImageData;
-  imageAlt: string;
+  mockup: ReactNode;
   imagePosition?: "left" | "right";
   tone?: "paper" | "paper-soft";
   anchor?: string;
@@ -27,8 +25,7 @@ export function BigFeatureBlock({
   body,
   linkHref,
   linkLabel,
-  imageSrc,
-  imageAlt,
+  mockup,
   imagePosition = "right",
   tone = "paper",
   anchor,
@@ -54,13 +51,9 @@ export function BigFeatureBlock({
           </div>
           <div className={clsx(imagePosition === "left" && "md:order-1")}>
             <div className="rounded-xl border border-accent bg-bg-elevated p-2 shadow-accent-glow">
-              <Image
-                src={imageSrc}
-                alt={imageAlt}
-                className="rounded-lg w-full h-auto"
-                width={1200}
-                height={760}
-              />
+              <div className="rounded-lg w-full aspect-[1200/760] overflow-hidden">
+                {mockup}
+              </div>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { BigFeatureBlock } from "@/components/marketing/BigFeatureBlock";
+import { StatsWireframe } from "@/components/marketing/wireframes/StatsWireframe";
 
 export function StatsBlock() {
   return (
@@ -9,8 +10,7 @@ export function StatsBlock() {
       body="WPM and accuracy over time. Per-key heatmaps. Streaks, goals, milestones. Everything synced across your devices."
       linkHref="/features#stats"
       linkLabel="Learn more"
-      imageSrc="/screenshots/stats.png"
-      imageAlt="Touch Typer stats — WPM chart over 6 months"
+      mockup={<StatsWireframe />}
       imagePosition="right"
     />
   );
