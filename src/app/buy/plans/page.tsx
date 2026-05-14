@@ -12,7 +12,7 @@ import type { PriceLite } from "@/components/BuyPlans/cta";
 export const metadata: Metadata = {
   title: "Pricing — Touch Typer",
   description:
-    "Free 7-day trial. Premium starts at $2.99/month. Cancel anytime.",
+    "Free 7-day trial. Premium starts at $2.99 USD/month. Cancel anytime. All prices in USD.",
   alternates: { canonical: "https://touch-typer.kochie.io/buy/plans" },
 };
 

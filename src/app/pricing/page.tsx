@@ -10,7 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Pricing — Touch Typer",
-  description: "Free to download. Premium is $2.99/month or $2.39/month billed yearly. Compare Free and Premium features.",
+  description: "Free to download. Premium is $2.99 USD/month or $2.39 USD/month billed yearly. Compare Free and Premium features. All prices in USD.",
   alternates: { canonical: "https://touch-typer.kochie.io/pricing" },
 };
 
@@ -77,9 +77,9 @@ export default function PricingPage() {
             <Card emphasis="gradient">
               <Eyebrow tone="default" className="!text-paper/80">Premium · Most popular</Eyebrow>
               <div className="mt-3 text-4xl sm:text-5xl font-bold">
-                $2.99<span className="text-base font-normal text-paper/70">/mo</span>
+                $2.99<span className="text-base font-normal text-paper/70"> USD/mo</span>
               </div>
-              <div className="text-sm text-paper/70 mt-1">or $2.39/mo billed yearly</div>
+              <div className="text-sm text-paper/70 mt-1">or $2.39 USD/mo billed yearly</div>
               <ul className="mt-6 space-y-3 text-sm text-paper/90">
                 {premiumFeatures.map((f) => (
                   <li key={f}>· {f}</li>
@@ -95,8 +95,48 @@ export default function PricingPage() {
         </Container>
       </Section>
 
+      <Section tone="paper" density="default">
+        <Container width="default">
+          <div className="text-center max-w-2xl mx-auto">
+            <Eyebrow>Streak freezes</Eyebrow>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+              One-off consumables
+            </h2>
+            <p className="mt-4 text-base text-fg/70">
+              Save a streak you'd otherwise lose. Premium subscribers receive one free freeze per week; extras can be purchased in packs.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-3 max-w-3xl mx-auto">
+            <Card tone="paper">
+              <div className="text-sm font-medium text-fg/70">1 freeze</div>
+              <div className="mt-2 text-3xl font-bold">$1<span className="text-sm font-normal text-fg/60"> USD</span></div>
+            </Card>
+            <Card tone="paper">
+              <div className="text-sm font-medium text-fg/70">3 freezes</div>
+              <div className="mt-2 text-3xl font-bold">$2<span className="text-sm font-normal text-fg/60"> USD</span></div>
+              <div className="text-xs text-fg/50 mt-1">Save 33%</div>
+            </Card>
+            <Card tone="paper">
+              <div className="text-sm font-medium text-fg/70">10 freezes</div>
+              <div className="mt-2 text-3xl font-bold">$6<span className="text-sm font-normal text-fg/60"> USD</span></div>
+              <div className="text-xs text-fg/50 mt-1">Save 40%</div>
+            </Card>
+          </div>
+
+          <p className="mt-6 text-xs text-fg/50 text-center">
+            Available to Premium subscribers from inside the app.
+          </p>
+        </Container>
+      </Section>
+
       <PricingMatrix />
       <PricingFAQ />
+      <Section tone="paper" density="compact">
+        <Container width="default">
+          <p className="text-xs text-fg/50 text-center">All prices in USD unless otherwise specified. Tax may apply.</p>
+        </Container>
+      </Section>
     </main>
   );
 }
