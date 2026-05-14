@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { CheckoutProvider } from "@stripe/react-stripe-js/checkout";
+import { CheckoutElementsProvider } from "@stripe/react-stripe-js/checkout";
 import { useTheme } from "next-themes";
 import { PaymentForm } from "./PaymentForm";
 
@@ -22,7 +22,7 @@ export default function CheckoutClient({ clientSecret }: CheckoutClientProps) {
   };
 
   return (
-    <CheckoutProvider
+    <CheckoutElementsProvider
       stripe={stripePromise}
       options={{
         clientSecret,
@@ -30,6 +30,6 @@ export default function CheckoutClient({ clientSecret }: CheckoutClientProps) {
       }}
     >
       <PaymentForm />
-    </CheckoutProvider>
+    </CheckoutElementsProvider>
   );
 }
