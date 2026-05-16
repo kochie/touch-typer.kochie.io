@@ -90,7 +90,7 @@ export function AuthCallbackHandler() {
   if (status === "loading") {
     return (
       <div className="flex min-h-[40vh] flex-col items-center justify-center px-4">
-        <p className="text-gray-600">Completing sign in…</p>
+        <p className="text-fg/70">Completing sign in…</p>
       </div>
     );
   }
@@ -98,9 +98,9 @@ export function AuthCallbackHandler() {
   if (status === "error") {
     return (
       <div className="flex min-h-[40vh] flex-col items-center justify-center px-4 text-center">
-        <p className="text-red-600 font-medium">Sign in failed</p>
-        <p className="mt-2 text-sm text-gray-600">{message}</p>
-        <a href="/forgot-password" className="mt-4 text-sm text-indigo-600 hover:underline">
+        <p className="text-bad font-medium">Sign in failed</p>
+        <p className="mt-2 text-sm text-fg/70">{message}</p>
+        <a href="/forgot-password" className="mt-4 text-sm text-accent hover:text-accent-deep hover:underline">
           Request a new password reset link
         </a>
       </div>
@@ -109,7 +109,7 @@ export function AuthCallbackHandler() {
 
   return (
     <div className="flex min-h-[40vh] flex-col items-center justify-center px-4">
-      <p className="text-gray-600">Redirecting…</p>
+      <p className="text-fg/70">Redirecting…</p>
     </div>
   );
 }

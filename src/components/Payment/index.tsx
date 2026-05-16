@@ -1,22 +1,35 @@
-"use client"
+"use client";
 
+import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import {
-  EmbeddedCheckoutProvider,
-  EmbeddedCheckout,
-} from "@stripe/react-stripe-js";
+import { CheckoutElementsProvider } from "@stripe/react-stripe-js/checkout";
+import { useTheme } from "next-themes";
+import { PaymentForm } from "./PaymentForm";
 
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-export function StripeCheckout({options}: {options: {clientSecret: string}}) {
+interface CheckoutClientProps {
+  clientSecret: string;
+}
+
+export default function CheckoutClient({ clientSecret }: CheckoutClientProps) {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const appearance = {
+    theme: (mounted && resolvedTheme === "dark" ? "night" : "stripe") as "stripe" | "night",
+  };
+
   return (
-    <div id="checkout" className="my-16">
-      <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-        <EmbeddedCheckout />
-      </EmbeddedCheckoutProvider>
-    </div>
+    <CheckoutElementsProvider
+      stripe={stripePromise}
+      options={{
+        clientSecret,
+        elementsOptions: { appearance },
+      }}
+    >
+      <PaymentForm />
+    </CheckoutElementsProvider>
   );
 }

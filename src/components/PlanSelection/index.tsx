@@ -55,7 +55,7 @@ export default function PricingPlans({ subscription }: { subscription: Plan }) {
       <div className="flex flex-col gap-6">
         <div>
           <p className="text-sm/6 font-medium">Subscription</p>
-          <p className="text-sm/6 text-black/50">
+          <p className="text-sm/6 text-fg/70">
             Your current plan is -{" "}
             <span className="font-bold">{subscription.billing_plan}</span>
           </p>
@@ -121,8 +121,8 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
     try {
       setIsLoading(true);
       
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
         throw new Error("Cannot update payment without a valid session");
       }
 
@@ -163,10 +163,10 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
   
   return (
     <div className="flex flex-col gap-4">
-      <Field className="grid grid-cols-5">
+      <Field className="flex flex-col gap-3 sm:grid sm:grid-cols-5 sm:items-center sm:gap-0">
         <div className="col-span-4">
           <Label className="text-sm/6 font-medium">Current Plan</Label>
-          <Description className="text-sm/6 text-black/50">
+          <Description className="text-sm/6 text-fg/70">
             <span>You are currently subscribed to the Pro plan on a{" "}
             {subscription.billing_period} basis.</span>
           </Description>
@@ -176,20 +176,20 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
             type="button"
             onClick={handlePaymentUpdate}
             disabled={isLoading}
-            className="transition duration-200 rounded-md bg-slate-100 px-3.5 py-2.5 text-sm font-semibold text-slate-600 shadow-sm hover:bg-slate-200 disabled:opacity-50"
+            className="transition duration-200 rounded-md bg-bg-elevated px-3.5 py-2.5 text-sm font-semibold text-fg/80 shadow-sm hover:bg-bg-elevated/80 disabled:opacity-50"
           >
             {isLoading ? "Loading..." : "Change on Stripe"}
           </button>
         </div>
       </Field>
-      <Field className="grid grid-cols-5">
+      <Field className="flex flex-col gap-3 sm:grid sm:grid-cols-5 sm:items-center sm:gap-0">
         <div className="col-span-4">
           <Label className="text-sm/6 font-medium">
             Change to{" "}
             {isYearly ? "Monthly" : "Yearly"}{" "}
             billing
           </Label>
-          <Description className="text-sm/6 text-black/50">
+          <Description className="text-sm/6 text-fg/70">
             {isYearly
               ? "Switch to monthly billing. Your next invoice will be prorated."
               : "Switch to yearly billing and save. Your next invoice will be prorated."}
@@ -200,7 +200,7 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
             type="button"
             onClick={() => handleSwitchInterval(isYearly ? "monthly" : "yearly")}
             disabled={!!switchingInterval}
-            className="transition duration-200 rounded-md bg-slate-100 px-3.5 py-2.5 text-sm font-semibold text-slate-600 shadow-sm hover:bg-slate-200 disabled:opacity-50"
+            className="transition duration-200 rounded-md bg-bg-elevated px-3.5 py-2.5 text-sm font-semibold text-fg/80 shadow-sm hover:bg-bg-elevated/80 disabled:opacity-50"
           >
             {switchingInterval
               ? "Updating..."
@@ -213,7 +213,7 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
       <Field className="grid grid-cols-3">
         <div className="col-span-2">
           <Label className="text-sm/6 font-medium">Auto Renewal</Label>
-          <Description className="text-sm/6 text-black/50">
+          <Description className="text-sm/6 text-fg/70">
             <span>Auto-renew is {subscription.auto_renew ? "On" : "Off"}. You can stop auto-renewal at any time.</span>
             {subscription.next_billing_date && (
               <span>
@@ -231,11 +231,11 @@ function ModifyPlanSection({ subscription }: ModifyPlanSectionProps) {
 function UpgradeSection() {
   const [billingPeriod, setBillingPeriod] = useState(PurchaseLength.Monthly);
   return (
-    <Field className="grid grid-cols-6">
+    <Field className="flex flex-col gap-3 sm:grid sm:grid-cols-6 sm:items-center sm:gap-0">
       <div className="col-span-5">
         <div>
           <Label className="text-sm/6 font-medium">Upgrade to Premium</Label>
-          <Description className="text-sm/6 text-black/50">
+          <Description className="text-sm/6 text-fg/70">
             Subscribe for more features and benefits.
           </Description>
           <div className="my-3">
@@ -246,17 +246,17 @@ function UpgradeSection() {
               <PriceOption price={20} label="per month, billed annually" />
             ) : null}
           </div>
-          <div className="w-48">
+          <div className="w-full max-w-xs">
             <RadioGroup
               value={billingPeriod}
               onChange={setBillingPeriod}
-              className="my-3 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 "
+              className="my-3 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-border"
             >
               {billingPeriods.map((option) => (
                 <Radio
                   key={option.value}
                   value={option.value}
-                  className="cursor-pointer rounded-md px-2.5 py-1 text-gray-500 data-[checked]:bg-slate-600 data-[checked]:text-white"
+                  className="cursor-pointer rounded-md px-2.5 py-1 text-fg/80 data-[checked]:bg-accent data-[checked]:text-paper"
                 >
                   {option.label}
                 </Radio>
@@ -268,7 +268,7 @@ function UpgradeSection() {
       <div>
         <Link
           href={`/checkout?purchasePrice=${billingPeriod}`}
-          className="inline-block transition duration-200 rounded-md bg-slate-100 px-3.5 py-2.5 text-sm font-semibold text-slate-600 shadow-sm hover:bg-slate-200"
+          className="inline-block transition duration-200 rounded-md bg-bg-elevated px-3.5 py-2.5 text-sm font-semibold text-fg/80 shadow-sm hover:bg-bg-elevated/80"
         >
           Buy Premium
         </Link>
@@ -281,10 +281,10 @@ function PriceOption({ price, label }: { price: number; label: string }) {
   return (
     <div>
       <div>
-        <span className="font-bold text-lg text-black/80">${price}</span>{" "}
-        <span className="font-bold text-xs text-black/50">USD</span>
+        <span className="font-bold text-lg text-fg/80">${price}</span>{" "}
+        <span className="font-bold text-xs text-fg/70">USD</span>
       </div>
-      <div className="text-sm text-black/50">{label}</div>
+      <div className="text-sm text-fg/70">{label}</div>
     </div>
   );
 }

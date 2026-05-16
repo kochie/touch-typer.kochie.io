@@ -36,3 +36,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# worktree-local pnpm config (not for the branch)
+/pnpm-workspace.yaml
+
+# superpowers brainstorm scratch
+.superpowers/
+
+# playwright MCP debug artifacts (local browser session dumps)
+.playwright-mcp/

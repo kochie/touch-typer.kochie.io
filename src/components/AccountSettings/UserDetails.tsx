@@ -5,6 +5,7 @@ import { Field as FormikField, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import { Notification } from "../Notification";
 import { useSupabaseClient } from "@/lib/supabase-provider";
+import { Button } from "@/components/ui/Button";
 
 interface UserData {
   email?: string | null;
@@ -78,14 +79,14 @@ export function UserDetails({ user }: { user: UserData }) {
     >
       {({ isSubmitting }) => (
         <Form>
-          <div className="divide-y divide-gray-200  overflow-hidden bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:px-6">Account Details</div>
+          <div className="divide-y divide-border overflow-hidden bg-bg border border-border rounded-xl">
+            <div className="px-4 py-5 sm:px-6 text-fg font-medium">Account Details</div>
             <div className="px-4 py-5 sm:p-6">
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <Field className="sm:col-span-3 row-start-1">
                   <Label
                     htmlFor="username"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Username
                   </Label>
@@ -96,14 +97,14 @@ export function UserDetails({ user }: { user: UserData }) {
                       name="username"
                       type="text"
                       autoComplete="username"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg px-3 py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
                 <Field className="sm:col-span-3">
                   <Label
                     htmlFor="name"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Name
                   </Label>
@@ -114,27 +115,28 @@ export function UserDetails({ user }: { user: UserData }) {
                       name="name"
                       type="text"
                       autoComplete="name"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg px-3 py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
                 <Field className="sm:col-span-4 row-start-2">
                   <Label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Email
                   </Label>
                   <div className="mt-2">
                     <FormikField
+                      as={Input}
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
                       disabled
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-500 bg-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg-elevated px-3 py-1.5 text-fg/50 shadow-sm placeholder:text-fg/40 sm:text-sm sm:leading-6"
                     />
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-1 text-xs text-fg/60">
                       Contact support to change your email
                     </p>
                   </div>
@@ -142,17 +144,18 @@ export function UserDetails({ user }: { user: UserData }) {
                 <Field className="sm:col-span-4 row-start-3">
                   <Label
                     htmlFor="phone"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-fg"
                   >
                     Phone Number
                   </Label>
                   <div className="mt-2">
                     <FormikField
+                      as={Input}
                       id="phone"
                       name="phone"
                       type="text"
                       autoComplete="tel"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block w-full rounded-md border border-border bg-bg px-3 py-1.5 text-fg shadow-sm placeholder:text-fg/40 focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </Field>
@@ -160,13 +163,14 @@ export function UserDetails({ user }: { user: UserData }) {
             </div>
             <div className="px-4 py-5 sm:px-6">
               <div className="flex items-center justify-end gap-x-6">
-                <button
+                <Button
                   type="submit"
+                  variant="primary"
+                  size="md"
                   disabled={isSubmitting}
-                  className="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 disabled:opacity-50"
                 >
                   {isSubmitting ? "Saving..." : "Save"}
-                </button>
+                </Button>
               </div>
             </div>
           </div>

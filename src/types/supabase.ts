@@ -7,6 +7,11 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.1"
+  }
   graphql_public: {
     Tables: {
       [_ in never]: never
@@ -67,6 +72,39 @@ export type Database = {
         }
         Relationships: []
       }
+      device_tokens: {
+        Row: {
+          channel_uri: string | null
+          created_at: string
+          device_name: string | null
+          id: string
+          platform: string
+          token: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          channel_uri?: string | null
+          created_at?: string
+          device_name?: string | null
+          id?: string
+          platform: string
+          token: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          channel_uri?: string | null
+          created_at?: string
+          device_name?: string | null
+          id?: string
+          platform?: string
+          token?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       goals: {
         Row: {
           category: string
@@ -116,9 +154,12 @@ export type Database = {
           cpm: number
           created_at: string | null
           datetime: string
+          equipped_face: string
+          equipped_hat: string | null
           id: string
           incorrect: number
           keyboard: string
+          language: string | null
           level: string
           numbers: boolean | null
           punctuation: boolean | null
@@ -132,9 +173,12 @@ export type Database = {
           cpm: number
           created_at?: string | null
           datetime?: string
+          equipped_face?: string
+          equipped_hat?: string | null
           id?: string
           incorrect: number
           keyboard: string
+          language?: string | null
           level: string
           numbers?: boolean | null
           punctuation?: boolean | null
@@ -148,9 +192,12 @@ export type Database = {
           cpm?: number
           created_at?: string | null
           datetime?: string
+          equipped_face?: string
+          equipped_hat?: string | null
           id?: string
           incorrect?: number
           keyboard?: string
+          language?: string | null
           level?: string
           numbers?: boolean | null
           punctuation?: boolean | null
@@ -164,35 +211,193 @@ export type Database = {
         Row: {
           created_at: string | null
           email: string | null
+          equipped_face: string
+          equipped_hat: string | null
           id: string
           name: string | null
           phone_number: string | null
           preferred_username: string | null
+          timezone: string | null
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
           email?: string | null
+          equipped_face?: string
+          equipped_hat?: string | null
           id: string
           name?: string | null
           phone_number?: string | null
           preferred_username?: string | null
+          timezone?: string | null
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
           email?: string | null
+          equipped_face?: string
+          equipped_hat?: string | null
           id?: string
           name?: string | null
           phone_number?: string | null
           preferred_username?: string | null
+          timezone?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      pvp_games: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          creator_completed_at: string | null
+          creator_correct: number | null
+          creator_cpm: number | null
+          creator_incorrect: number | null
+          creator_key_presses: Json | null
+          creator_time: string | null
+          id: string
+          joiner_completed_at: string | null
+          joiner_correct: number | null
+          joiner_cpm: number | null
+          joiner_incorrect: number | null
+          joiner_key_presses: Json | null
+          joiner_time: string | null
+          match_id: string
+          round_number: number
+          winner_id: string | null
+          word_set: string[]
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          creator_completed_at?: string | null
+          creator_correct?: number | null
+          creator_cpm?: number | null
+          creator_incorrect?: number | null
+          creator_key_presses?: Json | null
+          creator_time?: string | null
+          id?: string
+          joiner_completed_at?: string | null
+          joiner_correct?: number | null
+          joiner_cpm?: number | null
+          joiner_incorrect?: number | null
+          joiner_key_presses?: Json | null
+          joiner_time?: string | null
+          match_id: string
+          round_number: number
+          winner_id?: string | null
+          word_set: string[]
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          creator_completed_at?: string | null
+          creator_correct?: number | null
+          creator_cpm?: number | null
+          creator_incorrect?: number | null
+          creator_key_presses?: Json | null
+          creator_time?: string | null
+          id?: string
+          joiner_completed_at?: string | null
+          joiner_correct?: number | null
+          joiner_cpm?: number | null
+          joiner_incorrect?: number | null
+          joiner_key_presses?: Json | null
+          joiner_time?: string | null
+          match_id?: string
+          round_number?: number
+          winner_id?: string | null
+          word_set?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pvp_games_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "pvp_matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pvp_matches: {
+        Row: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        Insert: {
+          best_of: number
+          capital?: boolean
+          created_at?: string
+          creator_id: string
+          creator_wins?: number
+          expires_at?: string
+          forfeited_by?: string | null
+          id?: string
+          invite_code: string
+          joiner_id?: string | null
+          joiner_joined_at?: string | null
+          joiner_wins?: number
+          keyboard: string
+          language: string
+          level: string
+          message?: string | null
+          numbers?: boolean
+          punctuation?: boolean
+          status?: string
+          updated_at?: string
+          winner_id?: string | null
+        }
+        Update: {
+          best_of?: number
+          capital?: boolean
+          created_at?: string
+          creator_id?: string
+          creator_wins?: number
+          expires_at?: string
+          forfeited_by?: string | null
+          id?: string
+          invite_code?: string
+          joiner_id?: string | null
+          joiner_joined_at?: string | null
+          joiner_wins?: number
+          keyboard?: string
+          language?: string
+          level?: string
+          message?: string | null
+          numbers?: boolean
+          punctuation?: boolean
+          status?: string
+          updated_at?: string
+          winner_id?: string | null
         }
         Relationships: []
       }
       results: {
         Row: {
           capital: boolean | null
+          client_uuid: string
+          code_lang: string | null
+          code_mode: boolean | null
           correct: number
           cpm: number
           created_at: string | null
@@ -210,6 +415,9 @@ export type Database = {
         }
         Insert: {
           capital?: boolean | null
+          client_uuid?: string
+          code_lang?: string | null
+          code_mode?: boolean | null
           correct: number
           cpm: number
           created_at?: string | null
@@ -227,6 +435,9 @@ export type Database = {
         }
         Update: {
           capital?: boolean | null
+          client_uuid?: string
+          code_lang?: string | null
+          code_mode?: boolean | null
           correct?: number
           cpm?: number
           created_at?: string | null
@@ -246,55 +457,136 @@ export type Database = {
       }
       settings: {
         Row: {
+          ai_weekly_email: boolean | null
           analytics: boolean | null
+          app_language: string | null
           blinker: boolean | null
           capital: boolean | null
+          code_lang: string | null
+          code_mode: boolean | null
+          code_snippet_source: string | null
+          confetti_on_personal_best: boolean
           created_at: string | null
+          custom_code_path: string | null
           id: string
           keyboard_name: string | null
           language: string | null
           level_name: string | null
+          notification_days: string[] | null
+          notification_message: string | null
+          notification_time: string | null
+          notifications_enabled: boolean | null
           numbers: boolean | null
+          practice_duration: number | null
           publish_to_leaderboard: boolean | null
           punctuation: boolean | null
+          schedule_enabled: boolean | null
+          tab_width: number | null
           theme: string | null
           updated_at: string | null
           user_id: string
           whats_new_on_startup: boolean | null
         }
         Insert: {
+          ai_weekly_email?: boolean | null
           analytics?: boolean | null
+          app_language?: string | null
           blinker?: boolean | null
           capital?: boolean | null
+          code_lang?: string | null
+          code_mode?: boolean | null
+          code_snippet_source?: string | null
+          confetti_on_personal_best?: boolean
           created_at?: string | null
+          custom_code_path?: string | null
           id?: string
           keyboard_name?: string | null
           language?: string | null
           level_name?: string | null
+          notification_days?: string[] | null
+          notification_message?: string | null
+          notification_time?: string | null
+          notifications_enabled?: boolean | null
           numbers?: boolean | null
+          practice_duration?: number | null
           publish_to_leaderboard?: boolean | null
           punctuation?: boolean | null
+          schedule_enabled?: boolean | null
+          tab_width?: number | null
           theme?: string | null
           updated_at?: string | null
           user_id: string
           whats_new_on_startup?: boolean | null
         }
         Update: {
+          ai_weekly_email?: boolean | null
           analytics?: boolean | null
+          app_language?: string | null
           blinker?: boolean | null
           capital?: boolean | null
+          code_lang?: string | null
+          code_mode?: boolean | null
+          code_snippet_source?: string | null
+          confetti_on_personal_best?: boolean
           created_at?: string | null
+          custom_code_path?: string | null
           id?: string
           keyboard_name?: string | null
           language?: string | null
           level_name?: string | null
+          notification_days?: string[] | null
+          notification_message?: string | null
+          notification_time?: string | null
+          notifications_enabled?: boolean | null
           numbers?: boolean | null
+          practice_duration?: number | null
           publish_to_leaderboard?: boolean | null
           punctuation?: boolean | null
+          schedule_enabled?: boolean | null
+          tab_width?: number | null
           theme?: string | null
           updated_at?: string | null
           user_id?: string
           whats_new_on_startup?: boolean | null
+        }
+        Relationships: []
+      }
+      streaks: {
+        Row: {
+          created_at: string | null
+          current_streak: number | null
+          id: string
+          last_activity_date: string | null
+          last_freeze_refresh: string | null
+          longest_streak: number | null
+          streak_freeze_count: number | null
+          streak_freeze_used_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          current_streak?: number | null
+          id?: string
+          last_activity_date?: string | null
+          last_freeze_refresh?: string | null
+          longest_streak?: number | null
+          streak_freeze_count?: number | null
+          streak_freeze_used_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          current_streak?: number | null
+          id?: string
+          last_activity_date?: string | null
+          last_freeze_refresh?: string | null
+          longest_streak?: number | null
+          streak_freeze_count?: number | null
+          streak_freeze_used_at?: string | null
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -304,9 +596,12 @@ export type Database = {
           auto_renew: boolean | null
           billing_period: string | null
           billing_plan: string | null
+          billing_service: string | null
           created_at: string | null
           id: string
           next_billing_date: string | null
+          payment_status: string | null
+          session_id: string | null
           status: string | null
           stripe_customer_id: string | null
           stripe_subscription_id: string | null
@@ -318,9 +613,12 @@ export type Database = {
           auto_renew?: boolean | null
           billing_period?: string | null
           billing_plan?: string | null
+          billing_service?: string | null
           created_at?: string | null
           id?: string
           next_billing_date?: string | null
+          payment_status?: string | null
+          session_id?: string | null
           status?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
@@ -332,9 +630,12 @@ export type Database = {
           auto_renew?: boolean | null
           billing_period?: string | null
           billing_plan?: string | null
+          billing_service?: string | null
           created_at?: string | null
           id?: string
           next_billing_date?: string | null
+          payment_status?: string | null
+          session_id?: string | null
           status?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
@@ -343,11 +644,112 @@ export type Database = {
         }
         Relationships: []
       }
+      transactions: {
+        Row: {
+          created_at: string | null
+          id: string
+          product_id: string | null
+          streak_freeze_credited: boolean | null
+          transaction_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          product_id?: string | null
+          streak_freeze_credited?: boolean | null
+          transaction_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          product_id?: string | null
+          streak_freeze_credited?: boolean | null
+          transaction_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
+      subscriptions_resolved: {
+        Row: {
+          apple_original_transaction_id: string | null
+          auto_renew: boolean | null
+          billing_period: string | null
+          billing_plan: string | null
+          billing_service: string | null
+          created_at: string | null
+          display_billing_period: string | null
+          effective_end_date: string | null
+          id: string | null
+          is_canceled: boolean | null
+          is_in_trial: boolean | null
+          is_past_due: boolean | null
+          is_premium: boolean | null
+          next_billing_date: string | null
+          payment_status: string | null
+          session_id: string | null
+          status: string | null
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          apple_original_transaction_id?: string | null
+          auto_renew?: boolean | null
+          billing_period?: string | null
+          billing_plan?: string | null
+          billing_service?: string | null
+          created_at?: string | null
+          display_billing_period?: never
+          effective_end_date?: never
+          id?: string | null
+          is_canceled?: never
+          is_in_trial?: never
+          is_past_due?: never
+          is_premium?: never
+          next_billing_date?: string | null
+          payment_status?: string | null
+          session_id?: string | null
+          status?: string | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          apple_original_transaction_id?: string | null
+          auto_renew?: boolean | null
+          billing_period?: string | null
+          billing_plan?: string | null
+          billing_service?: string | null
+          created_at?: string | null
+          display_billing_period?: never
+          effective_end_date?: never
+          id?: string | null
+          is_canceled?: never
+          is_in_trial?: never
+          is_past_due?: never
+          is_premium?: never
+          next_billing_date?: string | null
+          payment_status?: string | null
+          session_id?: string | null
+          status?: string | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       user_results_view: {
         Row: {
           capital: boolean | null
+          code_lang: string | null
+          code_mode: boolean | null
           correct: number | null
           cpm: number | null
           created_at: string | null
@@ -368,13 +770,514 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      cancel_match: {
+        Args: { _match_id: string }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      cancel_match_as: {
+        Args: { _match_id: string; _user: string }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      create_match: {
+        Args: {
+          _best_of: number
+          _capital: boolean
+          _keyboard: string
+          _language: string
+          _level: string
+          _message?: string
+          _numbers: boolean
+          _punctuation: boolean
+          _word_sets: Json
+        }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      create_match_as: {
+        Args: {
+          _best_of: number
+          _capital: boolean
+          _keyboard: string
+          _language: string
+          _level: string
+          _message: string
+          _numbers: boolean
+          _punctuation: boolean
+          _user: string
+          _word_sets: Json
+        }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      dblink: { Args: { "": string }; Returns: Record<string, unknown>[] }
+      dblink_cancel_query: { Args: { "": string }; Returns: string }
+      dblink_close: { Args: { "": string }; Returns: string }
+      dblink_connect: { Args: { "": string }; Returns: string }
+      dblink_connect_u: { Args: { "": string }; Returns: string }
+      dblink_current_query: { Args: never; Returns: string }
+      dblink_disconnect:
+        | { Args: never; Returns: string }
+        | { Args: { "": string }; Returns: string }
+      dblink_error_message: { Args: { "": string }; Returns: string }
+      dblink_exec: { Args: { "": string }; Returns: string }
+      dblink_fdw_validator: {
+        Args: { catalog: unknown; options: string[] }
+        Returns: undefined
+      }
+      dblink_get_connections: { Args: never; Returns: string[] }
+      dblink_get_notify:
+        | { Args: { conname: string }; Returns: Record<string, unknown>[] }
+        | { Args: never; Returns: Record<string, unknown>[] }
+      dblink_get_pkey: {
+        Args: { "": string }
+        Returns: Database["public"]["CompositeTypes"]["dblink_pkey_results"][]
+        SetofOptions: {
+          from: "*"
+          to: "dblink_pkey_results"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      dblink_get_result: {
+        Args: { "": string }
+        Returns: Record<string, unknown>[]
+      }
+      dblink_is_busy: { Args: { "": string }; Returns: number }
+      forfeit_match: {
+        Args: { _match_id: string }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      forfeit_match_as: {
+        Args: { _match_id: string; _user: string }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      generate_invite_code: { Args: never; Returns: string }
+      generate_unique_username: { Args: never; Returns: string }
+      get_match_by_invite_code: {
+        Args: { _code: string }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_user_leaderboard_rank: {
+        Args: {
+          p_capital: boolean
+          p_keyboard: string
+          p_language: string
+          p_level: string
+          p_numbers: boolean
+          p_punctuation: boolean
+          p_user_id: string
+        }
+        Returns: {
+          correct: number
+          cpm: number
+          datetime: string
+          equipped_face: string
+          equipped_hat: string
+          incorrect: number
+          rank: number
+          time: number
+          username: string
+        }[]
+      }
+      join_match_by_invite: {
+        Args: { _code: string }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      join_match_by_invite_as: {
+        Args: { _code: string; _user: string }
+        Returns: {
+          best_of: number
+          capital: boolean
+          created_at: string
+          creator_id: string
+          creator_wins: number
+          expires_at: string
+          forfeited_by: string | null
+          id: string
+          invite_code: string
+          joiner_id: string | null
+          joiner_joined_at: string | null
+          joiner_wins: number
+          keyboard: string
+          language: string
+          level: string
+          message: string | null
+          numbers: boolean
+          punctuation: boolean
+          status: string
+          updated_at: string
+          winner_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_matches"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      list_my_rivals: {
+        Args: never
+        Returns: {
+          last_match_id: string
+          last_played_at: string
+          matches_lost: number
+          matches_played: number
+          matches_won: number
+          rival_id: string
+        }[]
+      }
+      submit_round_result: {
+        Args: {
+          _correct: number
+          _cpm: number
+          _incorrect: number
+          _key_presses: Json
+          _match_id: string
+          _round_number: number
+          _time: string
+        }
+        Returns: {
+          completed_at: string | null
+          created_at: string
+          creator_completed_at: string | null
+          creator_correct: number | null
+          creator_cpm: number | null
+          creator_incorrect: number | null
+          creator_key_presses: Json | null
+          creator_time: string | null
+          id: string
+          joiner_completed_at: string | null
+          joiner_correct: number | null
+          joiner_cpm: number | null
+          joiner_incorrect: number | null
+          joiner_key_presses: Json | null
+          joiner_time: string | null
+          match_id: string
+          round_number: number
+          winner_id: string | null
+          word_set: string[]
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_games"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      submit_round_result_as: {
+        Args: {
+          _correct: number
+          _cpm: number
+          _incorrect: number
+          _key_presses: Json
+          _match_id: string
+          _round_number: number
+          _time: string
+          _user: string
+        }
+        Returns: {
+          completed_at: string | null
+          created_at: string
+          creator_completed_at: string | null
+          creator_correct: number | null
+          creator_cpm: number | null
+          creator_incorrect: number | null
+          creator_key_presses: Json | null
+          creator_time: string | null
+          id: string
+          joiner_completed_at: string | null
+          joiner_correct: number | null
+          joiner_cpm: number | null
+          joiner_incorrect: number | null
+          joiner_key_presses: Json | null
+          joiner_time: string | null
+          match_id: string
+          round_number: number
+          winner_id: string | null
+          word_set: string[]
+        }
+        SetofOptions: {
+          from: "*"
+          to: "pvp_games"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      trigger_send_notifications: { Args: never; Returns: undefined }
+      upsert_leaderboard_score: {
+        Args: {
+          p_capital: boolean
+          p_correct: number
+          p_datetime?: string
+          p_equipped_face?: string
+          p_equipped_hat?: string
+          p_incorrect: number
+          p_keyboard: string
+          p_language: string
+          p_level: string
+          p_numbers: boolean
+          p_punctuation: boolean
+          p_time: number
+          p_user_id: string
+          p_username: string
+        }
+        Returns: {
+          capital: boolean | null
+          correct: number
+          cpm: number
+          created_at: string | null
+          datetime: string
+          equipped_face: string
+          equipped_hat: string | null
+          id: string
+          incorrect: number
+          keyboard: string
+          language: string | null
+          level: string
+          numbers: boolean | null
+          punctuation: boolean | null
+          time: number
+          user_id: string
+          username: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "leaderboard_scores"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       [_ in never]: never
     }
     CompositeTypes: {
-      [_ in never]: never
+      dblink_pkey_results: {
+        position: number | null
+        colname: string | null
+      }
     }
   }
 }
@@ -504,4 +1407,3 @@ export const Constants = {
     Enums: {},
   },
 } as const
-

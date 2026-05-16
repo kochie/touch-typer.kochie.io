@@ -1,64 +1,83 @@
 @import "tailwindcss";
+@import "./tokens.css";
+
+@theme {
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-mute: var(--color-mute);
+  --color-line: var(--color-line);
+  --color-paper-soft: var(--color-paper-soft);
+  --color-paper: var(--color-paper);
+  --color-accent: var(--color-accent);
+  --color-accent-deep: var(--color-accent-deep);
+  --color-warm: var(--color-warm);
+  --color-good: var(--color-good);
+  --color-warn: var(--color-warn);
+  --color-bad: var(--color-bad);
+
+  /* NEW theme-aware tokens */
+  --color-bg: var(--color-bg);
+  --color-bg-elevated: var(--color-bg-elevated);
+  --color-fg: var(--color-fg);
+  --color-fg-muted: var(--color-fg-muted);
+  --color-border: var(--color-border);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-accent-bright: var(--color-accent-bright);
+
+  --font-sans: var(--font-sans), -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "Menlo", monospace;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
-@keyframes animated-text {
-  from {
-    width: 0;
-  }
-
-  to {
-    width: calc(264px + 3px);
-  }
+@keyframes blink-cursor {
+  0%, 50%   { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
 }
 
-/* cursor animations */
-
-@keyframes animated-cursor {
-  from {
-    border-right-color: #2d85d2;
-  }
-
-  to {
-    border-right-color: transparent;
-  }
+@keyframes accent-throb {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.08); }
 }
 
 @layer utilities {
-  .typewriter {
-    border-right: solid 3px #2d85d2;
-    white-space: nowrap;
-    overflow: hidden;
-    /* font-family: 'Source Code Pro', monospace;   */
-    /* font-size: 28px; */
-    color: rgba(255, 255, 255, 0.7);
-
-    animation: animated-text 4s steps(22) 1s 1 normal both,
-      animated-cursor 600ms steps(22) infinite;
+  .cursor-blink {
+    animation: blink-cursor 1s steps(1, end) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cursor-blink { animation: none; opacity: 1; }
   }
 
-  .iconHover {
-    transition: 0.35s ease;
-    transform: translate(0, -4px);
-    cursor: pointer;
-    box-shadow: 0 12px 40px 20px rgba(0, 0, 0, 0.05);
+  /* Slow blue throb for the hero radial blob — ~7s breath cycle */
+  .accent-throb {
+    animation: accent-throb 7s ease-in-out infinite;
+    transform-origin: center;
+    will-change: opacity, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .accent-throb { animation: none; opacity: 0.8; transform: none; }
   }
 
-  .logoHover {
-    --icon-color: #2780cd;
+  /* Accent shadow for amplified-color treatments */
+  .shadow-accent {
+    box-shadow: 0 4px 20px -2px rgba(45, 133, 210, 0.35);
   }
+  .shadow-accent-glow {
+    box-shadow: 0 16px 48px -8px rgba(45, 133, 210, 0.25);
+  }
+}
 
-  .logo {
-    --icon-color: white;
-  }
-
-  .logoPrimary {
-    color: var(--icon-color);
-  }
-
-  .fillRuleNonZero {
-    fill-rule: nonzero;
-  }
+@layer components {
+  .prose-styles p { margin-bottom: 1em; }
+  .prose-styles p:last-child { margin-bottom: 0; }
+  .prose-styles strong { font-weight: 600; color: var(--color-fg); }
+  .prose-styles em { font-style: italic; }
+  .prose-styles ul { list-style: disc; padding-left: 1.25em; margin-bottom: 1em; }
+  .prose-styles ol { list-style: decimal; padding-left: 1.25em; margin-bottom: 1em; }
+  .prose-styles li { margin-bottom: 0.25em; }
+  .prose-styles a { color: var(--color-accent); text-decoration: underline; }
+  .prose-styles a:hover { color: var(--color-accent-deep); }
+  .prose-styles code { font-family: var(--font-mono); font-size: 0.9em; background: var(--color-bg-elevated); padding: 0.1em 0.3em; border-radius: 0.25em; }
 }

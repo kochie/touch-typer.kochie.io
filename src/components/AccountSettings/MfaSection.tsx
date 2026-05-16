@@ -5,6 +5,7 @@ import { useSupabaseClient } from "@/lib/supabase-provider";
 import { Input, Label } from "@headlessui/react";
 import { toast } from "react-toastify";
 import { Notification } from "../Notification";
+import { Button } from "@/components/ui/Button";
 
 type Factor = { id: string; friendly_name?: string; factor_type: string };
 
@@ -110,33 +111,33 @@ export function MfaSection() {
   };
 
   return (
-    <div className="divide-y divide-gray-200 overflow-hidden bg-white shadow rounded-lg">
+    <div className="divide-y divide-border overflow-hidden bg-bg border border-border rounded-xl">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-base font-semibold leading-7 text-gray-900">Two-factor authentication</h3>
-        <p className="mt-1 text-sm text-gray-600">
+        <h3 className="text-base font-semibold leading-7 text-fg">Two-factor authentication</h3>
+        <p className="mt-1 text-sm text-fg/60">
           Add an extra layer of security with an authenticator app.
         </p>
       </div>
       <div className="px-4 py-5 sm:p-6 space-y-6">
         {loading ? (
-          <p className="text-sm text-gray-500">Loading...</p>
+          <p className="text-sm text-fg/60">Loading...</p>
         ) : (
           <>
             {factors.length > 0 && (
               <div>
-                <p className="text-sm font-medium text-gray-900 mb-2">Active factors</p>
+                <p className="text-sm font-medium text-fg mb-2">Active factors</p>
                 <ul className="space-y-2">
                   {factors.map((f) => (
                     <li
                       key={f.id}
-                      className="flex items-center justify-between rounded-md bg-gray-50 px-3 py-2 text-sm"
+                      className="flex items-center justify-between rounded-md bg-bg-elevated border border-border px-3 py-2 text-sm"
                     >
                       <span>{f.friendly_name ?? f.factor_type ?? f.id}</span>
                       <button
                         type="button"
                         onClick={() => handleUnenroll(f)}
                         disabled={unenrolling === f.id}
-                        className="text-red-600 hover:text-red-700 text-sm font-medium disabled:opacity-50"
+                        className="text-bad hover:text-bad/80 text-sm font-medium disabled:opacity-50"
                       >
                         {unenrolling === f.id ? "Disabling..." : "Disable"}
                       </button>
@@ -148,18 +149,19 @@ export function MfaSection() {
 
             {!factorId ? (
               factors.length === 0 && (
-                <button
+                <Button
                   type="button"
+                  variant="primary"
+                  size="md"
                   onClick={handleEnrollStart}
                   disabled={enrolling}
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
                 >
                   {enrolling ? "Starting..." : "Enable two-factor authentication"}
-                </button>
+                </Button>
               )
             ) : (
               <div className="space-y-4">
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-fg/80">
                   Scan this QR code with your authenticator app (e.g. Google Authenticator, Authy), then enter the code below.
                 </p>
                 {qrCode && (
@@ -168,12 +170,12 @@ export function MfaSection() {
                   </div>
                 )}
                 {secret && (
-                  <p className="text-xs text-gray-500 break-all font-mono">
+                  <p className="text-xs text-fg/60 break-all font-mono">
                     Or enter this secret manually: {secret}
                   </p>
                 )}
                 <form onSubmit={handleEnrollVerify} className="space-y-2">
-                  <Label htmlFor="mfa-code" className="block text-sm font-medium text-gray-900">
+                  <Label htmlFor="mfa-code" className="block text-sm font-medium text-fg">
                     Verification code
                   </Label>
                   <Input
@@ -182,22 +184,15 @@ export function MfaSection() {
                     onChange={(e) => setVerifyCode(e.target.value)}
                     placeholder="000000"
                     maxLength={6}
-                    className="block w-full max-w-xs rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                    className="block w-full max-w-xs rounded-md border border-border bg-bg py-1.5 text-fg shadow-sm focus:border-accent focus:ring-2 focus:ring-accent/20 sm:text-sm"
                   />
                   <div className="flex gap-2">
-                    <button
-                      type="submit"
-                      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
-                    >
+                    <Button type="submit" variant="primary" size="md">
                       Verify and enable
-                    </button>
-                    <button
-                      type="button"
-                      onClick={cancelEnroll}
-                      className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
+                    </Button>
+                    <Button type="button" variant="secondary" size="md" onClick={cancelEnroll}>
                       Cancel
-                    </button>
+                    </Button>
                   </div>
                 </form>
               </div>

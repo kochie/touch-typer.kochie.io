@@ -1,0 +1,48 @@
+/* Design tokens — single source of truth for color.
+ * Surfaced as Tailwind v4 theme tokens via the @theme directive in main.css.
+ *
+ * Two groups:
+ *   - Never-swap: paper/paper-soft, ink/ink-soft, mute, line — literal hex,
+ *     used by surfaces locked to a specific tone (Footer, Code Mode, FinalCTA).
+ *   - Theme-aware: bg/bg-elevated, fg/fg-muted, border, accent-soft, accent-bright
+ *     — flip on [data-theme="dark"]. Used by everything that should follow theme.
+ */
+
+:root {
+  /* Never-swap neutrals (light-literal values) */
+  --color-ink: #0f1115;
+  --color-ink-soft: #1f232b;
+  --color-mute: #6b7280;
+  --color-line: #e5e5e0;
+  --color-paper-soft: #f3f3ef;
+  --color-paper: #fafaf9;
+
+  /* Never-swap accent base + deep (same hue both themes) */
+  --color-accent: #2d85d2;
+  --color-accent-deep: #1e5e96;
+
+  /* State colors (never-swap) */
+  --color-warm: #d97757;
+  --color-good: #16a34a;
+  --color-warn: #d97706;
+  --color-bad: #dc2626;
+
+  /* Theme-aware (light values) */
+  --color-bg: #fafaf9;
+  --color-bg-elevated: #f3f3ef;
+  --color-fg: #0f1115;
+  --color-fg-muted: #6b7280;
+  --color-border: #e5e5e0;
+  --color-accent-soft: #cfe2f3;
+  --color-accent-bright: #4ba0e8;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0d1117;
+  --color-bg-elevated: #161b22;
+  --color-fg: #f0f6fc;
+  --color-fg-muted: #8b949e;
+  --color-border: #30363d;
+  --color-accent-soft: rgba(45, 133, 210, 0.18);
+  --color-accent-bright: #58a6ff;
+}

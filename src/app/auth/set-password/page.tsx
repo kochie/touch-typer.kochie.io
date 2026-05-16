@@ -7,7 +7,24 @@ import { Field, Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import { Notification } from "@/components/Notification";
 import Image from "next/image";
-import Logo from "@/assets/logo-dark.png";
+import { useTheme } from "next-themes";
+
+function ThemedLogo() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const logoSrc =
+    mounted && resolvedTheme === "dark" ? "/logo-color.svg" : "/logo-ink.svg";
+  return (
+    <Image
+      src={logoSrc}
+      alt="Touch Typer"
+      width={730}
+      height={284}
+      className="mx-auto h-10 w-auto"
+    />
+  );
+}
 
 export default function SetPasswordPage() {
   const router = useRouter();
@@ -30,7 +47,7 @@ export default function SetPasswordPage() {
   if (checking) {
     return (
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12">
-        <p className="text-gray-600">Loading...</p>
+        <p className="text-fg/70">Loading...</p>
       </div>
     );
   }
@@ -40,13 +57,13 @@ export default function SetPasswordPage() {
   }
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-slate-100">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-bg-elevated">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <Image alt="Touch Typer" src={Logo} className="mx-auto h-10 w-auto" />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <ThemedLogo />
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-fg">
           Set new password
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center text-sm text-fg/70">
           Enter your new password below.
         </p>
       </div>
@@ -92,11 +109,11 @@ export default function SetPasswordPage() {
           }}
         >
           {({ isSubmitting, errors }) => (
-            <Form className="space-y-6 bg-white rounded-xl shadow-xl p-8">
+            <Form className="space-y-6 bg-bg rounded-xl shadow-xl p-8">
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-fg"
                 >
                   New password
                 </label>
@@ -107,17 +124,17 @@ export default function SetPasswordPage() {
                     type="password"
                     autoComplete="new-password"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                    className="block w-full rounded-md border-0 py-1.5 text-fg shadow-sm ring-1 ring-inset ring-border placeholder:text-fg/40 focus:ring-2 focus:ring-inset focus:ring-accent sm:text-sm"
                   />
                 </div>
                 {errors.password && (
-                  <p className="mt-1 text-xs text-red-600">{errors.password}</p>
+                  <p className="mt-1 text-xs text-bad">{errors.password}</p>
                 )}
               </div>
               <div>
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-fg"
                 >
                   Confirm password
                 </label>
@@ -128,17 +145,17 @@ export default function SetPasswordPage() {
                     type="password"
                     autoComplete="new-password"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                    className="block w-full rounded-md border-0 py-1.5 text-fg shadow-sm ring-1 ring-inset ring-border placeholder:text-fg/40 focus:ring-2 focus:ring-inset focus:ring-accent sm:text-sm"
                   />
                 </div>
                 {errors.confirmPassword && (
-                  <p className="mt-1 text-xs text-red-600">{errors.confirmPassword}</p>
+                  <p className="mt-1 text-xs text-bad">{errors.confirmPassword}</p>
                 )}
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
+                className="flex w-full justify-center rounded-md bg-accent px-3 py-1.5 text-sm font-semibold leading-6 text-paper shadow-sm hover:bg-accent-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-50"
               >
                 {isSubmitting ? "Updating..." : "Update password"}
               </button>
