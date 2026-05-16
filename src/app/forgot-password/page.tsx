@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Logo from "@/assets/logo-dark.png";
 import { useSupabaseClient } from "@/lib/supabase-provider";
 import { toast } from "react-toastify";
@@ -24,7 +25,17 @@ function getAuthBaseUrl(): string {
 }
 
 export default function ForgotPasswordPage() {
+  return (
+    <Suspense fallback={null}>
+      <ForgotPasswordInner />
+    </Suspense>
+  );
+}
+
+function ForgotPasswordInner() {
   const supabase = useSupabaseClient();
+  const searchParams = useSearchParams();
+  const prefillEmail = searchParams.get("email")?.trim() ?? "";
   const [sent, setSent] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -45,13 +56,16 @@ export default function ForgotPasswordPage() {
             Reset password
           </h1>
           <p className="mt-2 text-sm text-fg/60">
-            Enter your email and we&apos;ll send you a link to set a new password.
+            {prefillEmail
+              ? "Confirm your email below — we'll send you a link to set a new password."
+              : "Enter your email and we'll send you a link to set a new password."}
           </p>
         </div>
 
         {!sent ? (
           <Formik
-            initialValues={{ email: "" }}
+            initialValues={{ email: prefillEmail }}
+            enableReinitialize
             onSubmit={async (values, { setSubmitting }) => {
               try {
                 const { error } = await supabase.auth.resetPasswordForEmail(
