@@ -201,47 +201,11 @@ export default function SignUp() {
 
         {step === "CONFIRM_EMAIL" && (
           <Card tone="paper">
-            <div className="text-center space-y-4">
-              <div className="bg-good/10 border border-good/30 rounded-lg p-6">
-                <h3 className="text-lg font-medium text-good">
-                  Check your email
-                </h3>
-                <p className="mt-2 text-sm text-good/80">
-                  We sent a confirmation link to <strong>{email}</strong>.
-                  Please click the link to verify your account.
-                </p>
-              </div>
-              <button
-                onClick={async () => {
-                  const { error } = await supabase.auth.resend({
-                    type: "signup",
-                    email,
-                  });
-                  if (error) {
-                    toast(Notification, {
-                      type: "error",
-                      data: {
-                        title: "Error",
-                        message: error.message,
-                        type: "error",
-                      },
-                    });
-                  } else {
-                    toast(Notification, {
-                      type: "success",
-                      data: {
-                        title: "Email Sent",
-                        message: "Confirmation email resent successfully",
-                        type: "success",
-                      },
-                    });
-                  }
-                }}
-                className="text-sm text-accent hover:text-accent-deep"
-              >
-                Resend confirmation email
-              </button>
-            </div>
+            <ConfirmEmailStep
+              email={email}
+              supabase={supabase}
+              onConfirmed={() => router.push("/account")}
+            />
           </Card>
         )}
 
@@ -254,6 +218,152 @@ export default function SignUp() {
             Sign in
           </Link>
         </p>
+      </div>
+    </div>
+  );
+}
+
+const RESEND_COOLDOWN_SECONDS = 60;
+
+/**
+ * Post-signup step. Supabase sends an 8-digit confirmation code AND a
+ * one-click link in the same email — this component lets the user paste
+ * the code directly without round-tripping through their mail client.
+ * If they click the link instead, /auth/callback handles it and this
+ * component is bypassed entirely.
+ *
+ * Mirrors renderer/src/components/SignUp/step02.tsx in the desktop app.
+ */
+function ConfirmEmailStep({
+  email,
+  supabase,
+  onConfirmed,
+}: {
+  email: string;
+  // Loose-typed to avoid pulling the full SupabaseClient type signature
+  // here; the only methods used are auth.verifyOtp and auth.resend.
+  supabase: ReturnType<typeof useSupabaseClient>;
+  onConfirmed: () => void;
+}) {
+  const [code, setCode] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [resendCooldown, setResendCooldown] = useState(0);
+
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const t = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [resendCooldown]);
+
+  const canSubmit = code.length === 8 && !submitting;
+
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canSubmit) return;
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        email,
+        token: code,
+        type: "signup",
+      });
+      if (error) throw error;
+      toast(Notification, {
+        type: "success",
+        data: {
+          title: "Account confirmed",
+          message: "Redirecting to your account…",
+          type: "success",
+        },
+      });
+      onConfirmed();
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Couldn't confirm that code";
+      toast(Notification, {
+        type: "error",
+        data: {
+          title: "Invalid code",
+          message,
+          type: "error",
+        },
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleResend = async () => {
+    if (resendCooldown > 0) return;
+    const { error } = await supabase.auth.resend({ type: "signup", email });
+    if (error) {
+      toast(Notification, {
+        type: "error",
+        data: { title: "Error", message: error.message, type: "error" },
+      });
+      return;
+    }
+    setResendCooldown(RESEND_COOLDOWN_SECONDS);
+    toast(Notification, {
+      type: "success",
+      data: {
+        title: "Email Sent",
+        message: "We sent a fresh 8-digit code to your inbox.",
+        type: "success",
+      },
+    });
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="text-center">
+        <h3 className="text-lg font-medium text-fg">Confirm your account</h3>
+        <p className="mt-2 text-sm text-fg/70">
+          We sent an 8-digit code to <strong>{email}</strong>. Enter it below,
+          or click the link in the email.
+        </p>
+      </div>
+
+      <form onSubmit={handleVerify} className="space-y-4">
+        <Field>
+          <Label htmlFor="otp" className="block text-sm font-medium text-fg">
+            Confirmation code
+          </Label>
+          <input
+            id="otp"
+            name="otp"
+            type="text"
+            inputMode="numeric"
+            autoComplete="one-time-code"
+            pattern="[0-9]{8}"
+            maxLength={8}
+            value={code}
+            onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, ""))}
+            disabled={submitting}
+            placeholder="00000000"
+            className="mt-2 block w-full rounded-md border-0 py-2 text-center text-2xl font-mono tracking-[0.4em] text-fg shadow-sm ring-1 ring-inset ring-border placeholder:text-fg/30 focus:ring-2 focus:ring-inset focus:ring-accent sm:text-2xl disabled:opacity-60"
+          />
+        </Field>
+
+        <Button type="submit" disabled={!canSubmit}>
+          {submitting ? "Confirming…" : "Confirm account"}
+        </Button>
+      </form>
+
+      <div className="text-center text-sm">
+        {resendCooldown > 0 ? (
+          <span className="text-fg/50">
+            Resend available in {resendCooldown}s
+          </span>
+        ) : (
+          <button
+            type="button"
+            onClick={handleResend}
+            className="text-accent hover:text-accent-deep"
+          >
+            Didn&apos;t receive it? Resend code
+          </button>
+        )}
       </div>
     </div>
   );
