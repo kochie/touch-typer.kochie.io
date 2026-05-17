@@ -46,8 +46,10 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
         setUser(currentSession?.user ?? null);
         setIsLoading(false);
         
-        // Refresh the page on sign in/out to update server components
-        if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+        // Refresh the page on auth changes to update server components.
+        // PASSWORD_RECOVERY is included so server components see the recovery
+        // session after the callback exchanges the reset code.
+        if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'PASSWORD_RECOVERY') {
           router.refresh();
         }
       }

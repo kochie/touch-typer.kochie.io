@@ -41,8 +41,19 @@ export function AuthCallbackHandler() {
           const { error } = await supabase.auth.exchangeCodeForSession(code);
           if (cancelled) return;
           if (error) {
+            // PKCE verifier lives in the browser that initiated the request.
+            // Opening the reset link in a different browser (e.g. system browser
+            // after requesting from the desktop app) fails here. Surfacing a
+            // clear message prevents users from looping on reset requests.
+            const isPkceError =
+              error.message.toLowerCase().includes("code verifier") ||
+              error.message.toLowerCase().includes("pkce");
             setStatus("error");
-            setMessage(error.message);
+            setMessage(
+              isPkceError
+                ? "This link must be opened in the same browser where you requested the reset. If you used the Touch Typer app, enter the 8-digit code instead of clicking the link."
+                : error.message
+            );
             return;
           }
           router.replace(targetPath);

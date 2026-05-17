@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useSupabaseClient } from "@/lib/supabase-provider";
 import { Field, Form, Formik } from "formik";
 import { toast } from "react-toastify";
@@ -33,16 +34,38 @@ export default function SetPasswordPage() {
   const [hasSession, setHasSession] = useState(false);
 
   useEffect(() => {
-    const check = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setHasSession(!!session);
+    let settled = false;
+
+    const settle = (found: boolean) => {
+      if (settled) return;
+      settled = true;
+      setHasSession(found);
       setChecking(false);
-      if (!session) {
-        router.replace("/signin");
-      }
     };
-    check();
-  }, [supabase, router]);
+
+    // Immediate check: session may already be in memory/storage from the callback exchange
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) settle(true);
+    });
+
+    // Also subscribe: PASSWORD_RECOVERY fires after PKCE code exchange completes,
+    // which may race with the getSession() call above
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if ((event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") && session) {
+        settle(true);
+      }
+    });
+
+    // Give up after 3 s and show an actionable error instead of silently
+    // bouncing to /signin, which causes users to re-request another reset email
+    const timeout = setTimeout(() => settle(false), 3000);
+
+    return () => {
+      settled = true;
+      subscription.unsubscribe();
+      clearTimeout(timeout);
+    };
+  }, [supabase]);
 
   if (checking) {
     return (
@@ -53,7 +76,23 @@ export default function SetPasswordPage() {
   }
 
   if (!hasSession) {
-    return null;
+    return (
+      <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 bg-bg-elevated">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center">
+          <ThemedLogo />
+          <h2 className="mt-10 text-2xl font-bold text-fg">Link expired</h2>
+          <p className="mt-2 text-sm text-fg/70">
+            Your password reset link has expired or is no longer valid.
+          </p>
+          <Link
+            href="/forgot-password"
+            className="mt-6 inline-block text-sm font-semibold text-accent hover:text-accent-deep"
+          >
+            Request a new reset link →
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
