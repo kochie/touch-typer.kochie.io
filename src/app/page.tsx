@@ -14,6 +14,7 @@ import { SocialProofStrip } from "@/components/marketing/SocialProofStrip";
 import { PricingTeaser } from "@/components/marketing/PricingTeaser";
 import { FinalCTA } from "@/components/marketing/FinalCTA";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { RootAuthHashCatcher } from "@/components/RootAuthHashCatcher";
 
 const description =
   "Practice typing. Get measurably faster. Free desktop typing tutor for Mac, Windows, and Linux. Real-time PvP, AI coach, and deep stats.";
@@ -42,6 +43,7 @@ export const viewport: Viewport = {
 export default function Page() {
   return (
     <main>
+      <RootAuthHashCatcher />
       <JsonLd
         id="ld-software-app"
         data={{
