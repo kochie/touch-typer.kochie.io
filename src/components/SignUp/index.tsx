@@ -70,6 +70,25 @@ export default function SignUp() {
                   return;
                 }
 
+                // Supabase anti-enumeration: when an email is already
+                // registered, /signup returns 200 with a synthetic user
+                // whose `identities` is an empty array — and no confirmation
+                // email is sent. Surface this so users (especially Cognito-
+                // migrated ones with a placeholder password) get routed to
+                // sign-in / password reset instead of waiting for an email.
+                if (data.user && (data.user.identities?.length ?? 0) === 0) {
+                  toast(Notification, {
+                    type: "error",
+                    data: {
+                      title: "Account already exists",
+                      message:
+                        "If you already have an account, please sign in instead — or reset your password if you don't remember it.",
+                      type: "error",
+                    },
+                  });
+                  return;
+                }
+
                 // Check if email confirmation is required
                 if (data.user && !data.session) {
                   // Email confirmation required
